@@ -42,7 +42,13 @@ public:
     float pixel(uint8_t x, uint8_t y) const;
     void setPixel(uint8_t x, uint8_t y, float temperature);
 
+    /// Returns true if the coordinates are inside the thermal image.
+    bool inBounds(uint8_t x, uint8_t y) const;
+
 private:
+    /// Converts an (x,y) coordinate into the array index.
+    std::size_t index(uint8_t x, uint8_t y) const;
+
     std::array<float, PIXEL_COUNT> pixels_;
 
     float thermistor_temperature_;
