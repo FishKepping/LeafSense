@@ -96,7 +96,7 @@ events:
       The output was:
       0
       MSBuild version 18.8.2+ce25c0108 for .NET Framework
-      Build started 25/07/2026 10:23:50 AM.
+      Build started 25/07/2026 11:31:07 AM.
       
       Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\4.3.1-msvc1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -125,7 +125,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:13.53
+      Time Elapsed 00:00:02.25
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -855,8 +855,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-1iap46"
-      binary: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-1iap46"
+      source: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e9c4eo"
+      binary: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e9c4eo"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -867,39 +867,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-1iap46'
+        Change Dir: 'C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e9c4eo'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_b63ce.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d2efd.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.8.2+ce25c0108 for .NET Framework
-        Build started 25/07/2026 10:24:07 AM.
+        Build started 25/07/2026 11:31:12 AM.
         
-        Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1iap46\\cmTC_b63ce.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e9c4eo\\cmTC_d2efd.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1iap46\\Debug\\".
-          Creating directory "cmTC_b63ce.dir\\Debug\\cmTC_b63ce.tlog\\".
+          Creating directory "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e9c4eo\\Debug\\".
+          Creating directory "cmTC_d2efd.dir\\Debug\\cmTC_d2efd.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_b63ce.dir\\Debug\\cmTC_b63ce.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_b63ce.dir\\Debug\\cmTC_b63ce.tlog\\unsuccessfulbuild".
+          Creating "cmTC_d2efd.dir\\Debug\\cmTC_d2efd.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_d2efd.dir\\Debug\\cmTC_d2efd.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_b63ce.dir\\Debug\\\\" /Fd"cmTC_b63ce.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_d2efd.dir\\Debug\\\\" /Fd"cmTC_d2efd.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36252 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_b63ce.dir\\Debug\\\\" /Fd"cmTC_b63ce.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_d2efd.dir\\Debug\\\\" /Fd"cmTC_d2efd.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1iap46\\Debug\\cmTC_b63ce.exe" /INCREMENTAL /ILK:"cmTC_b63ce.dir\\Debug\\cmTC_b63ce.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-1iap46/Debug/cmTC_b63ce.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-1iap46/Debug/cmTC_b63ce.lib" /MACHINE:X64  /machine:x64 cmTC_b63ce.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_b63ce.vcxproj -> C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1iap46\\Debug\\cmTC_b63ce.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e9c4eo\\Debug\\cmTC_d2efd.exe" /INCREMENTAL /ILK:"cmTC_d2efd.dir\\Debug\\cmTC_d2efd.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e9c4eo/Debug/cmTC_d2efd.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e9c4eo/Debug/cmTC_d2efd.lib" /MACHINE:X64  /machine:x64 cmTC_d2efd.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_d2efd.vcxproj -> C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e9c4eo\\Debug\\cmTC_d2efd.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_b63ce.dir\\Debug\\cmTC_b63ce.tlog\\unsuccessfulbuild".
-          Touching "cmTC_b63ce.dir\\Debug\\cmTC_b63ce.tlog\\cmTC_b63ce.lastbuildstate".
-        Done Building Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1iap46\\cmTC_b63ce.vcxproj" (default targets).
+          Deleting file "cmTC_d2efd.dir\\Debug\\cmTC_d2efd.tlog\\unsuccessfulbuild".
+          Touching "cmTC_d2efd.dir\\Debug\\cmTC_d2efd.tlog\\cmTC_d2efd.lastbuildstate".
+        Done Building Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e9c4eo\\cmTC_d2efd.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:04.79
+        Time Elapsed 00:00:02.57
         
       exitCode: 0
   -
@@ -1024,7 +1024,7 @@ events:
       The output was:
       0
       MSBuild version 18.8.2+ce25c0108 for .NET Framework
-      Build started 25/07/2026 10:24:14 AM.
+      Build started 25/07/2026 11:31:17 AM.
       
       Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\4.3.1-msvc1\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -1312,8 +1312,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-g84rqe"
-      binary: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-g84rqe"
+      source: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-7vun9x"
+      binary: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-7vun9x"
     cmakeVariables:
       CMAKE_CXX_STDLIB_MODULES_JSON: ""
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
@@ -1323,39 +1323,39 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-g84rqe'
+        Change Dir: 'C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-7vun9x'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_44eac.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_5ffd2.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.8.2+ce25c0108 for .NET Framework
-        Build started 25/07/2026 10:24:19 AM.
+        Build started 25/07/2026 11:31:22 AM.
         
-        Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-g84rqe\\cmTC_44eac.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7vun9x\\cmTC_5ffd2.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-g84rqe\\Debug\\".
-          Creating directory "cmTC_44eac.dir\\Debug\\cmTC_44eac.tlog\\".
+          Creating directory "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7vun9x\\Debug\\".
+          Creating directory "cmTC_5ffd2.dir\\Debug\\cmTC_5ffd2.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_44eac.dir\\Debug\\cmTC_44eac.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_44eac.dir\\Debug\\cmTC_44eac.tlog\\unsuccessfulbuild".
+          Creating "cmTC_5ffd2.dir\\Debug\\cmTC_5ffd2.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_5ffd2.dir\\Debug\\cmTC_5ffd2.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_44eac.dir\\Debug\\\\" /Fd"cmTC_44eac.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_5ffd2.dir\\Debug\\\\" /Fd"cmTC_5ffd2.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36252 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_44eac.dir\\Debug\\\\" /Fd"cmTC_44eac.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_5ffd2.dir\\Debug\\\\" /Fd"cmTC_5ffd2.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.3\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-g84rqe\\Debug\\cmTC_44eac.exe" /INCREMENTAL /ILK:"cmTC_44eac.dir\\Debug\\cmTC_44eac.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-g84rqe/Debug/cmTC_44eac.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-g84rqe/Debug/cmTC_44eac.lib" /MACHINE:X64  /machine:x64 cmTC_44eac.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_44eac.vcxproj -> C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-g84rqe\\Debug\\cmTC_44eac.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7vun9x\\Debug\\cmTC_5ffd2.exe" /INCREMENTAL /ILK:"cmTC_5ffd2.dir\\Debug\\cmTC_5ffd2.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-7vun9x/Debug/cmTC_5ffd2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-7vun9x/Debug/cmTC_5ffd2.lib" /MACHINE:X64  /machine:x64 cmTC_5ffd2.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_5ffd2.vcxproj -> C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7vun9x\\Debug\\cmTC_5ffd2.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_44eac.dir\\Debug\\cmTC_44eac.tlog\\unsuccessfulbuild".
-          Touching "cmTC_44eac.dir\\Debug\\cmTC_44eac.tlog\\cmTC_44eac.lastbuildstate".
-        Done Building Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-g84rqe\\cmTC_44eac.vcxproj" (default targets).
+          Deleting file "cmTC_5ffd2.dir\\Debug\\cmTC_5ffd2.tlog\\unsuccessfulbuild".
+          Touching "cmTC_5ffd2.dir\\Debug\\cmTC_5ffd2.tlog\\cmTC_5ffd2.lastbuildstate".
+        Done Building Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7vun9x\\cmTC_5ffd2.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:03.04
+        Time Elapsed 00:00:02.43
         
       exitCode: 0
   -
@@ -1386,4 +1386,321 @@ events:
       Running the C compiler's linker: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe" "-v"
       Microsoft (R) Incremental Linker Version 14.51.36252.0
       Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FindGit.cmake:111 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FetchContent.cmake:1887 (find_package)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FetchContent.cmake:1622 (__FetchContent_populateSubbuild)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FetchContent.cmake:2158:EVAL:2 (__FetchContent_doPopulation)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FetchContent.cmake:2158 (cmake_language)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FetchContent.cmake:2399 (__FetchContent_Populate)"
+      - "leafsense-core/CMakeLists.txt:13 (FetchContent_MakeAvailable)"
+    mode: "program"
+    variable: "GIT_EXECUTABLE"
+    description: "Git command line client"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "git.cmd"
+      - "git"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/vcpackages/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/Roslyn/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Team Tools/DiagnosticsHub/Collector/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/"
+      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/"
+      - "C:/ProgramData/Oracle/Java/javapath/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Users/campb/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/adb/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/Intel/WiFi/bin/"
+      - "C:/Program Files/Common Files/Intel/WirelessCommon/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/vcpkg/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/"
+      - "C:/Program Files/LeafSense/bin/"
+      - "C:/Program Files/LeafSense/sbin/"
+      - "C:/Program Files/LeafSense/"
+      - "C:/Users/campb/AppData/Local/Atlassian/SourceTree/git_local/bin/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/vcpackages/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/vcpackages/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/vcpackages/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/Roslyn/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/Roslyn/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/Roslyn/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Team Tools/DiagnosticsHub/Collector/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Team Tools/DiagnosticsHub/Collector/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Team Tools/DiagnosticsHub/Collector/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/git.cmd"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/git.cmd.com"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/git.cmd.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/git.cmd"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/git.cmd.com"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/git.cmd.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/git.cmd"
+      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/git.cmd.com"
+      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/git.cmd.exe"
+      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.cmd"
+      - "C:/ProgramData/Oracle/Java/javapath/git.cmd.com"
+      - "C:/ProgramData/Oracle/Java/javapath/git.cmd.exe"
+      - "C:/ProgramData/Oracle/Java/javapath/git.cmd"
+      - "C:/Windows/System32/git.cmd.com"
+      - "C:/Windows/System32/git.cmd.exe"
+      - "C:/Windows/System32/git.cmd"
+      - "C:/Windows/git.cmd.com"
+      - "C:/Windows/git.cmd.exe"
+      - "C:/Windows/git.cmd"
+      - "C:/Windows/System32/wbem/git.cmd.com"
+      - "C:/Windows/System32/wbem/git.cmd.exe"
+      - "C:/Windows/System32/wbem/git.cmd"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/git.cmd.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/git.cmd.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/git.cmd"
+      - "C:/Users/campb/AppData/Local/Microsoft/WindowsApps/git.cmd.com"
+      - "C:/Users/campb/AppData/Local/Microsoft/WindowsApps/git.cmd.exe"
+      - "C:/Users/campb/AppData/Local/Microsoft/WindowsApps/git.cmd"
+      - "C:/adb/git.cmd.com"
+      - "C:/adb/git.cmd.exe"
+      - "C:/adb/git.cmd"
+      - "C:/Windows/System32/OpenSSH/git.cmd.com"
+      - "C:/Windows/System32/OpenSSH/git.cmd.exe"
+      - "C:/Windows/System32/OpenSSH/git.cmd"
+      - "C:/Program Files/Intel/WiFi/bin/git.cmd.com"
+      - "C:/Program Files/Intel/WiFi/bin/git.cmd.exe"
+      - "C:/Program Files/Intel/WiFi/bin/git.cmd"
+      - "C:/Program Files/Common Files/Intel/WirelessCommon/git.cmd.com"
+      - "C:/Program Files/Common Files/Intel/WirelessCommon/git.cmd.exe"
+      - "C:/Program Files/Common Files/Intel/WirelessCommon/git.cmd"
+      - "C:/Program Files/Git/cmd/git.cmd.com"
+      - "C:/Program Files/Git/cmd/git.cmd.exe"
+      - "C:/Program Files/Git/cmd/git.cmd"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.cmd.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.cmd.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.cmd"
+      - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/git.cmd.com"
+      - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/git.cmd.exe"
+      - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/git.cmd"
+      - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/git.cmd.com"
+      - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/git.cmd.exe"
+      - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/vcpkg/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/vcpkg/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/vcpkg/git.cmd"
+      - "C:/Program Files/bin/git.cmd.com"
+      - "C:/Program Files/bin/git.cmd.exe"
+      - "C:/Program Files/bin/git.cmd"
+      - "C:/Program Files/sbin/git.cmd.com"
+      - "C:/Program Files/sbin/git.cmd.exe"
+      - "C:/Program Files/sbin/git.cmd"
+      - "C:/Program Files/git.cmd.com"
+      - "C:/Program Files/git.cmd.exe"
+      - "C:/Program Files/git.cmd"
+      - "C:/Program Files (x86)/bin/git.cmd.com"
+      - "C:/Program Files (x86)/bin/git.cmd.exe"
+      - "C:/Program Files (x86)/bin/git.cmd"
+      - "C:/Program Files (x86)/sbin/git.cmd.com"
+      - "C:/Program Files (x86)/sbin/git.cmd.exe"
+      - "C:/Program Files (x86)/sbin/git.cmd"
+      - "C:/Program Files (x86)/git.cmd.com"
+      - "C:/Program Files (x86)/git.cmd.exe"
+      - "C:/Program Files (x86)/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/git.cmd.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/git.cmd.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/git.cmd"
+      - "C:/Program Files/LeafSense/bin/git.cmd.com"
+      - "C:/Program Files/LeafSense/bin/git.cmd.exe"
+      - "C:/Program Files/LeafSense/bin/git.cmd"
+      - "C:/Program Files/LeafSense/sbin/git.cmd.com"
+      - "C:/Program Files/LeafSense/sbin/git.cmd.exe"
+      - "C:/Program Files/LeafSense/sbin/git.cmd"
+      - "C:/Program Files/LeafSense/git.cmd.com"
+      - "C:/Program Files/LeafSense/git.cmd.exe"
+      - "C:/Program Files/LeafSense/git.cmd"
+      - "C:/Users/campb/AppData/Local/Atlassian/SourceTree/git_local/bin/git.cmd.com"
+      - "C:/Users/campb/AppData/Local/Atlassian/SourceTree/git_local/bin/git.cmd.exe"
+      - "C:/Users/campb/AppData/Local/Atlassian/SourceTree/git_local/bin/git.cmd"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/git"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/vcpackages/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/vcpackages/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/VC/vcpackages/git"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TestWindow/git"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/git"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/Roslyn/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/Roslyn/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/Roslyn/git"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Team Tools/DiagnosticsHub/Collector/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Team Tools/DiagnosticsHub/Collector/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Team Tools/DiagnosticsHub/Collector/git"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/git"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/git.com"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/git.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/git"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/git.com"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/git.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/git"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/git"
+      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/git.com"
+      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/git.exe"
+      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/git"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/git"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.com"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.exe"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git"
+      - "C:/ProgramData/Oracle/Java/javapath/git.com"
+      - "C:/ProgramData/Oracle/Java/javapath/git.exe"
+      - "C:/ProgramData/Oracle/Java/javapath/git"
+      - "C:/Windows/System32/git.com"
+      - "C:/Windows/System32/git.exe"
+      - "C:/Windows/System32/git"
+      - "C:/Windows/git.com"
+      - "C:/Windows/git.exe"
+      - "C:/Windows/git"
+      - "C:/Windows/System32/wbem/git.com"
+      - "C:/Windows/System32/wbem/git.exe"
+      - "C:/Windows/System32/wbem/git"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/git.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/git.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/git"
+      - "C:/Users/campb/AppData/Local/Microsoft/WindowsApps/git.com"
+      - "C:/Users/campb/AppData/Local/Microsoft/WindowsApps/git.exe"
+      - "C:/Users/campb/AppData/Local/Microsoft/WindowsApps/git"
+      - "C:/adb/git.com"
+      - "C:/adb/git.exe"
+      - "C:/adb/git"
+      - "C:/Windows/System32/OpenSSH/git.com"
+      - "C:/Windows/System32/OpenSSH/git.exe"
+      - "C:/Windows/System32/OpenSSH/git"
+      - "C:/Program Files/Intel/WiFi/bin/git.com"
+      - "C:/Program Files/Intel/WiFi/bin/git.exe"
+      - "C:/Program Files/Intel/WiFi/bin/git"
+      - "C:/Program Files/Common Files/Intel/WirelessCommon/git.com"
+      - "C:/Program Files/Common Files/Intel/WirelessCommon/git.exe"
+      - "C:/Program Files/Common Files/Intel/WirelessCommon/git"
+      - "C:/Program Files/Git/cmd/git.com"
+    found: "C:/Program Files/Git/cmd/git.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\VC\\VCPackages"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\TeamFoundation\\Team Explorer"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\bin\\Roslyn"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Team Tools\\DiagnosticsHub\\Collector"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\Extensions\\Microsoft\\CodeCoverage.Console"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\\\x64"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\\\x64"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\\\MSBuild\\Current\\Bin\\amd64"
+        - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\"
+        - "C:\\ProgramData\\Oracle\\Java\\javapath"
+        - "C:\\Windows\\System32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\adb"
+        - "C:\\Windows\\System32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\Intel\\WiFi\\bin\\"
+        - "C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\campb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\campb\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\VC\\Linux\\bin\\ConnectionManagerExe"
+        - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\vcpkg"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/LeafSense"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files/LeafSense"
 ...
