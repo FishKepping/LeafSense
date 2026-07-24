@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/campb/Documents/GitHub/LeafSense/build/cmake_install.cmake",
+		"C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

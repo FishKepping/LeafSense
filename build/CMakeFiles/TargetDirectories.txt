@@ -1,0 +1,4 @@
+C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/leafsense-core.dir
+C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/ALL_BUILD.dir
