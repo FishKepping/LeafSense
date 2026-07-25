@@ -14,4 +14,5 @@ include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/mean_fil
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/median_filter_tests-b12d07c_include.cmake")
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/exponential_filter_tests-b12d07c_include.cmake")
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/amg8833_decoder_tests-b12d07c_include.cmake")
+include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/thermal_processor_tests-b12d07c_include.cmake")
 subdirs("../_deps/catch2-build")

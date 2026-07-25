@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.20)
 
 project(
     leafsense_core
-    VERSION 1.0.0
     LANGUAGES CXX
 )
 
@@ -28,6 +27,7 @@ add_library(
     src/thermal_frame.cpp
     src/frame_statistics.cpp
     src/amg8833_decoder.cpp
+    src/thermal_processor.cpp
     src/roi/pixel_selection.cpp
     src/roi/rectangle_roi.cpp
     src/roi/polygon_roi.cpp
@@ -93,163 +93,80 @@ if(LEAFSENSE_BUILD_TESTS)
 
     include(Catch)
 
-    add_executable(
+    function(
+        leafsense_add_test
+        target_name
+        source_file
+    )
+        add_executable(
+            ${target_name}
+            ${source_file}
+        )
+
+        target_link_libraries(
+            ${target_name}
+            PRIVATE
+                leafsense::core
+                Catch2::Catch2WithMain
+        )
+
+        catch_discover_tests(
+            ${target_name}
+        )
+    endfunction()
+
+    leafsense_add_test(
         thermal_frame_tests
         tests/thermal_frame_test.cpp
     )
 
-    target_link_libraries(
-        thermal_frame_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        thermal_frame_tests
-    )
-
-    add_executable(
+    leafsense_add_test(
         pixel_selection_tests
         tests/pixel_selection_test.cpp
     )
 
-    target_link_libraries(
-        pixel_selection_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        pixel_selection_tests
-    )
-
-    add_executable(
+    leafsense_add_test(
         frame_statistics_tests
         tests/frame_statistics_test.cpp
     )
 
-    target_link_libraries(
-        frame_statistics_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        frame_statistics_tests
-    )
-
-    add_executable(
+    leafsense_add_test(
         rectangle_roi_tests
         tests/rectangle_roi_test.cpp
     )
 
-    target_link_libraries(
-        rectangle_roi_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        rectangle_roi_tests
-    )
-
-    add_executable(
+    leafsense_add_test(
         polygon_roi_tests
         tests/polygon_roi_test.cpp
     )
 
-    target_link_libraries(
-        polygon_roi_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        polygon_roi_tests
-    )
-
-    add_executable(
+    leafsense_add_test(
         threshold_roi_tests
         tests/threshold_roi_test.cpp
     )
 
-    target_link_libraries(
-        threshold_roi_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        threshold_roi_tests
-    )
-
-    add_executable(
+    leafsense_add_test(
         mean_filter_tests
         tests/mean_filter_test.cpp
     )
 
-    target_link_libraries(
-        mean_filter_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        mean_filter_tests
-    )
-
-    add_executable(
+    leafsense_add_test(
         median_filter_tests
         tests/median_filter_test.cpp
     )
 
-    target_link_libraries(
-        median_filter_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        median_filter_tests
-    )
-
-    add_executable(
+    leafsense_add_test(
         exponential_filter_tests
         tests/exponential_filter_test.cpp
     )
 
-    target_link_libraries(
-        exponential_filter_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        exponential_filter_tests
-    )
-
-    add_executable(
+    leafsense_add_test(
         amg8833_decoder_tests
         tests/amg8833_decoder_test.cpp
     )
 
-    target_link_libraries(
-        amg8833_decoder_tests
-        PRIVATE
-            leafsense::core
-            Catch2::Catch2WithMain
-    )
-
-    catch_discover_tests(
-        amg8833_decoder_tests
+    leafsense_add_test(
+        thermal_processor_tests
+        tests/thermal_processor_test.cpp
     )
 endif()
