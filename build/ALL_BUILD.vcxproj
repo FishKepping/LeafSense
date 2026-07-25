@@ -190,6 +190,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{CD7CA8EA-D41E-3138-9109-E31054581104}</Project>
       <Name>amg8833_driver_tests</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\drivers\amg8833\amg8833_recovery_tests.vcxproj">
+      <Project>{0FFF4EA9-273B-3C6A-AB27-431925C9E647}</Project>
+      <Name>amg8833_recovery_tests</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\amg8833_registers_tests.vcxproj">
       <Project>{85B0D48E-CE4D-3DDF-8D92-44B4A331C2C9}</Project>
       <Name>amg8833_registers_tests</Name>

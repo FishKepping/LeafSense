@@ -13,6 +13,7 @@
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<BuildDependency Project="leafsense-core/amg8833_decoder_tests.vcxproj"/>
 		<BuildDependency Project="drivers/amg8833/amg8833_driver_tests.vcxproj"/>
+		<BuildDependency Project="drivers/amg8833/amg8833_recovery_tests.vcxproj"/>
 		<BuildDependency Project="leafsense-core/amg8833_registers_tests.vcxproj"/>
 		<BuildDependency Project="leafsense-core/exponential_filter_tests.vcxproj"/>
 		<BuildDependency Project="leafsense-core/frame_statistics_tests.vcxproj"/>
@@ -53,6 +54,13 @@
 		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
 	</Project>
 	<Project Path="drivers/amg8833/amg8833_driver_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="cd7ca8ea-d41e-3138-9109-e31054581104">
+		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="drivers/amg8833/leafsense_amg8833_driver.vcxproj"/>
+		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="drivers/amg8833/amg8833_recovery_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="0fff4ea9-273b-3c6a-ab27-431925c9e647">
 		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
 		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
