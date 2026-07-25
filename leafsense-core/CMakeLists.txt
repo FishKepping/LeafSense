@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(
     leafsense_core
-    VERSION 0.3.0
+    VERSION 0.4.0
     LANGUAGES CXX
 )
 
@@ -28,6 +28,7 @@ add_library(
     src/thermal_frame.cpp
     src/frame_statistics.cpp
     src/roi/pixel_selection.cpp
+    src/roi/rectangle_roi.cpp
 )
 
 add_library(
@@ -132,5 +133,21 @@ if(LEAFSENSE_BUILD_TESTS)
 
     catch_discover_tests(
         frame_statistics_tests
+    )
+
+    add_executable(
+        rectangle_roi_tests
+        tests/rectangle_roi_test.cpp
+    )
+
+    target_link_libraries(
+        rectangle_roi_tests
+        PRIVATE
+            leafsense::core
+            Catch2::Catch2WithMain
+    )
+
+    catch_discover_tests(
+        rectangle_roi_tests
     )
 endif()
