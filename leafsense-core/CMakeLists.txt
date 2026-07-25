@@ -1,54 +1,136 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 
-project(leafsense-core)
+project(
+    leafsense_core
+    VERSION 0.3.0
+    LANGUAGES CXX
+)
 
 include(FetchContent)
 
-FetchContent_Declare(
-    Catch2
-    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-    GIT_TAG v3.8.1
+set(
+    CMAKE_CXX_STANDARD
+    17
 )
 
-FetchContent_MakeAvailable(Catch2)
+set(
+    CMAKE_CXX_STANDARD_REQUIRED
+    ON
+)
 
-add_library(leafsense-core
+set(
+    CMAKE_CXX_EXTENSIONS
+    OFF
+)
+
+add_library(
+    leafsense_core
     src/thermal_frame.cpp
+    src/frame_statistics.cpp
     src/roi/pixel_selection.cpp
 )
 
-target_include_directories(leafsense-core
-    PUBLIC
-        include
+add_library(
+    leafsense::core
+    ALIAS
+    leafsense_core
 )
 
-target_compile_features(leafsense-core
+target_include_directories(
+    leafsense_core
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_compile_features(
+    leafsense_core
     PUBLIC
         cxx_std_17
 )
 
-add_executable(thermal_frame_tests
-    tests/thermal_frame_test.cpp
+if(MSVC)
+    target_compile_options(
+        leafsense_core
+        PRIVATE
+            /W4
+            /permissive-
+    )
+else()
+    target_compile_options(
+        leafsense_core
+        PRIVATE
+            -Wall
+            -Wextra
+            -Wpedantic
+    )
+endif()
+
+option(
+    LEAFSENSE_BUILD_TESTS
+    "Build LeafSense unit tests"
+    ON
 )
 
-target_link_libraries(thermal_frame_tests
-    PRIVATE
-        leafsense-core
-        Catch2::Catch2WithMain
-)
+if(LEAFSENSE_BUILD_TESTS)
+    enable_testing()
 
-add_executable(pixel_selection_tests
-    tests/pixel_selection_test.cpp
-)
+    FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY
+            https://github.com/catchorg/Catch2.git
+        GIT_TAG
+            v3.7.1
+    )
 
-target_link_libraries(pixel_selection_tests
-    PRIVATE
-        leafsense-core
-        Catch2::Catch2WithMain
-)
+    FetchContent_MakeAvailable(Catch2)
 
-include(CTest)
-include(Catch)
+    include(Catch)
 
-catch_discover_tests(thermal_frame_tests)
-catch_discover_tests(pixel_selection_tests)
+    add_executable(
+        thermal_frame_tests
+        tests/thermal_frame_test.cpp
+    )
+
+    target_link_libraries(
+        thermal_frame_tests
+        PRIVATE
+            leafsense::core
+            Catch2::Catch2WithMain
+    )
+
+    catch_discover_tests(
+        thermal_frame_tests
+    )
+
+    add_executable(
+        pixel_selection_tests
+        tests/pixel_selection_test.cpp
+    )
+
+    target_link_libraries(
+        pixel_selection_tests
+        PRIVATE
+            leafsense::core
+            Catch2::Catch2WithMain
+    )
+
+    catch_discover_tests(
+        pixel_selection_tests
+    )
+
+    add_executable(
+        frame_statistics_tests
+        tests/frame_statistics_test.cpp
+    )
+
+    target_link_libraries(
+        frame_statistics_tests
+        PRIVATE
+            leafsense::core
+            Catch2::Catch2WithMain
+    )
+
+    catch_discover_tests(
+        frame_statistics_tests
+    )
+endif()

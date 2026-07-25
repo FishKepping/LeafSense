@@ -1,12 +1,9 @@
 C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/ALL_BUILD.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/ZERO_CHECK.dir
-C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/leafsense-core.dir
+C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/leafsense_core.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/thermal_frame_tests.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/pixel_selection_tests.dir
-C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/Experimental.dir
-C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/Nightly.dir
-C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/Continuous.dir
-C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/NightlyMemoryCheck.dir
+C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/frame_statistics_tests.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/ALL_BUILD.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/_deps/catch2-build/CMakeFiles/ALL_BUILD.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/_deps/catch2-build/src/CMakeFiles/Catch2.dir

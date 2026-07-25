@@ -7,6 +7,19 @@
 		<BuildType Name="RelWithDebInfo"/>
 		<Platform Name="x64"/>
 	</Configurations>
+	<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e72d6a55-00dc-3143-964f-aa8ebc2df21b" DefaultStartup="true">
+		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense-core/frame_statistics_tests.vcxproj"/>
+		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
+		<BuildDependency Project="leafsense-core/pixel_selection_tests.vcxproj"/>
+		<BuildDependency Project="leafsense-core/thermal_frame_tests.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
 	<Project Path="_deps/catch2-build/src/Catch2.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8d538cbe-01bf-4a2e-a98a-6c368fdf13d7">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 	</Project>
@@ -14,64 +27,26 @@
 		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 	</Project>
-	<Project Path="leafsense-core/leafsense-core.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="351bcecc-31ed-3c42-a9d1-937b25131099">
+	<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e5271e05-e795-3d4a-80fa-694270adc96c"/>
+	<Project Path="leafsense-core/frame_statistics_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="ce1dd70b-1c9e-39b5-85ab-d96a38e30a49">
+		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="leafsense-core/leafsense_core.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e653691c-5928-33f2-af63-ede2a1dfb92a">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 	</Project>
 	<Project Path="leafsense-core/pixel_selection_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="48af0678-9883-31da-9eef-2e87bf36d2b2">
 		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
 		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
-		<BuildDependency Project="leafsense-core/leafsense-core.vcxproj"/>
+		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
 	</Project>
 	<Project Path="leafsense-core/thermal_frame_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="b590dfa9-b5b7-3112-8f40-606a0a3f8c66">
 		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
 		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
-		<BuildDependency Project="leafsense-core/leafsense-core.vcxproj"/>
+		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
 	</Project>
-	<Folder Name="/CMakePredefinedTargets/">
-		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e72d6a55-00dc-3143-964f-aa8ebc2df21b" DefaultStartup="true">
-			<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
-			<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
-			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
-			<BuildDependency Project="leafsense-core/leafsense-core.vcxproj"/>
-			<BuildDependency Project="leafsense-core/pixel_selection_tests.vcxproj"/>
-			<BuildDependency Project="leafsense-core/thermal_frame_tests.vcxproj"/>
-			<Build Solution="Debug|*" Project="false"/>
-			<Build Solution="Release|*" Project="false"/>
-			<Build Solution="MinSizeRel|*" Project="false"/>
-			<Build Solution="RelWithDebInfo|*" Project="false"/>
-		</Project>
-		<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e5271e05-e795-3d4a-80fa-694270adc96c"/>
-	</Folder>
-	<Folder Name="/CTestDashboardTargets/">
-		<Project Path="leafsense-core/Continuous.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8aa98e93-5ecf-3f3f-972a-978274d621de">
-			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
-			<Build Solution="Debug|*" Project="false"/>
-			<Build Solution="Release|*" Project="false"/>
-			<Build Solution="MinSizeRel|*" Project="false"/>
-			<Build Solution="RelWithDebInfo|*" Project="false"/>
-		</Project>
-		<Project Path="leafsense-core/Experimental.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="857ef402-a8e6-30a5-b064-581637978698">
-			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
-			<Build Solution="Debug|*" Project="false"/>
-			<Build Solution="Release|*" Project="false"/>
-			<Build Solution="MinSizeRel|*" Project="false"/>
-			<Build Solution="RelWithDebInfo|*" Project="false"/>
-		</Project>
-		<Project Path="leafsense-core/Nightly.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="685f9825-0cae-3a1c-9a86-205081a6fa0c">
-			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
-			<Build Solution="Debug|*" Project="false"/>
-			<Build Solution="Release|*" Project="false"/>
-			<Build Solution="MinSizeRel|*" Project="false"/>
-			<Build Solution="RelWithDebInfo|*" Project="false"/>
-		</Project>
-		<Project Path="leafsense-core/NightlyMemoryCheck.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8b44cac7-38ea-3e9f-9f0f-741c38a16c24">
-			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
-			<Build Solution="Debug|*" Project="false"/>
-			<Build Solution="Release|*" Project="false"/>
-			<Build Solution="MinSizeRel|*" Project="false"/>
-			<Build Solution="RelWithDebInfo|*" Project="false"/>
-		</Project>
-	</Folder>
 </Solution>

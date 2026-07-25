@@ -178,15 +178,6 @@
 #endif
 
 
-/* #undef CATCH_CONFIG_USE_BUILTIN_CONSTANT_P */
-/* #undef CATCH_CONFIG_NO_USE_BUILTIN_CONSTANT_P */
-
-#if defined( CATCH_CONFIG_USE_BUILTIN_CONSTANT_P ) && \
-    defined( CATCH_CONFIG_NO_USE_BUILTIN_CONSTANT_P )
-#    error Cannot force USE_BUILTIN_CONSTANT_P to both ON and OFF
-#endif
-
-
 // ------
 // Simple toggle defines
 // their value is never used and they cannot be overridden
