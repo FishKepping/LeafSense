@@ -194,6 +194,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{5F707586-0148-3E2D-9230-F6E28A04FD2F}</Project>
       <Name>mean_filter_tests</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\median_filter_tests.vcxproj">
+      <Project>{B9BBCABC-798B-3A44-9DB6-BA9873D71801}</Project>
+      <Name>median_filter_tests</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\pixel_selection_tests.vcxproj">
       <Project>{48AF0678-9883-31DA-9EEF-2E87BF36D2B2}</Project>
       <Name>pixel_selection_tests</Name>
