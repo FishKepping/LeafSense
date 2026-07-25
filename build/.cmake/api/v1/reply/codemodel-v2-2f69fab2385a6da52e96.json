@@ -1,0 +1,1000 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Git::Git::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-Git__Git-Debug-6d475613da24bfcb768a.json",
+					"name" : "Git::Git",
+					"projectIndex" : 1
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"build" : "leafsense-core",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-leafsense-core-Debug-a390ef340ac6fd01a4d5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "leafsense-core",
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"build" : "_deps/catch2-build",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-_deps.catch2-build-Debug-98954b0ffcd6084a10c8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/catch2-build/src",
+					"jsonFile" : "directory-_deps.catch2-build.src-Debug-88b11f3d1ed49dfce978.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src/src",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LeafSense",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "leafsense_core",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3
+					],
+					"name" : "Catch2",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Debug-45107f75d0eaf2c0966e.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-ALL_BUILD-Debug-84ad20939da4d7353664.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@3e93893dc0618e684ae7",
+					"jsonFile" : "target-ALL_BUILD-Debug-380c9f8881927b23c00f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2-Debug-54518c559141900c34b2.json",
+					"name" : "Catch2",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2WithMain::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2WithMain-Debug-5a325629660c4f0e7b47.json",
+					"name" : "Catch2WithMain",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Debug-898a056bd2ce9ee701ab.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "frame_statistics_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-frame_statistics_tests-Debug-96fa5c1bd3df2fe4bff9.json",
+					"name" : "frame_statistics_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "leafsense_core::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-leafsense_core-Debug-0c3bfe4eb3e01d3da5f8.json",
+					"name" : "leafsense_core",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pixel_selection_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-pixel_selection_tests-Debug-b4f8d337adb925e3ae3b.json",
+					"name" : "pixel_selection_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polygon_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-polygon_roi_tests-Debug-1ad9020759803b4d961a.json",
+					"name" : "polygon_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "rectangle_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-rectangle_roi_tests-Debug-811593b448fb53b53881.json",
+					"name" : "rectangle_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_frame_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_frame_tests-Debug-9f62db32dbdff4d9954e.json",
+					"name" : "thermal_frame_tests",
+					"projectIndex" : 1
+				}
+			]
+		},
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Git::Git::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-Git__Git-Release-6d475613da24bfcb768a.json",
+					"name" : "Git::Git",
+					"projectIndex" : 1
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Release-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"build" : "leafsense-core",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-leafsense-core-Release-a390ef340ac6fd01a4d5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "leafsense-core",
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"build" : "_deps/catch2-build",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-_deps.catch2-build-Release-98954b0ffcd6084a10c8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/catch2-build/src",
+					"jsonFile" : "directory-_deps.catch2-build.src-Release-88b11f3d1ed49dfce978.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src/src",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LeafSense",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "leafsense_core",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3
+					],
+					"name" : "Catch2",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Release-45107f75d0eaf2c0966e.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-ALL_BUILD-Release-84ad20939da4d7353664.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@3e93893dc0618e684ae7",
+					"jsonFile" : "target-ALL_BUILD-Release-380c9f8881927b23c00f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2-Release-5117a94e2237cc53d22a.json",
+					"name" : "Catch2",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2WithMain::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2WithMain-Release-2052971c51ab78a7d10a.json",
+					"name" : "Catch2WithMain",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Release-898a056bd2ce9ee701ab.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "frame_statistics_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-frame_statistics_tests-Release-2278dc259f47d4ac4113.json",
+					"name" : "frame_statistics_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "leafsense_core::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-leafsense_core-Release-2414016e50f6cd3bb4a8.json",
+					"name" : "leafsense_core",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pixel_selection_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-pixel_selection_tests-Release-eb450d2657ca847eb788.json",
+					"name" : "pixel_selection_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polygon_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-polygon_roi_tests-Release-415dddfa0278d110c17f.json",
+					"name" : "polygon_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "rectangle_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-rectangle_roi_tests-Release-8a0899471ec24ffeac3f.json",
+					"name" : "rectangle_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_frame_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_frame_tests-Release-1708270eedca3845b7a6.json",
+					"name" : "thermal_frame_tests",
+					"projectIndex" : 1
+				}
+			]
+		},
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Git::Git::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-Git__Git-MinSizeRel-6d475613da24bfcb768a.json",
+					"name" : "Git::Git",
+					"projectIndex" : 1
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-MinSizeRel-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"build" : "leafsense-core",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-leafsense-core-MinSizeRel-a390ef340ac6fd01a4d5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "leafsense-core",
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"build" : "_deps/catch2-build",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-_deps.catch2-build-MinSizeRel-98954b0ffcd6084a10c8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/catch2-build/src",
+					"jsonFile" : "directory-_deps.catch2-build.src-MinSizeRel-88b11f3d1ed49dfce978.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src/src",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"name" : "MinSizeRel",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LeafSense",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "leafsense_core",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3
+					],
+					"name" : "Catch2",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-45107f75d0eaf2c0966e.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-84ad20939da4d7353664.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@3e93893dc0618e684ae7",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-380c9f8881927b23c00f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2-MinSizeRel-caff4b4a76cabe5f13a7.json",
+					"name" : "Catch2",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2WithMain::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2WithMain-MinSizeRel-f1421027f28bc0da81dc.json",
+					"name" : "Catch2WithMain",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-MinSizeRel-898a056bd2ce9ee701ab.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "frame_statistics_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-frame_statistics_tests-MinSizeRel-52d09d6098cd17c42f81.json",
+					"name" : "frame_statistics_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "leafsense_core::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-leafsense_core-MinSizeRel-4726772d7f97736352bf.json",
+					"name" : "leafsense_core",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pixel_selection_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-pixel_selection_tests-MinSizeRel-8d3b024663e5d2a1f723.json",
+					"name" : "pixel_selection_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polygon_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-polygon_roi_tests-MinSizeRel-49ef1aa82a6ba5ee64f3.json",
+					"name" : "polygon_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "rectangle_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-rectangle_roi_tests-MinSizeRel-7d0567b7b0432f1d4803.json",
+					"name" : "rectangle_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_frame_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_frame_tests-MinSizeRel-acf9d91cb44a068457e4.json",
+					"name" : "thermal_frame_tests",
+					"projectIndex" : 1
+				}
+			]
+		},
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Git::Git::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-Git__Git-RelWithDebInfo-6d475613da24bfcb768a.json",
+					"name" : "Git::Git",
+					"projectIndex" : 1
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-RelWithDebInfo-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"build" : "leafsense-core",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-leafsense-core-RelWithDebInfo-a390ef340ac6fd01a4d5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "leafsense-core",
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"build" : "_deps/catch2-build",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-_deps.catch2-build-RelWithDebInfo-98954b0ffcd6084a10c8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/catch2-build/src",
+					"jsonFile" : "directory-_deps.catch2-build.src-RelWithDebInfo-88b11f3d1ed49dfce978.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src/src",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LeafSense",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "leafsense_core",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3
+					],
+					"name" : "Catch2",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-45107f75d0eaf2c0966e.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-84ad20939da4d7353664.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@3e93893dc0618e684ae7",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-380c9f8881927b23c00f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2-RelWithDebInfo-f80b760c91ad78c8ea2c.json",
+					"name" : "Catch2",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2WithMain::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2WithMain-RelWithDebInfo-a57e8b8151ea0d03d935.json",
+					"name" : "Catch2WithMain",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-RelWithDebInfo-898a056bd2ce9ee701ab.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "frame_statistics_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-frame_statistics_tests-RelWithDebInfo-5975b8edb36ccada07b9.json",
+					"name" : "frame_statistics_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "leafsense_core::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-leafsense_core-RelWithDebInfo-ccd7dbf7ca35e53e3bd6.json",
+					"name" : "leafsense_core",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pixel_selection_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-pixel_selection_tests-RelWithDebInfo-7af4e5554f31a69bf2e2.json",
+					"name" : "pixel_selection_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polygon_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-polygon_roi_tests-RelWithDebInfo-c5578f8f3fa19bc5acc0.json",
+					"name" : "polygon_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "rectangle_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-rectangle_roi_tests-RelWithDebInfo-f4c283fbac274b1cbb2d.json",
+					"name" : "rectangle_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_frame_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_frame_tests-RelWithDebInfo-27d1ed839f2528292e3a.json",
+					"name" : "thermal_frame_tests",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/campb/Documents/GitHub/LeafSense/build",
+		"source" : "C:/Users/campb/Documents/GitHub/LeafSense"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	}
+}
