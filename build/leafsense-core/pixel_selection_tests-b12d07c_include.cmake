@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/pixel_selection_tests-b12d07c_tests.cmake")
+  include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/pixel_selection_tests-b12d07c_tests.cmake")
+else()
+  add_test(pixel_selection_tests_NOT_BUILT-b12d07c pixel_selection_tests_NOT_BUILT-b12d07c)
+endif()

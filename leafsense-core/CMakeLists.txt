@@ -14,6 +14,7 @@ FetchContent_MakeAvailable(Catch2)
 
 add_library(leafsense-core
     src/thermal_frame.cpp
+    src/roi/pixel_selection.cpp
 )
 
 target_include_directories(leafsense-core
@@ -35,3 +36,19 @@ target_link_libraries(thermal_frame_tests
         leafsense-core
         Catch2::Catch2WithMain
 )
+
+add_executable(pixel_selection_tests
+    tests/pixel_selection_test.cpp
+)
+
+target_link_libraries(pixel_selection_tests
+    PRIVATE
+        leafsense-core
+        Catch2::Catch2WithMain
+)
+
+include(CTest)
+include(Catch)
+
+catch_discover_tests(thermal_frame_tests)
+catch_discover_tests(pixel_selection_tests)

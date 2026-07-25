@@ -4,6 +4,9 @@
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\thermal_frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\pixel_selection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\CMakeLists.txt" />

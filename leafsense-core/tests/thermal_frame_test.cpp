@@ -12,6 +12,15 @@ TEST_CASE("New ThermalFrame starts invalid")
     REQUIRE_FALSE(frame.isValid());
 }
 
+TEST_CASE("Frame can be marked valid")
+{
+    ThermalFrame frame;
+
+    frame.setValid(true);
+
+    REQUIRE(frame.isValid());
+}
+
 TEST_CASE("Set and get a pixel")
 {
     ThermalFrame frame;
@@ -64,4 +73,58 @@ TEST_CASE("Out of bounds returns zero")
     ThermalFrame frame;
 
     REQUIRE(frame.pixel(100, 100) == Catch::Approx(0.0f));
+}
+
+TEST_CASE("In bounds coordinates")
+{
+    ThermalFrame frame;
+
+    REQUIRE(frame.inBounds(0, 0));
+    REQUIRE(frame.inBounds(7, 7));
+
+    REQUIRE_FALSE(frame.inBounds(8, 0));
+    REQUIRE_FALSE(frame.inBounds(0, 8));
+}
+
+TEST_CASE("Pixel validity")
+{
+    ThermalFrame frame;
+
+    REQUIRE(frame.pixelValid(0, 0));
+    REQUIRE(frame.pixelValid(7, 7));
+
+    REQUIRE_FALSE(frame.pixelValid(8, 0));
+    REQUIRE_FALSE(frame.pixelValid(0, 8));
+}
+
+TEST_CASE("Valid pixel count")
+{
+    ThermalFrame frame;
+
+    REQUIRE(frame.validPixelCount() == 64);
+}
+
+TEST_CASE("Pixel buffer accessor")
+{
+    ThermalFrame frame;
+
+    frame.setPixel(1, 2, 31.75f);
+
+    const auto& pixels = frame.pixels();
+
+    REQUIRE(pixels.size() == ThermalFrame::PIXEL_COUNT);
+
+    REQUIRE(pixels[2 * ThermalFrame::WIDTH + 1] ==
+            Catch::Approx(31.75f));
+}
+
+TEST_CASE("Out of bounds write is ignored")
+{
+    ThermalFrame frame;
+
+    frame.setPixel(50, 50, 99.9f);
+
+    REQUIRE(frame.validPixelCount() == 64);
+
+    REQUIRE(frame.pixel(50, 50) == Catch::Approx(0.0f));
 }
