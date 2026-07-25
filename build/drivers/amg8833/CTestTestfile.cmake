@@ -1,0 +1,21 @@
+# CMake generated Testfile for 
+# Source directory: C:/Users/campb/Documents/GitHub/LeafSense/drivers/amg8833
+# Build directory: C:/Users/campb/Documents/GitHub/LeafSense/build/drivers/amg8833
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+if(CTEST_CONFIGURATION_TYPE MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
+  add_test("amg8833_driver_tests" "C:/Users/campb/Documents/GitHub/LeafSense/build/drivers/amg8833/Debug/amg8833_driver_tests.exe")
+  set_tests_properties("amg8833_driver_tests" PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/campb/Documents/GitHub/LeafSense/drivers/amg8833/CMakeLists.txt;60;add_test;C:/Users/campb/Documents/GitHub/LeafSense/drivers/amg8833/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
+  add_test("amg8833_driver_tests" "C:/Users/campb/Documents/GitHub/LeafSense/build/drivers/amg8833/Release/amg8833_driver_tests.exe")
+  set_tests_properties("amg8833_driver_tests" PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/campb/Documents/GitHub/LeafSense/drivers/amg8833/CMakeLists.txt;60;add_test;C:/Users/campb/Documents/GitHub/LeafSense/drivers/amg8833/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
+  add_test("amg8833_driver_tests" "C:/Users/campb/Documents/GitHub/LeafSense/build/drivers/amg8833/MinSizeRel/amg8833_driver_tests.exe")
+  set_tests_properties("amg8833_driver_tests" PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/campb/Documents/GitHub/LeafSense/drivers/amg8833/CMakeLists.txt;60;add_test;C:/Users/campb/Documents/GitHub/LeafSense/drivers/amg8833/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
+  add_test("amg8833_driver_tests" "C:/Users/campb/Documents/GitHub/LeafSense/build/drivers/amg8833/RelWithDebInfo/amg8833_driver_tests.exe")
+  set_tests_properties("amg8833_driver_tests" PROPERTIES  _BACKTRACE_TRIPLES "C:/Users/campb/Documents/GitHub/LeafSense/drivers/amg8833/CMakeLists.txt;60;add_test;C:/Users/campb/Documents/GitHub/LeafSense/drivers/amg8833/CMakeLists.txt;0;")
+else()
+  add_test("amg8833_driver_tests" NOT_AVAILABLE)
+endif()

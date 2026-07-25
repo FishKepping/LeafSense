@@ -1,6 +1,6 @@
 ^C:\USERS\CAMPB\DOCUMENTS\GITHUB\LEAFSENSE\LEAFSENSE-CORE\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/campb/Documents/GitHub/LeafSense -BC:/Users/campb/Documents/GitHub/LeafSense/build --check-stamp-file C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/campb/Documents/GitHub/LeafSense -BC:/Users/campb/Documents/GitHub/LeafSense/build --check-stamp-file C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

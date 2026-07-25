@@ -4,7 +4,8 @@
 		"C:/Users/campb/Documents/GitHub/LeafSense/build/cmake_install.cmake",
 		"C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/cmake_install.cmake",
 		"C:/Users/campb/Documents/GitHub/LeafSense/build/_deps/catch2-build/cmake_install.cmake",
-		"C:/Users/campb/Documents/GitHub/LeafSense/build/_deps/catch2-build/src/cmake_install.cmake"
+		"C:/Users/campb/Documents/GitHub/LeafSense/build/_deps/catch2-build/src/cmake_install.cmake",
+		"C:/Users/campb/Documents/GitHub/LeafSense/build/drivers/amg8833/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

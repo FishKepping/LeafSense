@@ -1,6 +1,6 @@
 ^C:\USERS\CAMPB\DOCUMENTS\GITHUB\LEAFSENSE\BUILD\CMAKEFILES\A3A0F8506CA405EA6247ACE53D0C57DD\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/campb/Documents/GitHub/LeafSense -BC:/Users/campb/Documents/GitHub/LeafSense/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/campb/Documents/GitHub/LeafSense/build/LeafSense.slnx
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/campb/Documents/GitHub/LeafSense -BC:/Users/campb/Documents/GitHub/LeafSense/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/campb/Documents/GitHub/LeafSense/build/LeafSense.slnx
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

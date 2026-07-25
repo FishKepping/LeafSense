@@ -1,0 +1,223 @@
+New ThermalFrame starts invalid 1 0.0498568
+Frame can be marked valid 1 0.0394539
+Set and get a pixel 1 0.0684705
+Clear resets pixels 1 0.0648613
+Frame number 1 0.0580827
+Timestamp 1 0.0472747
+Thermistor temperature 1 0.0626451
+Out of bounds returns zero 1 0.0489538
+In bounds coordinates 1 0.0488779
+Pixel validity 1 0.0526744
+Valid pixel count 1 0.056315
+Pixel buffer accessor 1 0.048222
+Out of bounds write is ignored 1 0.0605203
+New selection is empty 1 0.0563205
+Capacity is 64 1 0.0579113
+Add one pixel 1 0.0707966
+Add multiple pixels 1 0.0431051
+Duplicate pixels are ignored 1 0.0597873
+Contains reports correctly 1 0.076893
+Invalid pixel indices are rejected 1 0.0518406
+Fill to capacity 1 0.0502535
+Clear removes all pixels 1 0.0568048
+Iteration order matches insertion order 1 0.0467833
+operator[] returns inserted values 1 0.0557589
+FrameStatistics finds the minimum temperature in a complete frame 1 0.0509345
+FrameStatistics finds the maximum temperature in a complete frame 1 0.082792
+FrameStatistics calculates the average temperature of a complete frame 1 0.056691
+FrameStatistics handles a uniform complete frame 1 0.0676512
+FrameStatistics supports negative temperatures 1 0.0502444
+FrameStatistics supports mixed positive and negative temperatures 1 0.0622196
+FrameStatistics reports every pixel as valid 1 0.0478625
+FrameStatistics finds the minimum temperature in a selection 1 0.0489153
+FrameStatistics finds the maximum temperature in a selection 1 0.0704462
+FrameStatistics calculates the average temperature of a selection 1 0.0432271
+FrameStatistics handles a single-pixel selection 1 0.0477207
+FrameStatistics returns zero for an empty selection 1 0.0616281
+FrameStatistics selection calculations are independent of insertion order 1 0.0567498
+FrameStatistics selection ignores duplicate insertion attempts 1 0.0400913
+A whole-frame selection matches complete frame statistics 1 0.0528693
+FrameStatistics calculates statistics from corner pixels 1 0.0480894
+RectangleRoi defaults to an empty rectangle 1 0.0716338
+RectangleRoi stores constructor geometry 1 0.0480893
+RectangleRoi geometry can be changed 1 0.0479022
+RectangleRoi rejects zero width 1 0.054548
+RectangleRoi rejects zero height 1 0.0594268
+RectangleRoi rejects an origin outside the frame 1 0.0462654
+RectangleRoi creates a single-pixel selection 1 0.0612738
+RectangleRoi creates a two-by-two selection 1 0.0531597
+RectangleRoi produces row-major pixel ordering 1 0.0575136
+RectangleRoi creates a full-frame selection 1 0.0670058
+RectangleRoi clips width at the right frame boundary 1 0.0518281
+RectangleRoi clips height at the bottom frame boundary 1 0.0520973
+RectangleRoi clips width and height at the frame boundaries 1 0.0582681
+RectangleRoi supports the bottom-right frame pixel 1 0.0484201
+RectangleRoi selection works with FrameStatistics 1 0.0474927
+A full-frame RectangleRoi matches whole-frame statistics 1 0.0611341
+RectangleRoi can be reused after geometry changes 1 0.0507818
+PolygonRoi defaults to an empty polygon 1 0.04815
+PolygonRoi stores vertices in insertion order 1 0.0545261
+PolygonRoi requires at least three vertices 1 0.0490097
+PolygonRoi supports its fixed vertex capacity 1 0.0473465
+PolygonRoi can be cleared 1 0.0466641
+PolygonRoi detects points inside a square 1 0.062886
+PolygonRoi rejects points outside a square 1 0.0699649
+PolygonRoi includes points on polygon boundaries 1 0.0505631
+PolygonRoi creates a square pixel selection 1 0.0533564
+PolygonRoi creates a triangular pixel selection 1 0.0723655
+PolygonRoi creates a full-frame selection 1 0.0490791
+PolygonRoi clips naturally to the thermal frame 1 0.059992
+PolygonRoi outside the frame produces an empty selection 1 0.0519497
+PolygonRoi supports clockwise vertex order 1 0.0484377
+PolygonRoi selection works with FrameStatistics 1 0.073799
+A full-frame PolygonRoi matches whole-frame statistics 1 0.048086
+ThresholdRoi defaults to a zero-only range 1 0.523077
+ThresholdRoi stores constructor temperatures 1 0.0492994
+ThresholdRoi range can be changed 1 0.0466643
+ThresholdRoi rejects an inverted temperature range 1 0.0619342
+ThresholdRoi includes both range boundaries 1 0.054033
+ThresholdRoi supports negative temperatures 1 0.0551697
+ThresholdRoi creates a sequential range selection 1 0.0654864
+ThresholdRoi creates a single-pixel selection 1 0.0625091
+ThresholdRoi creates an empty selection when no pixels match 1 0.0473584
+ThresholdRoi creates a full-frame selection 1 0.0677176
+ThresholdRoi selects every matching uniform pixel 1 0.047369
+ThresholdRoi excludes uniform pixels outside the range 1 0.050071
+ThresholdRoi preserves row-major pixel ordering 1 0.0545422
+ThresholdRoi selection works with FrameStatistics 1 0.0719459
+Full-range ThresholdRoi matches whole-frame statistics 1 0.0421548
+ThresholdRoi responds to changing frame data 1 0.0640542
+ThresholdRoi can be reused with a changed range 1 0.0635665
+MeanFilter radius zero produces an unchanged frame 1 0.0491552
+MeanFilter preserves a uniform thermal frame 1 0.0713427
+MeanFilter calculates a three-by-three center average 1 0.0722662
+MeanFilter clips the top-left neighbourhood 1 0.0934249
+MeanFilter clips the top-right neighbourhood 1 0.0562868
+MeanFilter clips the bottom-left neighbourhood 1 0.0507392
+MeanFilter clips the bottom-right neighbourhood 1 0.0558025
+MeanFilter smooths an isolated hot pixel 1 0.0527789
+MeanFilter radius two calculates a five-by-five average 1 0.0421435
+MeanFilter large radius uses the complete frame 1 0.0535661
+MeanFilter preserves frame metadata 1 0.0432334
+MeanFilter preserves an invalid frame state 1 0.0509574
+MeanFilter does not modify the source frame 1 0.0571687
+MeanFilter output works with FrameStatistics 1 0.0487753
+MeanFilter output works with a rectangular ROI 1 0.0675676
+MedianFilter radius zero produces an unchanged frame 1 0.0497826
+MedianFilter preserves a uniform thermal frame 1 0.0458414
+MedianFilter calculates a three-by-three center median 1 0.053565
+MedianFilter calculates an even-sized corner median 1 0.474046
+MedianFilter clips the top-right neighbourhood 1 0.0417467
+MedianFilter clips the bottom-left neighbourhood 1 0.0500372
+MedianFilter clips the bottom-right neighbourhood 1 0.0522429
+MedianFilter removes an isolated hot pixel 1 0.0499064
+MedianFilter removes an isolated cold pixel 1 0.0769275
+MedianFilter preserves a dominant hot region 1 0.0493598
+MedianFilter preserves a sharp vertical edge 1 0.0414662
+MedianFilter radius two calculates a five-by-five median 1 0.0948688
+MedianFilter large radius uses the complete frame 1 0.054468
+MedianFilter supports negative temperatures 1 0.0632384
+MedianFilter preserves frame metadata 1 0.0554651
+MedianFilter preserves an invalid frame state 1 0.0501781
+MedianFilter does not modify the source frame 1 0.0566327
+MedianFilter output works with FrameStatistics 1 0.05797
+MedianFilter output works with a rectangular ROI 1 0.0410064
+ExponentialFilter defaults to alpha one-half 1 0.0825401
+ExponentialFilter stores constructor alpha 1 0.0607203
+ExponentialFilter clamps constructor alpha 1 0.048502
+ExponentialFilter alpha can be changed 1 0.0575682
+ExponentialFilter passes the first frame through unchanged 1 0.0415097
+ExponentialFilter alpha one follows the current frame 1 0.0415825
+ExponentialFilter alpha zero retains previous temperatures 1 0.0632092
+ExponentialFilter alpha one-half averages two frames 1 0.0472421
+ExponentialFilter uses the previous filtered output 1 0.0483524
+ExponentialFilter smooths an isolated changing pixel 1 0.0547544
+ExponentialFilter operates independently on every pixel 1 0.0565213
+ExponentialFilter preserves current frame metadata 1 0.0596248
+ExponentialFilter does not modify source frames 1 0.0642241
+ExponentialFilter reset clears temporal state 1 0.0500215
+ExponentialFilter supports changing alpha while initialized 1 0.0651443
+ExponentialFilter output works with FrameStatistics 1 0.0462181
+ExponentialFilter output works with a rectangular ROI 1 0.042381
+Amg8833Decoder exposes the expected pixel byte count 1 0.517547
+Amg8833Decoder decodes zero pixel temperature 1 0.0416872
+Amg8833Decoder decodes positive pixel temperature 1 0.0470616
+Amg8833Decoder decodes one positive pixel count 1 0.0502209
+Amg8833Decoder decodes one negative pixel count 1 0.0452828
+Amg8833Decoder decodes negative pixel temperature 1 0.0540882
+Amg8833Decoder decodes documented negative pixel value 1 0.0606186
+Amg8833Decoder decodes maximum positive pixel value 1 0.0606654
+Amg8833Decoder decodes minimum negative pixel value 1 0.0556177
+Amg8833Decoder ignores unused pixel high-byte bits 1 0.0606773
+Amg8833Decoder uses low-byte-first pixel ordering 1 0.0495533
+Amg8833Decoder decodes zero thermistor temperature 1 0.0678833
+Amg8833Decoder decodes positive thermistor temperature 1 0.0433557
+Amg8833Decoder decodes one positive thermistor count 1 0.0569673
+Amg8833Decoder decodes one negative thermistor count 1 0.0484671
+Amg8833Decoder decodes negative thermistor temperature 1 0.0731635
+Amg8833Decoder treats thermistor sign as sign magnitude 1 0.0543884
+Amg8833Decoder decodes maximum thermistor magnitude 1 0.0476961
+Amg8833Decoder ignores unused thermistor high-byte bits 1 0.0584775
+Amg8833Decoder decodes a uniform pixel frame 1 0.0469506
+Amg8833Decoder preserves row-major register ordering 1 0.0608941
+Amg8833Decoder decodes mixed positive and negative pixels 1 0.0483266
+Amg8833Decoder decodePixels retains default metadata 1 0.0623675
+Amg8833Decoder builds a complete valid ThermalFrame 1 0.0452532
+Amg8833Decoder can mark a decoded frame invalid 1 0.0544101
+Decoded AMG8833 frame works with FrameStatistics 1 0.046426
+Decoded AMG8833 frame works with RectangleRoi 1 0.0538374
+Decoded AMG8833 frame works with ThresholdRoi 1 0.0603601
+Decoded AMG8833 frame works with MedianFilter 1 0.0483663
+Consecutive decoded frames work with ExponentialFilter 1 0.0597085
+ThermalProcessor has disabled filters by default 1 0.0556921
+ThermalProcessor stores its configuration 1 0.0659291
+ThermalProcessor clamps exponential alpha 1 0.0516085
+ThermalProcessor with no filters returns an unchanged frame 1 0.0610432
+ThermalProcessor applies the mean spatial filter 1 0.0479733
+ThermalProcessor applies the median spatial filter 1 0.510577
+ThermalProcessor applies exponential smoothing 1 0.0417666
+ThermalProcessor applies spatial filtering before temporal filtering 1 0.0451627
+ThermalProcessor decodes raw AMG8833 data 1 0.0488986
+ThermalProcessor filters decoded raw data 1 0.0496617
+ThermalProcessor preserves current frame metadata 1 0.0581999
+ThermalProcessor does not modify its source frame 1 0.0644279
+Invalid frames pass through unchanged 1 0.0659098
+Invalid frames do not advance exponential state 1 0.0434315
+ThermalProcessor reset clears exponential history 1 0.0668437
+Changing exponential alpha preserves filter history 1 0.0476764
+Disabling exponential filtering resets its history 1 0.0556478
+Re-enabling exponential filtering starts with a fresh frame 1 0.0476556
+Processed frames work with FrameStatistics 1 0.089972
+Processed frames work with RectangleRoi 1 0.0552929
+Processed frames work with ThresholdRoi 1 0.0433178
+Amg8833Registers defines both supported I2C addresses 1 0.0576353
+Amg8833Registers defines configuration register addresses 1 0.0535322
+Amg8833Registers defines threshold register addresses 1 0.0588774
+Amg8833Registers defines thermistor register addresses 1 0.0505973
+Amg8833Registers defines pixel register range 1 0.0580086
+Amg8833Registers encodes normal power mode 1 0.0505954
+Amg8833Registers encodes sleep power mode 1 0.0623236
+Amg8833Registers encodes standby power modes 1 0.058403
+Amg8833Registers encodes reset commands 1 0.0561102
+Amg8833Registers encodes ten frames per second 1 0.0499955
+Amg8833Registers encodes one frame per second 1 0.0560979
+Amg8833Registers disables interrupts by default 1 0.050082
+Amg8833Registers enables difference-mode interrupt 1 0.0620184
+Amg8833Registers encodes disabled absolute mode 1 0.0643537
+Amg8833Registers enables absolute-mode interrupt 1 0.0592772
+Amg8833Registers decodes a clear status register 1 0.0498479
+Amg8833Registers decodes interrupt status 1 0.0773294
+Amg8833Registers decodes pixel overflow status 1 0.0668332
+Amg8833Registers decodes thermistor overflow status 1 0.476209
+Amg8833Registers decodes all status flags 1 0.0436498
+Amg8833Registers ignores unknown status bits 1 0.0461652
+Amg8833Registers encodes no status-clear flags 1 0.0479236
+Amg8833Registers encodes individual status-clear flags 1 0.0625377
+Amg8833Registers encodes all status-clear flags 1 0.0548064
+Amg8833Registers encodes moving-average mode 1 0.0668265
+Amg8833Registers maps the first pixel registers 1 0.0514162
+Amg8833Registers maps row boundary pixel registers 1 0.0553579
+Amg8833Registers maps the final pixel registers 1 0.0606246
+Amg8833Registers rejects invalid pixel indices 1 0.0499721
+amg8833_driver_tests 1 0.150042
+---

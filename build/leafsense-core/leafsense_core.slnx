@@ -36,6 +36,13 @@
 		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
 		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
 	</Project>
+	<Project Path="RUN_TESTS.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="0b278c78-c697-33ec-ae08-891fa75a0768">
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
 	<Project Path="../ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e5271e05-e795-3d4a-80fa-694270adc96c"/>
 	<Project Path="amg8833_decoder_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="045c17e7-4b68-3fee-b9b6-87a706604105">
 		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
