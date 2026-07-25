@@ -1,5 +1,7 @@
 #pragma once
 
+#include <array>
+#include <cstddef>
 #include <cstdint>
 
 #include "leafsense/amg8833_registers.h"
@@ -14,33 +16,50 @@ namespace leafsense::drivers {
  */
 struct Amg8833RecoveryConfig
 {
-    /**
-     * Enable automatic sensor reinitialization after repeated
-     * communication failures.
-     */
     bool enabled = true;
 
     /**
-     * Number of consecutive acquisition failures required before
-     * automatic recovery is attempted.
-     *
      * Values below 1 are treated as 1.
      */
     std::uint32_t failure_threshold = 3;
 };
 
 /**
- * @brief Complete hardware and processing configuration for an AMG8833.
+ * @brief Hardware interrupt threshold configuration.
+ *
+ * Thresholds use the AMG8833 pixel-temperature resolution of 0.25 °C.
+ *
+ * Valid temperature range:
+ *
+ *     -512.0 °C through 511.75 °C
+ *
+ * Hysteresis must be non-negative and must not exceed the distance
+ * between the lower and upper thresholds.
+ */
+struct Amg8833InterruptThresholds
+{
+    bool enabled = false;
+
+    float upper_temperature = 30.0f;
+
+    float lower_temperature = 10.0f;
+
+    float hysteresis = 1.0f;
+};
+
+/**
+ * @brief Complete hardware and processing configuration.
  */
 struct Amg8833DriverConfig
 {
     Amg8833FrameRate frame_rate =
         Amg8833FrameRate::FramesPerSecond10;
 
-    bool moving_average_enabled =
-        false;
+    bool moving_average_enabled = false;
 
     Amg8833InterruptConfig interrupt;
+
+    Amg8833InterruptThresholds interrupt_thresholds;
 
     ProcessingConfig processing;
 
@@ -56,6 +75,8 @@ enum class Amg8833DriverError : std::uint8_t
 
     NotInitialized,
 
+    InvalidInterruptThresholds,
+
     PowerControlWriteFailed,
 
     InitialResetWriteFailed,
@@ -63,6 +84,8 @@ enum class Amg8833DriverError : std::uint8_t
     FrameRateWriteFailed,
 
     MovingAverageWriteFailed,
+
+    InterruptThresholdWriteFailed,
 
     InterruptControlWriteFailed,
 
@@ -72,15 +95,13 @@ enum class Amg8833DriverError : std::uint8_t
 
     ThermistorReadFailed,
 
-    PixelReadFailed
+    PixelReadFailed,
+
+    InterruptTableReadFailed
 };
 
 /**
- * @brief Result of one AMG8833 frame-acquisition attempt.
- *
- * A failed read can trigger automatic recovery. Recovery information
- * is reported separately from the acquisition error because the frame
- * that triggered recovery was still not acquired.
+ * @brief Result of one frame-acquisition attempt.
  */
 struct Amg8833Acquisition
 {
@@ -91,145 +112,176 @@ struct Amg8833Acquisition
     Amg8833DriverError error =
         Amg8833DriverError::None;
 
-    bool recovery_attempted =
-        false;
+    bool recovery_attempted = false;
 
-    bool recovery_succeeded =
-        false;
+    bool recovery_succeeded = false;
 
-    /**
-     * Return true when all bus reads completed successfully.
-     */
     bool success() const;
 };
 
 /**
- * @brief Runtime health information for the AMG8833 driver.
+ * @brief Runtime health information.
  */
 struct Amg8833DriverHealth
 {
-    bool initialized =
-        false;
+    bool initialized = false;
 
-    std::uint32_t consecutive_failures =
-        0;
+    std::uint32_t consecutive_failures = 0;
 
-    std::uint32_t total_failures =
-        0;
+    std::uint32_t total_failures = 0;
 
-    std::uint32_t recovery_attempts =
-        0;
+    std::uint32_t recovery_attempts = 0;
 
-    std::uint32_t successful_recoveries =
-        0;
+    std::uint32_t successful_recoveries = 0;
 
-    std::uint32_t failed_recoveries =
-        0;
+    std::uint32_t failed_recoveries = 0;
 
-    /**
-     * Return true when the driver is initialized and has no current
-     * consecutive communication failures.
-     */
     bool healthy() const;
 };
 
 /**
+ * @brief Decoded 8×8 AMG8833 interrupt table.
+ *
+ * Pixel indexing follows ThermalFrame:
+ *
+ *     row 0, column 0 = pixel index 0
+ *     row 7, column 7 = pixel index 63
+ */
+class Amg8833InterruptMap
+{
+public:
+    static constexpr std::size_t WIDTH = 8;
+
+    static constexpr std::size_t HEIGHT = 8;
+
+    static constexpr std::size_t PIXEL_COUNT =
+        WIDTH * HEIGHT;
+
+    using RawBytes = std::array<std::uint8_t, 8>;
+
+    Amg8833InterruptMap();
+
+    /**
+     * Return whether a pixel is active.
+     *
+     * Invalid coordinates return false.
+     */
+    bool active(
+        std::size_t row,
+        std::size_t column) const;
+
+    /**
+     * Return whether a linear pixel index is active.
+     *
+     * Invalid indices return false.
+     */
+    bool active(
+        std::size_t pixel_index) const;
+
+    /**
+     * Return the number of active interrupt pixels.
+     */
+    std::size_t activeCount() const;
+
+    /**
+     * Return true when at least one pixel is active.
+     */
+    bool any() const;
+
+    /**
+     * Return true when no pixels are active.
+     */
+    bool empty() const;
+
+    /**
+     * Return the original interrupt-table bytes.
+     */
+    const RawBytes& rawBytes() const;
+
+private:
+    friend class Amg8833Driver;
+
+    explicit Amg8833InterruptMap(
+        const RawBytes& raw_bytes);
+
+    RawBytes raw_bytes_;
+
+    std::size_t active_count_;
+};
+
+/**
+ * @brief Result of an interrupt-table read.
+ */
+struct Amg8833InterruptMapResult
+{
+    Amg8833InterruptMap map;
+
+    Amg8833DriverError error =
+        Amg8833DriverError::None;
+
+    bool recovery_attempted = false;
+
+    bool recovery_succeeded = false;
+
+    bool success() const;
+};
+
+/**
  * @brief Platform-independent AMG8833 sensor driver.
- *
- * The driver owns:
- *
- *     sensor initialization
- *     register acquisition
- *     frame processing
- *     status handling
- *     error tracking
- *     automatic recovery
- *
- * Automatic recovery is attempted after the configured number of
- * consecutive acquisition read failures.
- *
- * The acquisition that triggers recovery still returns its original
- * read error. The caller should request another frame after successful
- * recovery.
- *
- * Sensor overflow flags do not count as communication failures because
- * all register operations completed successfully.
- *
- * The implementation performs no heap allocation.
  */
 class Amg8833Driver
 {
 public:
-    /**
-     * Construct a driver using default configuration.
-     */
     explicit Amg8833Driver(
         Amg8833Bus& bus);
 
-    /**
-     * Construct a driver using the supplied configuration.
-     */
     Amg8833Driver(
         Amg8833Bus& bus,
         const Amg8833DriverConfig& config);
 
-    /**
-     * Return the active configuration.
-     */
     const Amg8833DriverConfig& config() const;
 
-    /**
-     * Configure and initialize the physical sensor.
-     *
-     * Frame numbering and temporal processing history are reset.
-     * Lifetime health counters are preserved.
-     */
     bool initialize();
 
-    /**
-     * Return true after successful initialization.
-     */
     bool initialized() const;
 
-    /**
-     * Clear all local driver state and health counters.
-     *
-     * This does not write to the physical sensor.
-     */
     void reset();
 
-    /**
-     * Return the most recent driver error.
-     */
     Amg8833DriverError lastError() const;
 
-    /**
-     * Return the most recently decoded sensor status.
-     */
     const Amg8833Status& lastStatus() const;
 
-    /**
-     * Return the number assigned to the most recently acquired frame.
-     */
     std::uint32_t frameCount() const;
 
-    /**
-     * Return current driver health information.
-     */
     Amg8833DriverHealth health() const;
 
-    /**
-     * Read, decode, and process one thermal frame.
-     */
     Amg8833Acquisition readFrame(
         std::uint32_t timestamp_ms);
 
     /**
-     * Clear the active flags from the most recently read status.
+     * Read and decode registers 0x10 through 0x17.
      *
-     * No bus write is performed when no status flags are active.
+     * A failed read participates in automatic recovery in the same way
+     * as frame-acquisition communication failures.
      */
+    Amg8833InterruptMapResult readInterruptMap();
+
     bool clearStatus();
+
+    /**
+     * Validate an interrupt-threshold configuration.
+     */
+    static bool validInterruptThresholds(
+        const Amg8833InterruptThresholds& thresholds);
+
+    /**
+     * Encode a temperature as the sensor's signed 12-bit 0.25 °C
+     * interrupt-threshold representation.
+     *
+     * Values outside the supported range are clamped.
+     */
+    static std::uint16_t encodeInterruptTemperature(
+        float temperature);
 
 private:
     bool performInitialization(
@@ -242,10 +294,22 @@ private:
 
     bool configureMovingAverage();
 
+    bool configureInterruptThresholds();
+
+    bool writeInterruptTemperature(
+        std::uint8_t low_register,
+        std::uint8_t high_register,
+        float temperature);
+
     void recordAcquisitionSuccess();
 
     void recordAcquisitionFailure(
         Amg8833Acquisition& acquisition);
+
+    void recordInterruptMapSuccess();
+
+    void recordInterruptMapFailure(
+        Amg8833InterruptMapResult& result);
 
     std::uint32_t recoveryThreshold() const;
 
