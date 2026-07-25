@@ -1,5 +1,4 @@
 #include <catch2/catch_test_macros.hpp>
-
 #include <array>
 #include <cmath>
 #include <cstddef>
@@ -20,6 +19,18 @@ using leafsense::drivers::Amg8833DriverConfig;
 using leafsense::drivers::Amg8833DriverError;
 using leafsense::drivers::Amg8833Snapshot;
 using leafsense::drivers::Amg8833SnapshotReader;
+
+constexpr float kTemperatureTolerance =
+    0.0001f;
+
+bool temperaturesEqual(
+    float actual,
+    float expected)
+{
+    return std::fabs(
+        actual - expected) <=
+        kTemperatureTolerance;
+}
 
 class SnapshotTestBus final
     : public Amg8833Bus
@@ -314,13 +325,13 @@ TEST_CASE(
         20.0f);
 
     REQUIRE(
-        snapshot.summary.average_temperature ==
-        Catch::Approx(
+        temperaturesEqual(
+            snapshot.summary.average_temperature,
             19.84375f));
 
     REQUIRE(
-        snapshot.summary.thermistor_temperature ==
-        Catch::Approx(
+        temperaturesEqual(
+            snapshot.summary.thermistor_temperature,
             25.0f));
 
     REQUIRE(

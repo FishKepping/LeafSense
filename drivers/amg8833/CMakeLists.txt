@@ -2,6 +2,7 @@ add_library(
     leafsense_amg8833_driver
     src/amg8833_driver.cpp
     src/amg8833_snapshot.cpp
+    src/amg8833_telemetry.cpp
 )
 
 add_library(
@@ -59,10 +60,8 @@ if(LEAFSENSE_BUILD_TESTS)
     )
 
     add_test(
-        NAME
-            amg8833_driver_tests
-        COMMAND
-            amg8833_driver_tests
+        NAME amg8833_driver_tests
+        COMMAND amg8833_driver_tests
     )
 
     add_executable(
@@ -78,10 +77,8 @@ if(LEAFSENSE_BUILD_TESTS)
     )
 
     add_test(
-        NAME
-            amg8833_recovery_tests
-        COMMAND
-            amg8833_recovery_tests
+        NAME amg8833_recovery_tests
+        COMMAND amg8833_recovery_tests
     )
 
     add_executable(
@@ -97,10 +94,8 @@ if(LEAFSENSE_BUILD_TESTS)
     )
 
     add_test(
-        NAME
-            amg8833_interrupt_tests
-        COMMAND
-            amg8833_interrupt_tests
+        NAME amg8833_interrupt_tests
+        COMMAND amg8833_interrupt_tests
     )
 
     add_executable(
@@ -116,9 +111,24 @@ if(LEAFSENSE_BUILD_TESTS)
     )
 
     add_test(
-        NAME
-            amg8833_snapshot_tests
-        COMMAND
-            amg8833_snapshot_tests
+        NAME amg8833_snapshot_tests
+        COMMAND amg8833_snapshot_tests
+    )
+
+    add_executable(
+        amg8833_telemetry_tests
+        tests/amg8833_telemetry_test.cpp
+    )
+
+    target_link_libraries(
+        amg8833_telemetry_tests
+        PRIVATE
+            leafsense::amg8833_driver
+            Catch2::Catch2WithMain
+    )
+
+    add_test(
+        NAME amg8833_telemetry_tests
+        COMMAND amg8833_telemetry_tests
     )
 endif()
