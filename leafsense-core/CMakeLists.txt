@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(
     leafsense_core
-    VERSION 0.9.0
+    VERSION 1.0.0
     LANGUAGES CXX
 )
 
@@ -27,6 +27,7 @@ add_library(
     leafsense_core
     src/thermal_frame.cpp
     src/frame_statistics.cpp
+    src/amg8833_decoder.cpp
     src/roi/pixel_selection.cpp
     src/roi/rectangle_roi.cpp
     src/roi/polygon_roi.cpp
@@ -234,5 +235,21 @@ if(LEAFSENSE_BUILD_TESTS)
 
     catch_discover_tests(
         exponential_filter_tests
+    )
+
+    add_executable(
+        amg8833_decoder_tests
+        tests/amg8833_decoder_test.cpp
+    )
+
+    target_link_libraries(
+        amg8833_decoder_tests
+        PRIVATE
+            leafsense::core
+            Catch2::Catch2WithMain
+    )
+
+    catch_discover_tests(
+        amg8833_decoder_tests
     )
 endif()
