@@ -206,6 +206,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{B590DFA9-B5B7-3112-8F40-606A0A3F8C66}</Project>
       <Name>thermal_frame_tests</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\threshold_roi_tests.vcxproj">
+      <Project>{C5E76C57-B7A9-3239-A76F-3B4775FAFC6E}</Project>
+      <Name>threshold_roi_tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

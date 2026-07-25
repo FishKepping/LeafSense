@@ -317,6 +317,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\pixel_selection.cpp" />
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\rectangle_roi.cpp" />
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\polygon_roi.cpp" />
+    <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\threshold_roi.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
