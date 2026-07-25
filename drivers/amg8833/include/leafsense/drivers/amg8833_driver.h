@@ -10,6 +10,26 @@
 namespace leafsense::drivers {
 
 /**
+ * @brief Automatic recovery configuration.
+ */
+struct Amg8833RecoveryConfig
+{
+    /**
+     * Enable automatic sensor reinitialization after repeated
+     * communication failures.
+     */
+    bool enabled = true;
+
+    /**
+     * Number of consecutive acquisition failures required before
+     * automatic recovery is attempted.
+     *
+     * Values below 1 are treated as 1.
+     */
+    std::uint32_t failure_threshold = 3;
+};
+
+/**
  * @brief Complete hardware and processing configuration for an AMG8833.
  */
 struct Amg8833DriverConfig
@@ -23,6 +43,8 @@ struct Amg8833DriverConfig
     Amg8833InterruptConfig interrupt;
 
     ProcessingConfig processing;
+
+    Amg8833RecoveryConfig recovery;
 };
 
 /**
@@ -56,11 +78,9 @@ enum class Amg8833DriverError : std::uint8_t
 /**
  * @brief Result of one AMG8833 frame-acquisition attempt.
  *
- * success() indicates that all required bus reads completed.
- *
- * A successful acquisition can still contain an invalid ThermalFrame
- * when the sensor reports pixel or thermistor overflow. Sensor status
- * is therefore separate from the driver error.
+ * A failed read can trigger automatic recovery. Recovery information
+ * is reported separately from the acquisition error because the frame
+ * that triggered recovery was still not acquired.
  */
 struct Amg8833Acquisition
 {
@@ -71,45 +91,69 @@ struct Amg8833Acquisition
     Amg8833DriverError error =
         Amg8833DriverError::None;
 
+    bool recovery_attempted =
+        false;
+
+    bool recovery_succeeded =
+        false;
+
     /**
-     * Return true when all bus operations completed successfully.
+     * Return true when all bus reads completed successfully.
      */
     bool success() const;
 };
 
 /**
+ * @brief Runtime health information for the AMG8833 driver.
+ */
+struct Amg8833DriverHealth
+{
+    bool initialized =
+        false;
+
+    std::uint32_t consecutive_failures =
+        0;
+
+    std::uint32_t total_failures =
+        0;
+
+    std::uint32_t recovery_attempts =
+        0;
+
+    std::uint32_t successful_recoveries =
+        0;
+
+    std::uint32_t failed_recoveries =
+        0;
+
+    /**
+     * Return true when the driver is initialized and has no current
+     * consecutive communication failures.
+     */
+    bool healthy() const;
+};
+
+/**
  * @brief Platform-independent AMG8833 sensor driver.
  *
- * This class owns the sensor initialization and acquisition sequence,
- * while Amg8833Bus supplies platform-specific register access.
+ * The driver owns:
  *
- * Initialization performs:
+ *     sensor initialization
+ *     register acquisition
+ *     frame processing
+ *     status handling
+ *     error tracking
+ *     automatic recovery
  *
- *     normal power mode
- *     initial reset
- *     frame-rate configuration
- *     moving-average configuration
- *     interrupt configuration
- *     status clearing
+ * Automatic recovery is attempted after the configured number of
+ * consecutive acquisition read failures.
  *
- * Frame acquisition performs:
+ * The acquisition that triggers recovery still returns its original
+ * read error. The caller should request another frame after successful
+ * recovery.
  *
- *     status-register read
- *     thermistor-register read
- *     128-byte pixel-register read
- *     decoding and filtering through ThermalProcessor
- *
- * Pixel or thermistor overflow produces a successfully acquired but
- * invalid ThermalFrame. Invalid frames do not update exponential
- * filtering history.
- *
- * Frame numbers count complete register acquisitions, including frames
- * marked invalid because of sensor overflow. Failed bus reads do not
- * increment the frame number.
- *
- * initialize() performs register operations only. The platform adapter
- * remains responsible for ensuring the sensor has completed its
- * power-on communication setup period before initialization begins.
+ * Sensor overflow flags do not count as communication failures because
+ * all register operations completed successfully.
  *
  * The implementation performs no heap allocation.
  */
@@ -137,8 +181,8 @@ public:
     /**
      * Configure and initialize the physical sensor.
      *
-     * Driver state and temporal filtering history are cleared before
-     * the initialization sequence begins.
+     * Frame numbering and temporal processing history are reset.
+     * Lifetime health counters are preserved.
      */
     bool initialize();
 
@@ -148,7 +192,7 @@ public:
     bool initialized() const;
 
     /**
-     * Clear local driver state.
+     * Clear all local driver state and health counters.
      *
      * This does not write to the physical sensor.
      */
@@ -170,6 +214,11 @@ public:
     std::uint32_t frameCount() const;
 
     /**
+     * Return current driver health information.
+     */
+    Amg8833DriverHealth health() const;
+
+    /**
      * Read, decode, and process one thermal frame.
      */
     Amg8833Acquisition readFrame(
@@ -183,12 +232,22 @@ public:
     bool clearStatus();
 
 private:
+    bool performInitialization(
+        bool preserve_health_counters);
+
     bool writeInitializationRegister(
         std::uint8_t register_address,
         std::uint8_t value,
         Amg8833DriverError error);
 
     bool configureMovingAverage();
+
+    void recordAcquisitionSuccess();
+
+    void recordAcquisitionFailure(
+        Amg8833Acquisition& acquisition);
+
+    std::uint32_t recoveryThreshold() const;
 
     Amg8833Bus& bus_;
 
@@ -203,6 +262,16 @@ private:
     Amg8833Status last_status_;
 
     std::uint32_t frame_count_;
+
+    std::uint32_t consecutive_failures_;
+
+    std::uint32_t total_failures_;
+
+    std::uint32_t recovery_attempts_;
+
+    std::uint32_t successful_recoveries_;
+
+    std::uint32_t failed_recoveries_;
 };
 
 }  // namespace leafsense::drivers

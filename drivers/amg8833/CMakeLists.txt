@@ -63,4 +63,23 @@ if(LEAFSENSE_BUILD_TESTS)
         COMMAND
             amg8833_driver_tests
     )
+
+    add_executable(
+        amg8833_recovery_tests
+        tests/amg8833_recovery_test.cpp
+    )
+
+    target_link_libraries(
+        amg8833_recovery_tests
+        PRIVATE
+            leafsense::amg8833_driver
+            Catch2::Catch2WithMain
+    )
+
+    add_test(
+        NAME
+            amg8833_recovery_tests
+        COMMAND
+            amg8833_recovery_tests
+    )
 endif()
