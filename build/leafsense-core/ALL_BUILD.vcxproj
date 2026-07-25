@@ -190,6 +190,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{E653691C-5928-33F2-AF63-EDE2A1DFB92A}</Project>
       <Name>leafsense_core</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\mean_filter_tests.vcxproj">
+      <Project>{5F707586-0148-3E2D-9230-F6E28A04FD2F}</Project>
+      <Name>mean_filter_tests</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\pixel_selection_tests.vcxproj">
       <Project>{48AF0678-9883-31DA-9EEF-2E87BF36D2B2}</Project>
       <Name>pixel_selection_tests</Name>

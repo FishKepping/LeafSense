@@ -10,4 +10,5 @@ include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/frame_st
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/rectangle_roi_tests-b12d07c_include.cmake")
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/polygon_roi_tests-b12d07c_include.cmake")
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/threshold_roi_tests-b12d07c_include.cmake")
+include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/mean_filter_tests-b12d07c_include.cmake")
 subdirs("../_deps/catch2-build")

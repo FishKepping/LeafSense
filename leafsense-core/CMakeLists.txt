@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(
     leafsense_core
-    VERSION 0.6.0
+    VERSION 0.7.0
     LANGUAGES CXX
 )
 
@@ -31,6 +31,7 @@ add_library(
     src/roi/rectangle_roi.cpp
     src/roi/polygon_roi.cpp
     src/roi/threshold_roi.cpp
+    src/filters/mean_filter.cpp
 )
 
 add_library(
@@ -183,5 +184,21 @@ if(LEAFSENSE_BUILD_TESTS)
 
     catch_discover_tests(
         threshold_roi_tests
+    )
+
+    add_executable(
+        mean_filter_tests
+        tests/mean_filter_test.cpp
+    )
+
+    target_link_libraries(
+        mean_filter_tests
+        PRIVATE
+            leafsense::core
+            Catch2::Catch2WithMain
+    )
+
+    catch_discover_tests(
+        mean_filter_tests
     )
 endif()

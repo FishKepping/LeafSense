@@ -4,3 +4,4 @@ C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\pixel_selection
 C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\rectangle_roi.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\rectangle_roi.obj
 C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\polygon_roi.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\polygon_roi.obj
 C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\threshold_roi.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\threshold_roi.obj
+C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\filters\mean_filter.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\mean_filter.obj

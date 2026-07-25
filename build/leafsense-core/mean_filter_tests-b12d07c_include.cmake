@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/mean_filter_tests-b12d07c_tests.cmake")
+  include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/mean_filter_tests-b12d07c_tests.cmake")
+else()
+  add_test(mean_filter_tests_NOT_BUILT-b12d07c mean_filter_tests_NOT_BUILT-b12d07c)
+endif()

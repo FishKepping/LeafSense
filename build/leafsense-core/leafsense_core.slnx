@@ -13,6 +13,7 @@
 		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
 		<BuildDependency Project="frame_statistics_tests.vcxproj"/>
 		<BuildDependency Project="leafsense_core.vcxproj"/>
+		<BuildDependency Project="mean_filter_tests.vcxproj"/>
 		<BuildDependency Project="pixel_selection_tests.vcxproj"/>
 		<BuildDependency Project="polygon_roi_tests.vcxproj"/>
 		<BuildDependency Project="rectangle_roi_tests.vcxproj"/>
@@ -39,6 +40,12 @@
 	</Project>
 	<Project Path="leafsense_core.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e653691c-5928-33f2-af63-ede2a1dfb92a">
 		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="mean_filter_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5f707586-0148-3e2d-9230-f6e28a04fd2f">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
 	</Project>
 	<Project Path="pixel_selection_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="48af0678-9883-31da-9eef-2e87bf36d2b2">
 		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
