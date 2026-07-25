@@ -182,6 +182,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{8bd3552a-2cfb-4a59-ab15-2031b97ada1e}</Project>
       <Name>Catch2WithMain</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\exponential_filter_tests.vcxproj">
+      <Project>{0F1D14A0-F97C-3A09-BB1F-E899DD4A2552}</Project>
+      <Name>exponential_filter_tests</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\frame_statistics_tests.vcxproj">
       <Project>{CE1DD70B-1C9E-39B5-85AB-D96A38E30A49}</Project>
       <Name>frame_statistics_tests</Name>

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(
     leafsense_core
-    VERSION 0.8.0
+    VERSION 0.9.0
     LANGUAGES CXX
 )
 
@@ -33,6 +33,7 @@ add_library(
     src/roi/threshold_roi.cpp
     src/filters/mean_filter.cpp
     src/filters/median_filter.cpp
+    src/filters/exponential_filter.cpp
 )
 
 add_library(
@@ -217,5 +218,21 @@ if(LEAFSENSE_BUILD_TESTS)
 
     catch_discover_tests(
         median_filter_tests
+    )
+
+    add_executable(
+        exponential_filter_tests
+        tests/exponential_filter_test.cpp
+    )
+
+    target_link_libraries(
+        exponential_filter_tests
+        PRIVATE
+            leafsense::core
+            Catch2::Catch2WithMain
+    )
+
+    catch_discover_tests(
+        exponential_filter_tests
     )
 endif()
