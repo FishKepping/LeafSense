@@ -1,0 +1,1252 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Git::Git::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-Git__Git-Debug-2e5a494900043514e39c.json",
+					"name" : "Git::Git",
+					"projectIndex" : 1
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"build" : "leafsense-core",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-leafsense-core-Debug-a390ef340ac6fd01a4d5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "leafsense-core",
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"build" : "_deps/catch2-build",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-_deps.catch2-build-Debug-98954b0ffcd6084a10c8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/catch2-build/src",
+					"jsonFile" : "directory-_deps.catch2-build.src-Debug-88b11f3d1ed49dfce978.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src/src",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LeafSense",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "leafsense_core",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3
+					],
+					"name" : "Catch2",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Debug-3a4f5d68b7b652ced7f4.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-ALL_BUILD-Debug-bae10623c23fa31a9256.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@3e93893dc0618e684ae7",
+					"jsonFile" : "target-ALL_BUILD-Debug-380c9f8881927b23c00f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2-Debug-54518c559141900c34b2.json",
+					"name" : "Catch2",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2WithMain::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2WithMain-Debug-5a325629660c4f0e7b47.json",
+					"name" : "Catch2WithMain",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Debug-898a056bd2ce9ee701ab.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "amg8833_decoder_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-amg8833_decoder_tests-Debug-25e62761d86aa71a3335.json",
+					"name" : "amg8833_decoder_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "amg8833_registers_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-amg8833_registers_tests-Debug-9f54534a12af723bc9b8.json",
+					"name" : "amg8833_registers_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "exponential_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-exponential_filter_tests-Debug-3b7d41bf94c69fc0ea2e.json",
+					"name" : "exponential_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "frame_statistics_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-frame_statistics_tests-Debug-174617888ca4e10ce560.json",
+					"name" : "frame_statistics_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "leafsense_core::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-leafsense_core-Debug-606b0b44be792bac61da.json",
+					"name" : "leafsense_core",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "mean_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-mean_filter_tests-Debug-561ee04cb0d8be3754e2.json",
+					"name" : "mean_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "median_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-median_filter_tests-Debug-60e4131f261a8f359b60.json",
+					"name" : "median_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pixel_selection_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-pixel_selection_tests-Debug-6cc2a17081776dfe863a.json",
+					"name" : "pixel_selection_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polygon_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-polygon_roi_tests-Debug-2dc4289f1e6df25391e3.json",
+					"name" : "polygon_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "rectangle_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-rectangle_roi_tests-Debug-2312bfee90ab68ee0829.json",
+					"name" : "rectangle_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_frame_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_frame_tests-Debug-5b0760ec840ea23576ad.json",
+					"name" : "thermal_frame_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_processor_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_processor_tests-Debug-b3708d48840dda8ff747.json",
+					"name" : "thermal_processor_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "threshold_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-threshold_roi_tests-Debug-260567d00e1d1be7db4c.json",
+					"name" : "threshold_roi_tests",
+					"projectIndex" : 1
+				}
+			]
+		},
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Git::Git::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-Git__Git-Release-2e5a494900043514e39c.json",
+					"name" : "Git::Git",
+					"projectIndex" : 1
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Release-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"build" : "leafsense-core",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-leafsense-core-Release-a390ef340ac6fd01a4d5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "leafsense-core",
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"build" : "_deps/catch2-build",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-_deps.catch2-build-Release-98954b0ffcd6084a10c8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/catch2-build/src",
+					"jsonFile" : "directory-_deps.catch2-build.src-Release-88b11f3d1ed49dfce978.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src/src",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LeafSense",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "leafsense_core",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3
+					],
+					"name" : "Catch2",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Release-3a4f5d68b7b652ced7f4.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-ALL_BUILD-Release-bae10623c23fa31a9256.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@3e93893dc0618e684ae7",
+					"jsonFile" : "target-ALL_BUILD-Release-380c9f8881927b23c00f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2-Release-5117a94e2237cc53d22a.json",
+					"name" : "Catch2",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2WithMain::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2WithMain-Release-2052971c51ab78a7d10a.json",
+					"name" : "Catch2WithMain",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Release-898a056bd2ce9ee701ab.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "amg8833_decoder_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-amg8833_decoder_tests-Release-48894ad08b0a894d95d2.json",
+					"name" : "amg8833_decoder_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "amg8833_registers_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-amg8833_registers_tests-Release-ba8478e90d19571ec509.json",
+					"name" : "amg8833_registers_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "exponential_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-exponential_filter_tests-Release-9835874d03d048a229e6.json",
+					"name" : "exponential_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "frame_statistics_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-frame_statistics_tests-Release-ed7f27975f52f56f87ab.json",
+					"name" : "frame_statistics_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "leafsense_core::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-leafsense_core-Release-bc52252a3af9be7cb506.json",
+					"name" : "leafsense_core",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "mean_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-mean_filter_tests-Release-c0e14e83dffa10e88e2a.json",
+					"name" : "mean_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "median_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-median_filter_tests-Release-ad28f7c89e3f55c6edc5.json",
+					"name" : "median_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pixel_selection_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-pixel_selection_tests-Release-a996cf8c1492db687f3e.json",
+					"name" : "pixel_selection_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polygon_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-polygon_roi_tests-Release-23a789518971a4d0aad4.json",
+					"name" : "polygon_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "rectangle_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-rectangle_roi_tests-Release-0f781e243722564add89.json",
+					"name" : "rectangle_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_frame_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_frame_tests-Release-19f33a6e29732b9d9809.json",
+					"name" : "thermal_frame_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_processor_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_processor_tests-Release-c4ff6dd0a4ae58ffe895.json",
+					"name" : "thermal_processor_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "threshold_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-threshold_roi_tests-Release-31a6c66f74a4fa1cd797.json",
+					"name" : "threshold_roi_tests",
+					"projectIndex" : 1
+				}
+			]
+		},
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Git::Git::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-Git__Git-MinSizeRel-2e5a494900043514e39c.json",
+					"name" : "Git::Git",
+					"projectIndex" : 1
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-MinSizeRel-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"build" : "leafsense-core",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-leafsense-core-MinSizeRel-a390ef340ac6fd01a4d5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "leafsense-core",
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"build" : "_deps/catch2-build",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-_deps.catch2-build-MinSizeRel-98954b0ffcd6084a10c8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/catch2-build/src",
+					"jsonFile" : "directory-_deps.catch2-build.src-MinSizeRel-88b11f3d1ed49dfce978.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src/src",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"name" : "MinSizeRel",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LeafSense",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "leafsense_core",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3
+					],
+					"name" : "Catch2",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-3a4f5d68b7b652ced7f4.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-bae10623c23fa31a9256.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@3e93893dc0618e684ae7",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-380c9f8881927b23c00f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2-MinSizeRel-caff4b4a76cabe5f13a7.json",
+					"name" : "Catch2",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2WithMain::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2WithMain-MinSizeRel-f1421027f28bc0da81dc.json",
+					"name" : "Catch2WithMain",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-MinSizeRel-898a056bd2ce9ee701ab.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "amg8833_decoder_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-amg8833_decoder_tests-MinSizeRel-278a9c081f180f3361a2.json",
+					"name" : "amg8833_decoder_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "amg8833_registers_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-amg8833_registers_tests-MinSizeRel-2c64ab587af6eda0f3ba.json",
+					"name" : "amg8833_registers_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "exponential_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-exponential_filter_tests-MinSizeRel-42979a62fce5487bac84.json",
+					"name" : "exponential_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "frame_statistics_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-frame_statistics_tests-MinSizeRel-00ea7860ddbe41489c2a.json",
+					"name" : "frame_statistics_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "leafsense_core::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-leafsense_core-MinSizeRel-edc5ecf56b82a5f3525c.json",
+					"name" : "leafsense_core",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "mean_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-mean_filter_tests-MinSizeRel-dcf9ee1c16a2f8826fc3.json",
+					"name" : "mean_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "median_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-median_filter_tests-MinSizeRel-267db8e52a35622f36f0.json",
+					"name" : "median_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pixel_selection_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-pixel_selection_tests-MinSizeRel-c7937aa94af807e05d04.json",
+					"name" : "pixel_selection_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polygon_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-polygon_roi_tests-MinSizeRel-cf272ab55aa9ab5fa22d.json",
+					"name" : "polygon_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "rectangle_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-rectangle_roi_tests-MinSizeRel-439ff7acb041b43f594c.json",
+					"name" : "rectangle_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_frame_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_frame_tests-MinSizeRel-4c96f70150c009539f37.json",
+					"name" : "thermal_frame_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_processor_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_processor_tests-MinSizeRel-c076aad1a4a58223f03d.json",
+					"name" : "thermal_processor_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "threshold_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-threshold_roi_tests-MinSizeRel-c60ccb58a117f80782d4.json",
+					"name" : "threshold_roi_tests",
+					"projectIndex" : 1
+				}
+			]
+		},
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "Git::Git::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-Git__Git-RelWithDebInfo-2e5a494900043514e39c.json",
+					"name" : "Git::Git",
+					"projectIndex" : 1
+				}
+			],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-RelWithDebInfo-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"build" : "leafsense-core",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-leafsense-core-RelWithDebInfo-a390ef340ac6fd01a4d5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "leafsense-core",
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"build" : "_deps/catch2-build",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-_deps.catch2-build-RelWithDebInfo-98954b0ffcd6084a10c8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/catch2-build/src",
+					"jsonFile" : "directory-_deps.catch2-build.src-RelWithDebInfo-88b11f3d1ed49dfce978.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "build/_deps/catch2-src/src",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LeafSense",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"abstractTargetIndexes" : 
+					[
+						0
+					],
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "leafsense_core",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3
+					],
+					"name" : "Catch2",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-3a4f5d68b7b652ced7f4.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ALL_BUILD::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-bae10623c23fa31a9256.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@3e93893dc0618e684ae7",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-380c9f8881927b23c00f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2-RelWithDebInfo-f80b760c91ad78c8ea2c.json",
+					"name" : "Catch2",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "Catch2WithMain::@fa92aa50e9bf5e1a7206",
+					"jsonFile" : "target-Catch2WithMain-RelWithDebInfo-a57e8b8151ea0d03d935.json",
+					"name" : "Catch2WithMain",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-RelWithDebInfo-898a056bd2ce9ee701ab.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "amg8833_decoder_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-amg8833_decoder_tests-RelWithDebInfo-4e50399cca4c33d5ca52.json",
+					"name" : "amg8833_decoder_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "amg8833_registers_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-amg8833_registers_tests-RelWithDebInfo-0b18e18506c4f616638d.json",
+					"name" : "amg8833_registers_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "exponential_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-exponential_filter_tests-RelWithDebInfo-26d362ffe352445bd555.json",
+					"name" : "exponential_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "frame_statistics_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-frame_statistics_tests-RelWithDebInfo-4511f4eaada5d69b11f9.json",
+					"name" : "frame_statistics_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "leafsense_core::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-leafsense_core-RelWithDebInfo-182dc8738165bf6b8ae9.json",
+					"name" : "leafsense_core",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "mean_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-mean_filter_tests-RelWithDebInfo-1fd8c562ba7ad3093100.json",
+					"name" : "mean_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "median_filter_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-median_filter_tests-RelWithDebInfo-ff9cfebcfd3d95203dcf.json",
+					"name" : "median_filter_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "pixel_selection_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-pixel_selection_tests-RelWithDebInfo-8cb8f14f423aae8c9e44.json",
+					"name" : "pixel_selection_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "polygon_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-polygon_roi_tests-RelWithDebInfo-e22d785d303e1e5b6d2f.json",
+					"name" : "polygon_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "rectangle_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-rectangle_roi_tests-RelWithDebInfo-93696cb76201c816eaec.json",
+					"name" : "rectangle_roi_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_frame_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_frame_tests-RelWithDebInfo-5b8836b79ef0694e8b7b.json",
+					"name" : "thermal_frame_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "thermal_processor_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-thermal_processor_tests-RelWithDebInfo-355a1b498351d35f2bec.json",
+					"name" : "thermal_processor_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "threshold_roi_tests::@fa0917cee3b6a9cf45a2",
+					"jsonFile" : "target-threshold_roi_tests-RelWithDebInfo-be10a6db2f280fb7bd13.json",
+					"name" : "threshold_roi_tests",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/campb/Documents/GitHub/LeafSense/build",
+		"source" : "C:/Users/campb/Documents/GitHub/LeafSense"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	}
+}

@@ -186,6 +186,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{045C17E7-4B68-3FEE-B9B6-87A706604105}</Project>
       <Name>amg8833_decoder_tests</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\amg8833_registers_tests.vcxproj">
+      <Project>{85B0D48E-CE4D-3DDF-8D92-44B4A331C2C9}</Project>
+      <Name>amg8833_registers_tests</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\exponential_filter_tests.vcxproj">
       <Project>{0F1D14A0-F97C-3A09-BB1F-E899DD4A2552}</Project>
       <Name>exponential_filter_tests</Name>

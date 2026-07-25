@@ -315,6 +315,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\thermal_frame.cpp" />
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\frame_statistics.cpp" />
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\amg8833_decoder.cpp" />
+    <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\amg8833_registers.cpp" />
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\thermal_processor.cpp" />
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\pixel_selection.cpp" />
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\roi\rectangle_roi.cpp" />

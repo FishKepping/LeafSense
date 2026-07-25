@@ -27,6 +27,7 @@ add_library(
     src/thermal_frame.cpp
     src/frame_statistics.cpp
     src/amg8833_decoder.cpp
+    src/amg8833_registers.cpp
     src/thermal_processor.cpp
     src/roi/pixel_selection.cpp
     src/roi/rectangle_roi.cpp
@@ -168,5 +169,10 @@ if(LEAFSENSE_BUILD_TESTS)
     leafsense_add_test(
         thermal_processor_tests
         tests/thermal_processor_test.cpp
+    )
+
+    leafsense_add_test(
+        amg8833_registers_tests
+        tests/amg8833_registers_test.cpp
     )
 endif()

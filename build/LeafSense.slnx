@@ -12,6 +12,7 @@
 		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 		<BuildDependency Project="leafsense-core/amg8833_decoder_tests.vcxproj"/>
+		<BuildDependency Project="leafsense-core/amg8833_registers_tests.vcxproj"/>
 		<BuildDependency Project="leafsense-core/exponential_filter_tests.vcxproj"/>
 		<BuildDependency Project="leafsense-core/frame_statistics_tests.vcxproj"/>
 		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
@@ -37,6 +38,12 @@
 	</Project>
 	<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e5271e05-e795-3d4a-80fa-694270adc96c"/>
 	<Project Path="leafsense-core/amg8833_decoder_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="045c17e7-4b68-3fee-b9b6-87a706604105">
+		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="leafsense-core/amg8833_registers_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="85b0d48e-ce4d-3ddf-8d92-44b4a331c2c9">
 		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
 		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
