@@ -16,7 +16,7 @@ LeafSense is designed to:
 - Make sensor failures observable and recoverable.
 - Avoid dynamic allocation in core capture paths.
 - Produce deterministic, testable data transformations.
-- Support future thermal sensors without redesigning Home Assistant.
+- Support future thermal sensors without redesigning Home Assistant intergration.
 - Support interactive regions of interest and environmental automation.
 - Leave room for future local prediction without coupling it to acquisition.
 
