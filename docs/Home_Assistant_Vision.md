@@ -12,7 +12,7 @@ The intended experience is an approachable Home Assistant dashboard where a user
 - Drag, resize, and rename regions.
 - Select rectangles, polygons, and later other shapes.
 - Monitor minimum, maximum, and average temperature for each region.
-- Combine thermal data with air, humidity, light, soil, and actuator state.
+- Combine leaf surface thermal data with air, humidity, light, soil, and other data to calulate VPD and other parameters. 
 - Create safe automations.
 - Understand sensor health and stale data.
 
