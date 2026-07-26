@@ -10,6 +10,7 @@
 
 #include "esphome_bus.h"
 #include "publisher.h"
+#include "rectangle_roi_processor.h"
 
 #include "leafsense/drivers/amg8833_driver.h"
 #include "leafsense/drivers/amg8833_snapshot.h"
@@ -35,10 +36,21 @@ public:
     void set_recovery_failure_threshold(std::uint8_t value);
     void set_moving_average_enabled(bool value);
 
+    void set_rectangle_roi(
+        std::uint8_t x,
+        std::uint8_t y,
+        std::uint8_t width,
+        std::uint8_t height);
+
     void set_minimum_temperature_sensor(sensor::Sensor* value);
     void set_maximum_temperature_sensor(sensor::Sensor* value);
     void set_average_temperature_sensor(sensor::Sensor* value);
     void set_thermistor_temperature_sensor(sensor::Sensor* value);
+
+    void set_roi_minimum_temperature_sensor(sensor::Sensor* value);
+    void set_roi_maximum_temperature_sensor(sensor::Sensor* value);
+    void set_roi_average_temperature_sensor(sensor::Sensor* value);
+    void set_roi_pixel_count_sensor(sensor::Sensor* value);
 
     void set_frame_count_sensor(sensor::Sensor* value);
     void set_valid_pixel_count_sensor(sensor::Sensor* value);
@@ -55,6 +67,7 @@ public:
     void set_overflow_detected_binary_sensor(binary_sensor::BinarySensor* value);
     void set_interrupt_detected_binary_sensor(binary_sensor::BinarySensor* value);
     void set_recovery_active_binary_sensor(binary_sensor::BinarySensor* value);
+    void set_roi_available_binary_sensor(binary_sensor::BinarySensor* value);
 
 protected:
     bool initializeDriver_();
@@ -68,6 +81,7 @@ protected:
     std::unique_ptr<leafsense::drivers::Amg8833Driver> driver_;
     std::unique_ptr<leafsense::drivers::Amg8833SnapshotReader> snapshot_reader_;
 
+    RectangleRoiProcessor roi_processor_;
     Amg8833TelemetryPublisher publisher_;
 };
 

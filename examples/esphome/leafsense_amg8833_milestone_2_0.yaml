@@ -1,0 +1,152 @@
+esphome:
+  name: leafsense-amg8833-test
+  friendly_name: LeafSense AMG8833 Test
+
+  includes:
+    - ../../leafsense-core/include/leafsense
+    - ../../drivers/amg8833/include/leafsense
+
+    - ../../leafsense-core/src/thermal_frame.cpp
+    - ../../leafsense-core/src/frame_statistics.cpp
+    - ../../leafsense-core/src/amg8833_decoder.cpp
+    - ../../leafsense-core/src/amg8833_registers.cpp
+    - ../../leafsense-core/src/thermal_processor.cpp
+    - ../../leafsense-core/src/roi/pixel_selection.cpp
+    - ../../leafsense-core/src/roi/rectangle_roi.cpp
+    - ../../leafsense-core/src/roi/polygon_roi.cpp
+    - ../../leafsense-core/src/roi/threshold_roi.cpp
+    - ../../leafsense-core/src/filters/mean_filter.cpp
+    - ../../leafsense-core/src/filters/median_filter.cpp
+    - ../../leafsense-core/src/filters/exponential_filter.cpp
+    - ../../drivers/amg8833/src/amg8833_driver.cpp
+    - ../../drivers/amg8833/src/amg8833_snapshot.cpp
+    - ../../drivers/amg8833/src/amg8833_telemetry.cpp
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  ap:
+    ssid: "LeafSense Fallback"
+    password: "leafsense123"
+
+captive_portal:
+
+external_components:
+  - source:
+      type: local
+      path: ../../firmware/esphome/components
+    components:
+      - leafsense_amg8833
+
+i2c:
+  sda: GPIO21
+  scl: GPIO22
+  frequency: 400kHz
+  scan: true
+
+leafsense_amg8833:
+  id: thermal_camera
+  address: 0x69
+  update_interval: 10s
+  include_interrupt_map: true
+  moving_average_enabled: false
+  recovery_enabled: true
+  recovery_failure_threshold: 3
+
+  # Coordinates begin at the top-left of the 8x8 image.
+  # This example selects the central 4x4 area.
+  rectangle_roi:
+    x: 2
+    y: 2
+    width: 4
+    height: 4
+
+sensor:
+  - platform: leafsense_amg8833
+    leafsense_amg8833_id: thermal_camera
+
+    minimum_temperature:
+      name: "Thermal Minimum Temperature"
+
+    maximum_temperature:
+      name: "Thermal Maximum Temperature"
+
+    average_temperature:
+      name: "Thermal Average Temperature"
+
+    thermistor_temperature:
+      name: "Thermal Sensor Temperature"
+
+    roi_minimum_temperature:
+      name: "Thermal ROI Minimum Temperature"
+
+    roi_maximum_temperature:
+      name: "Thermal ROI Maximum Temperature"
+
+    roi_average_temperature:
+      name: "Thermal ROI Average Temperature"
+
+    roi_pixel_count:
+      name: "Thermal ROI Pixel Count"
+
+    frame_count:
+      name: "Thermal Frame Count"
+
+    valid_pixel_count:
+      name: "Thermal Valid Pixel Count"
+
+    active_interrupt_pixel_count:
+      name: "Thermal Active Interrupt Pixels"
+
+    consecutive_failures:
+      name: "Thermal Consecutive Failures"
+
+    total_failures:
+      name: "Thermal Total Failures"
+
+    recovery_attempts:
+      name: "Thermal Recovery Attempts"
+
+    successful_recoveries:
+      name: "Thermal Successful Recoveries"
+
+    failed_recoveries:
+      name: "Thermal Failed Recoveries"
+
+binary_sensor:
+  - platform: leafsense_amg8833
+    leafsense_amg8833_id: thermal_camera
+
+    connected:
+      name: "Thermal Camera Connected"
+
+    driver_problem:
+      name: "Thermal Driver Problem"
+
+    frame_available:
+      name: "Thermal Frame Available"
+
+    overflow_detected:
+      name: "Thermal Overflow Detected"
+
+    interrupt_detected:
+      name: "Thermal Interrupt Detected"
+
+    recovery_active:
+      name: "Thermal Recovery Attempted"
+
+    roi_available:
+      name: "Thermal ROI Available"

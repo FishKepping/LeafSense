@@ -20,6 +20,11 @@ CONF_MAXIMUM_TEMPERATURE = "maximum_temperature"
 CONF_AVERAGE_TEMPERATURE = "average_temperature"
 CONF_THERMISTOR_TEMPERATURE = "thermistor_temperature"
 
+CONF_ROI_MINIMUM_TEMPERATURE = "roi_minimum_temperature"
+CONF_ROI_MAXIMUM_TEMPERATURE = "roi_maximum_temperature"
+CONF_ROI_AVERAGE_TEMPERATURE = "roi_average_temperature"
+CONF_ROI_PIXEL_COUNT = "roi_pixel_count"
+
 CONF_FRAME_COUNT = "frame_count"
 CONF_VALID_PIXEL_COUNT = "valid_pixel_count"
 CONF_ACTIVE_INTERRUPT_PIXEL_COUNT = "active_interrupt_pixel_count"
@@ -57,6 +62,10 @@ CONFIG_SCHEMA = cv.Schema(
         cv.Optional(CONF_MAXIMUM_TEMPERATURE): temperature_schema(),
         cv.Optional(CONF_AVERAGE_TEMPERATURE): temperature_schema(),
         cv.Optional(CONF_THERMISTOR_TEMPERATURE): temperature_schema(),
+        cv.Optional(CONF_ROI_MINIMUM_TEMPERATURE): temperature_schema(),
+        cv.Optional(CONF_ROI_MAXIMUM_TEMPERATURE): temperature_schema(),
+        cv.Optional(CONF_ROI_AVERAGE_TEMPERATURE): temperature_schema(),
+        cv.Optional(CONF_ROI_PIXEL_COUNT): diagnostic_counter_schema(),
         cv.Optional(CONF_FRAME_COUNT): diagnostic_counter_schema(),
         cv.Optional(CONF_VALID_PIXEL_COUNT): diagnostic_counter_schema(),
         cv.Optional(
@@ -85,57 +94,26 @@ async def to_code(config):
     )
 
     definitions = (
-        (
-            CONF_MINIMUM_TEMPERATURE,
-            "set_minimum_temperature_sensor",
-        ),
-        (
-            CONF_MAXIMUM_TEMPERATURE,
-            "set_maximum_temperature_sensor",
-        ),
-        (
-            CONF_AVERAGE_TEMPERATURE,
-            "set_average_temperature_sensor",
-        ),
-        (
-            CONF_THERMISTOR_TEMPERATURE,
-            "set_thermistor_temperature_sensor",
-        ),
+        (CONF_MINIMUM_TEMPERATURE, "set_minimum_temperature_sensor"),
+        (CONF_MAXIMUM_TEMPERATURE, "set_maximum_temperature_sensor"),
+        (CONF_AVERAGE_TEMPERATURE, "set_average_temperature_sensor"),
+        (CONF_THERMISTOR_TEMPERATURE, "set_thermistor_temperature_sensor"),
+        (CONF_ROI_MINIMUM_TEMPERATURE, "set_roi_minimum_temperature_sensor"),
+        (CONF_ROI_MAXIMUM_TEMPERATURE, "set_roi_maximum_temperature_sensor"),
+        (CONF_ROI_AVERAGE_TEMPERATURE, "set_roi_average_temperature_sensor"),
+        (CONF_ROI_PIXEL_COUNT, "set_roi_pixel_count_sensor"),
         (CONF_FRAME_COUNT, "set_frame_count_sensor"),
-        (
-            CONF_VALID_PIXEL_COUNT,
-            "set_valid_pixel_count_sensor",
-        ),
+        (CONF_VALID_PIXEL_COUNT, "set_valid_pixel_count_sensor"),
         (
             CONF_ACTIVE_INTERRUPT_PIXEL_COUNT,
             "set_active_interrupt_pixel_count_sensor",
         ),
-        (
-            CONF_CONSECUTIVE_FAILURES,
-            "set_consecutive_failures_sensor",
-        ),
-        (
-            CONF_TOTAL_FAILURES,
-            "set_total_failures_sensor",
-        ),
-        (
-            CONF_RECOVERY_ATTEMPTS,
-            "set_recovery_attempts_sensor",
-        ),
-        (
-            CONF_SUCCESSFUL_RECOVERIES,
-            "set_successful_recoveries_sensor",
-        ),
-        (
-            CONF_FAILED_RECOVERIES,
-            "set_failed_recoveries_sensor",
-        ),
+        (CONF_CONSECUTIVE_FAILURES, "set_consecutive_failures_sensor"),
+        (CONF_TOTAL_FAILURES, "set_total_failures_sensor"),
+        (CONF_RECOVERY_ATTEMPTS, "set_recovery_attempts_sensor"),
+        (CONF_SUCCESSFUL_RECOVERIES, "set_successful_recoveries_sensor"),
+        (CONF_FAILED_RECOVERIES, "set_failed_recoveries_sensor"),
     )
 
     for key, setter in definitions:
-        await register_optional_sensor(
-            config,
-            parent,
-            key,
-            setter,
-        )
+        await register_optional_sensor(config, parent, key, setter)

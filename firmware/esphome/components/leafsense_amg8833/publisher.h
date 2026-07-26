@@ -1,8 +1,12 @@
 #pragma once
 
+#include <cstdint>
+
 #include "esphome/components/binary_sensor/binary_sensor.h"
 #include "esphome/components/sensor/sensor.h"
 #include "leafsense/drivers/amg8833_telemetry.h"
+
+#include "rectangle_roi_processor.h"
 
 namespace esphome {
 namespace leafsense_amg8833 {
@@ -11,7 +15,8 @@ class Amg8833TelemetryPublisher
 {
 public:
     void publish(
-        const leafsense::drivers::Amg8833Telemetry& telemetry);
+        const leafsense::drivers::Amg8833Telemetry& telemetry,
+        const RectangleRoiResult& roi_result);
 
     void publishUnavailable();
 
@@ -19,6 +24,11 @@ public:
     void setMaximumTemperatureSensor(sensor::Sensor* value);
     void setAverageTemperatureSensor(sensor::Sensor* value);
     void setThermistorTemperatureSensor(sensor::Sensor* value);
+
+    void setRoiMinimumTemperatureSensor(sensor::Sensor* value);
+    void setRoiMaximumTemperatureSensor(sensor::Sensor* value);
+    void setRoiAverageTemperatureSensor(sensor::Sensor* value);
+    void setRoiPixelCountSensor(sensor::Sensor* value);
 
     void setFrameCountSensor(sensor::Sensor* value);
     void setValidPixelCountSensor(sensor::Sensor* value);
@@ -35,16 +45,11 @@ public:
     void setOverflowDetectedBinarySensor(binary_sensor::BinarySensor* value);
     void setInterruptDetectedBinarySensor(binary_sensor::BinarySensor* value);
     void setRecoveryActiveBinarySensor(binary_sensor::BinarySensor* value);
+    void setRoiAvailableBinarySensor(binary_sensor::BinarySensor* value);
 
 private:
-    static void publishSensor(
-        sensor::Sensor* target,
-        float value);
-
-    static void publishCounter(
-        sensor::Sensor* target,
-        std::uint32_t value);
-
+    static void publishSensor(sensor::Sensor* target, float value);
+    static void publishCounter(sensor::Sensor* target, std::uint32_t value);
     static void publishBinarySensor(
         binary_sensor::BinarySensor* target,
         bool value);
@@ -53,6 +58,11 @@ private:
     sensor::Sensor* maximum_temperature_sensor_ = nullptr;
     sensor::Sensor* average_temperature_sensor_ = nullptr;
     sensor::Sensor* thermistor_temperature_sensor_ = nullptr;
+
+    sensor::Sensor* roi_minimum_temperature_sensor_ = nullptr;
+    sensor::Sensor* roi_maximum_temperature_sensor_ = nullptr;
+    sensor::Sensor* roi_average_temperature_sensor_ = nullptr;
+    sensor::Sensor* roi_pixel_count_sensor_ = nullptr;
 
     sensor::Sensor* frame_count_sensor_ = nullptr;
     sensor::Sensor* valid_pixel_count_sensor_ = nullptr;
@@ -69,6 +79,7 @@ private:
     binary_sensor::BinarySensor* overflow_detected_binary_sensor_ = nullptr;
     binary_sensor::BinarySensor* interrupt_detected_binary_sensor_ = nullptr;
     binary_sensor::BinarySensor* recovery_active_binary_sensor_ = nullptr;
+    binary_sensor::BinarySensor* roi_available_binary_sensor_ = nullptr;
 };
 
 }  // namespace leafsense_amg8833

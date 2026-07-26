@@ -3,7 +3,7 @@ from __future__ import annotations
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import i2c
-from esphome.const import CONF_ID
+from esphome.const import CONF_HEIGHT, CONF_ID, CONF_WIDTH, CONF_X, CONF_Y
 
 CODEOWNERS = ["@FishKepping"]
 DEPENDENCIES = ["i2c"]
@@ -14,6 +14,7 @@ CONF_INCLUDE_INTERRUPT_MAP = "include_interrupt_map"
 CONF_RECOVERY_ENABLED = "recovery_enabled"
 CONF_RECOVERY_FAILURE_THRESHOLD = "recovery_failure_threshold"
 CONF_MOVING_AVERAGE_ENABLED = "moving_average_enabled"
+CONF_RECTANGLE_ROI = "rectangle_roi"
 
 leafsense_amg8833_ns = cg.esphome_ns.namespace("leafsense_amg8833")
 
@@ -21,6 +22,15 @@ LeafSenseAmg8833Component = leafsense_amg8833_ns.class_(
     "LeafSenseAmg8833Component",
     cg.PollingComponent,
     i2c.I2CDevice,
+)
+
+RECTANGLE_ROI_SCHEMA = cv.Schema(
+    {
+        cv.Required(CONF_X): cv.int_range(min=0, max=7),
+        cv.Required(CONF_Y): cv.int_range(min=0, max=7),
+        cv.Required(CONF_WIDTH): cv.int_range(min=1, max=8),
+        cv.Required(CONF_HEIGHT): cv.int_range(min=1, max=8),
+    }
 )
 
 CONFIG_SCHEMA = (
@@ -34,6 +44,7 @@ CONFIG_SCHEMA = (
                 default=3,
             ): cv.int_range(min=1, max=255),
             cv.Optional(CONF_MOVING_AVERAGE_ENABLED, default=False): cv.boolean,
+            cv.Optional(CONF_RECTANGLE_ROI): RECTANGLE_ROI_SCHEMA,
         }
     )
     .extend(cv.polling_component_schema("10s"))
@@ -73,3 +84,14 @@ async def to_code(config):
             config[CONF_MOVING_AVERAGE_ENABLED]
         )
     )
+
+    if CONF_RECTANGLE_ROI in config:
+        roi = config[CONF_RECTANGLE_ROI]
+        cg.add(
+            var.set_rectangle_roi(
+                roi[CONF_X],
+                roi[CONF_Y],
+                roi[CONF_WIDTH],
+                roi[CONF_HEIGHT],
+            )
+        )

@@ -69,7 +69,10 @@ void LeafSenseAmg8833Component::update()
         leafsense::drivers::Amg8833TelemetryProjector::project(
             snapshot);
 
-    publisher_.publish(telemetry);
+    const RectangleRoiResult roi_result =
+        roi_processor_.process(snapshot.frame);
+
+    publisher_.publish(telemetry, roi_result);
 
     if (telemetry.frame_read_succeeded)
     {
@@ -133,6 +136,25 @@ void LeafSenseAmg8833Component::dump_config()
         static_cast<unsigned long>(
             driver_config_.recovery.failure_threshold));
 
+    if (roi_processor_.configured())
+    {
+        const leafsense::roi::RectangleRoi& roi =
+            roi_processor_.roi();
+
+        ESP_LOGCONFIG(
+            TAG,
+            "  Rectangle ROI: x=%u, y=%u, width=%u, height=%u, pixels=%lu",
+            static_cast<unsigned>(roi.x()),
+            static_cast<unsigned>(roi.y()),
+            static_cast<unsigned>(roi.width()),
+            static_cast<unsigned>(roi.height()),
+            static_cast<unsigned long>(roi.pixelCount()));
+    }
+    else
+    {
+        ESP_LOGCONFIG(TAG, "  Rectangle ROI: disabled");
+    }
+
     if (driver_ != nullptr)
     {
         const leafsense::drivers::Amg8833DriverHealth health =
@@ -180,6 +202,16 @@ void LeafSenseAmg8833Component::set_moving_average_enabled(bool value)
     driver_config_.moving_average_enabled = value;
 }
 
+
+void LeafSenseAmg8833Component::set_rectangle_roi(
+    std::uint8_t x,
+    std::uint8_t y,
+    std::uint8_t width,
+    std::uint8_t height)
+{
+    roi_processor_.configure(x, y, width, height);
+}
+
 void LeafSenseAmg8833Component::set_minimum_temperature_sensor(
     sensor::Sensor* value)
 {
@@ -202,6 +234,30 @@ void LeafSenseAmg8833Component::set_thermistor_temperature_sensor(
     sensor::Sensor* value)
 {
     publisher_.setThermistorTemperatureSensor(value);
+}
+
+void LeafSenseAmg8833Component::set_roi_minimum_temperature_sensor(
+    sensor::Sensor* value)
+{
+    publisher_.setRoiMinimumTemperatureSensor(value);
+}
+
+void LeafSenseAmg8833Component::set_roi_maximum_temperature_sensor(
+    sensor::Sensor* value)
+{
+    publisher_.setRoiMaximumTemperatureSensor(value);
+}
+
+void LeafSenseAmg8833Component::set_roi_average_temperature_sensor(
+    sensor::Sensor* value)
+{
+    publisher_.setRoiAverageTemperatureSensor(value);
+}
+
+void LeafSenseAmg8833Component::set_roi_pixel_count_sensor(
+    sensor::Sensor* value)
+{
+    publisher_.setRoiPixelCountSensor(value);
 }
 
 void LeafSenseAmg8833Component::set_frame_count_sensor(
@@ -286,6 +342,13 @@ void LeafSenseAmg8833Component::set_recovery_active_binary_sensor(
     binary_sensor::BinarySensor* value)
 {
     publisher_.setRecoveryActiveBinarySensor(value);
+}
+
+
+void LeafSenseAmg8833Component::set_roi_available_binary_sensor(
+    binary_sensor::BinarySensor* value)
+{
+    publisher_.setRoiAvailableBinarySensor(value);
 }
 
 bool LeafSenseAmg8833Component::initializeDriver_()

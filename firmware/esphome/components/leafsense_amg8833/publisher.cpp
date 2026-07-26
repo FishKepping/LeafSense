@@ -7,19 +7,14 @@ namespace esphome {
 namespace leafsense_amg8833 {
 
 void Amg8833TelemetryPublisher::publish(
-    const leafsense::drivers::Amg8833Telemetry& telemetry)
+    const leafsense::drivers::Amg8833Telemetry& telemetry,
+    const RectangleRoiResult& roi_result)
 {
     if (telemetry.temperaturesAvailable())
     {
-        publishSensor(
-            minimum_temperature_sensor_,
-            telemetry.minimum_temperature);
-        publishSensor(
-            maximum_temperature_sensor_,
-            telemetry.maximum_temperature);
-        publishSensor(
-            average_temperature_sensor_,
-            telemetry.average_temperature);
+        publishSensor(minimum_temperature_sensor_, telemetry.minimum_temperature);
+        publishSensor(maximum_temperature_sensor_, telemetry.maximum_temperature);
+        publishSensor(average_temperature_sensor_, telemetry.average_temperature);
         publishSensor(
             thermistor_temperature_sensor_,
             telemetry.thermistor_temperature);
@@ -32,13 +27,33 @@ void Amg8833TelemetryPublisher::publish(
         publishSensor(thermistor_temperature_sensor_, NAN);
     }
 
-    publishCounter(
-        frame_count_sensor_,
-        telemetry.frame_number);
+    if (roi_result.available)
+    {
+        publishSensor(
+            roi_minimum_temperature_sensor_,
+            roi_result.minimum_temperature);
+        publishSensor(
+            roi_maximum_temperature_sensor_,
+            roi_result.maximum_temperature);
+        publishSensor(
+            roi_average_temperature_sensor_,
+            roi_result.average_temperature);
+        publishCounter(
+            roi_pixel_count_sensor_,
+            static_cast<std::uint32_t>(roi_result.pixel_count));
+    }
+    else
+    {
+        publishSensor(roi_minimum_temperature_sensor_, NAN);
+        publishSensor(roi_maximum_temperature_sensor_, NAN);
+        publishSensor(roi_average_temperature_sensor_, NAN);
+        publishCounter(roi_pixel_count_sensor_, 0U);
+    }
+
+    publishCounter(frame_count_sensor_, telemetry.frame_number);
     publishCounter(
         valid_pixel_count_sensor_,
-        static_cast<std::uint32_t>(
-            telemetry.valid_pixel_count));
+        static_cast<std::uint32_t>(telemetry.valid_pixel_count));
     publishCounter(
         active_interrupt_pixel_count_sensor_,
         static_cast<std::uint32_t>(
@@ -46,18 +61,12 @@ void Amg8833TelemetryPublisher::publish(
     publishCounter(
         consecutive_failures_sensor_,
         telemetry.consecutive_failures);
-    publishCounter(
-        total_failures_sensor_,
-        telemetry.total_failures);
-    publishCounter(
-        recovery_attempts_sensor_,
-        telemetry.recovery_attempts);
+    publishCounter(total_failures_sensor_, telemetry.total_failures);
+    publishCounter(recovery_attempts_sensor_, telemetry.recovery_attempts);
     publishCounter(
         successful_recoveries_sensor_,
         telemetry.successful_recoveries);
-    publishCounter(
-        failed_recoveries_sensor_,
-        telemetry.failed_recoveries);
+    publishCounter(failed_recoveries_sensor_, telemetry.failed_recoveries);
 
     publishBinarySensor(
         connected_binary_sensor_,
@@ -78,6 +87,9 @@ void Amg8833TelemetryPublisher::publish(
     publishBinarySensor(
         recovery_active_binary_sensor_,
         telemetry.recovery_attempted);
+    publishBinarySensor(
+        roi_available_binary_sensor_,
+        roi_result.available);
 }
 
 void Amg8833TelemetryPublisher::publishUnavailable()
@@ -87,12 +99,18 @@ void Amg8833TelemetryPublisher::publishUnavailable()
     publishSensor(average_temperature_sensor_, NAN);
     publishSensor(thermistor_temperature_sensor_, NAN);
 
+    publishSensor(roi_minimum_temperature_sensor_, NAN);
+    publishSensor(roi_maximum_temperature_sensor_, NAN);
+    publishSensor(roi_average_temperature_sensor_, NAN);
+    publishCounter(roi_pixel_count_sensor_, 0U);
+
     publishBinarySensor(connected_binary_sensor_, false);
     publishBinarySensor(driver_problem_binary_sensor_, true);
     publishBinarySensor(frame_available_binary_sensor_, false);
     publishBinarySensor(overflow_detected_binary_sensor_, false);
     publishBinarySensor(interrupt_detected_binary_sensor_, false);
     publishBinarySensor(recovery_active_binary_sensor_, false);
+    publishBinarySensor(roi_available_binary_sensor_, false);
 }
 
 void Amg8833TelemetryPublisher::setMinimumTemperatureSensor(
@@ -119,14 +137,36 @@ void Amg8833TelemetryPublisher::setThermistorTemperatureSensor(
     thermistor_temperature_sensor_ = value;
 }
 
-void Amg8833TelemetryPublisher::setFrameCountSensor(
+void Amg8833TelemetryPublisher::setRoiMinimumTemperatureSensor(
     sensor::Sensor* value)
+{
+    roi_minimum_temperature_sensor_ = value;
+}
+
+void Amg8833TelemetryPublisher::setRoiMaximumTemperatureSensor(
+    sensor::Sensor* value)
+{
+    roi_maximum_temperature_sensor_ = value;
+}
+
+void Amg8833TelemetryPublisher::setRoiAverageTemperatureSensor(
+    sensor::Sensor* value)
+{
+    roi_average_temperature_sensor_ = value;
+}
+
+void Amg8833TelemetryPublisher::setRoiPixelCountSensor(
+    sensor::Sensor* value)
+{
+    roi_pixel_count_sensor_ = value;
+}
+
+void Amg8833TelemetryPublisher::setFrameCountSensor(sensor::Sensor* value)
 {
     frame_count_sensor_ = value;
 }
 
-void Amg8833TelemetryPublisher::setValidPixelCountSensor(
-    sensor::Sensor* value)
+void Amg8833TelemetryPublisher::setValidPixelCountSensor(sensor::Sensor* value)
 {
     valid_pixel_count_sensor_ = value;
 }
@@ -143,14 +183,12 @@ void Amg8833TelemetryPublisher::setConsecutiveFailuresSensor(
     consecutive_failures_sensor_ = value;
 }
 
-void Amg8833TelemetryPublisher::setTotalFailuresSensor(
-    sensor::Sensor* value)
+void Amg8833TelemetryPublisher::setTotalFailuresSensor(sensor::Sensor* value)
 {
     total_failures_sensor_ = value;
 }
 
-void Amg8833TelemetryPublisher::setRecoveryAttemptsSensor(
-    sensor::Sensor* value)
+void Amg8833TelemetryPublisher::setRecoveryAttemptsSensor(sensor::Sensor* value)
 {
     recovery_attempts_sensor_ = value;
 }
@@ -161,8 +199,7 @@ void Amg8833TelemetryPublisher::setSuccessfulRecoveriesSensor(
     successful_recoveries_sensor_ = value;
 }
 
-void Amg8833TelemetryPublisher::setFailedRecoveriesSensor(
-    sensor::Sensor* value)
+void Amg8833TelemetryPublisher::setFailedRecoveriesSensor(sensor::Sensor* value)
 {
     failed_recoveries_sensor_ = value;
 }
@@ -203,6 +240,12 @@ void Amg8833TelemetryPublisher::setRecoveryActiveBinarySensor(
     recovery_active_binary_sensor_ = value;
 }
 
+void Amg8833TelemetryPublisher::setRoiAvailableBinarySensor(
+    binary_sensor::BinarySensor* value)
+{
+    roi_available_binary_sensor_ = value;
+}
+
 void Amg8833TelemetryPublisher::publishSensor(
     sensor::Sensor* target,
     float value)
@@ -217,9 +260,7 @@ void Amg8833TelemetryPublisher::publishCounter(
     sensor::Sensor* target,
     std::uint32_t value)
 {
-    publishSensor(
-        target,
-        static_cast<float>(value));
+    publishSensor(target, static_cast<float>(value));
 }
 
 void Amg8833TelemetryPublisher::publishBinarySensor(
