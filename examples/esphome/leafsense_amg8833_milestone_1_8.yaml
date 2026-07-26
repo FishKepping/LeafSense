@@ -1,0 +1,74 @@
+esphome:
+  name: leafsense-amg8833-test
+  friendly_name: LeafSense AMG8833 Test
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+logger:
+
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  ap:
+    ssid: "LeafSense Fallback"
+    password: "leafsense123"
+
+captive_portal:
+
+external_components:
+  - source:
+      type: local
+      path: ../../firmware/esphome/components
+    components:
+      - leafsense_amg8833
+
+i2c:
+  sda: GPIO21
+  scl: GPIO22
+  frequency: 400kHz
+  scan: true
+
+leafsense_amg8833:
+  id: thermal_camera
+  address: 0x69
+  update_interval: 10s
+
+  include_interrupt_map: false
+
+  moving_average_enabled: false
+
+  recovery_enabled: true
+
+  recovery_failure_threshold: 3
+
+sensor:
+  - platform: leafsense_amg8833
+    leafsense_amg8833_id: thermal_camera
+
+    frame_count:
+      name: "Thermal Poll Count"
+
+    consecutive_failures:
+      name: "Thermal Consecutive Failures"
+
+    total_failures:
+      name: "Thermal Total Failures"
+
+binary_sensor:
+  - platform: leafsense_amg8833
+    leafsense_amg8833_id: thermal_camera
+
+    connected:
+      name: "Thermal Camera Connected"
+
+    driver_healthy:
+      name: "Thermal Camera Problem"
