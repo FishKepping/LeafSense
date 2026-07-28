@@ -36,6 +36,8 @@ add_library(
     src/filters/mean_filter.cpp
     src/filters/median_filter.cpp
     src/filters/exponential_filter.cpp
+    src/measurement/measurement_channel.cpp
+    src/measurement/measurement_channel_manager.cpp
 )
 
 add_library(
@@ -174,5 +176,10 @@ if(LEAFSENSE_BUILD_TESTS)
     leafsense_add_test(
         amg8833_registers_tests
         tests/amg8833_registers_test.cpp
+    )
+
+    leafsense_add_test(
+        measurement_channel_tests
+        tests/measurement_channel_test.cpp
     )
 endif()

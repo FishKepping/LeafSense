@@ -23,6 +23,7 @@
 		<BuildDependency Project="drivers/amg8833/leafsense_amg8833_driver.vcxproj"/>
 		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
 		<BuildDependency Project="leafsense-core/mean_filter_tests.vcxproj"/>
+		<BuildDependency Project="leafsense-core/measurement_channel_tests.vcxproj"/>
 		<BuildDependency Project="leafsense-core/median_filter_tests.vcxproj"/>
 		<BuildDependency Project="leafsense-core/pixel_selection_tests.vcxproj"/>
 		<BuildDependency Project="leafsense-core/polygon_roi_tests.vcxproj"/>
@@ -117,6 +118,12 @@
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 	</Project>
 	<Project Path="leafsense-core/mean_filter_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5f707586-0148-3e2d-9230-f6e28a04fd2f">
+		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense-core/leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="leafsense-core/measurement_channel_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="6dddc2d2-3954-3956-b79e-92353d3fd563">
 		<BuildDependency Project="_deps/catch2-build/src/Catch2.vcxproj"/>
 		<BuildDependency Project="_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>

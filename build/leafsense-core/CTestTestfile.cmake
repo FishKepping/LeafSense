@@ -16,4 +16,5 @@ include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/exponent
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/amg8833_decoder_tests-b12d07c_include.cmake")
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/thermal_processor_tests-b12d07c_include.cmake")
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/amg8833_registers_tests-b12d07c_include.cmake")
+include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/measurement_channel_tests-b12d07c_include.cmake")
 subdirs("../_deps/catch2-build")

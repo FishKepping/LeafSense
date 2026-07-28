@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/measurement_channel_tests-b12d07c_tests.cmake")
+  include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/measurement_channel_tests-b12d07c_tests.cmake")
+else()
+  add_test(measurement_channel_tests_NOT_BUILT-b12d07c measurement_channel_tests_NOT_BUILT-b12d07c)
+endif()

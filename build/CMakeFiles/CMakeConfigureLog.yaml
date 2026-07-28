@@ -48,6 +48,8 @@ events:
         - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
         - "C:\\ProgramData\\Oracle\\Java\\javapath"
         - "C:\\Windows\\System32"
         - "C:\\Windows"
@@ -65,6 +67,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
         - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\campb\\.local\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\campb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\GitHubDesktop\\bin"
@@ -97,7 +100,7 @@ events:
       The output was:
       0
       MSBuild version 18.8.2+ce25c0108 for .NET Framework
-      Build started 26/07/2026 12:12:18 PM.
+      Build started 28/07/2026 9:22:36 PM.
       
       Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\4.4.0\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -126,7 +129,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:02.73
+      Time Elapsed 00:00:02.11
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -171,6 +174,8 @@ events:
       - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
       - "C:/ProgramData/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -184,6 +189,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
+      - "C:/Users/campb/.local/bin/"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
@@ -208,6 +214,8 @@ events:
         - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
         - "C:\\ProgramData\\Oracle\\Java\\javapath"
         - "C:\\Windows\\System32"
         - "C:\\Windows"
@@ -225,6 +233,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
         - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\campb\\.local\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\campb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\GitHubDesktop\\bin"
@@ -267,6 +276,8 @@ events:
       - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
       - "C:/ProgramData/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -280,6 +291,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
+      - "C:/Users/campb/.local/bin/"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
@@ -326,6 +338,12 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/lld-link.com"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/lld-link.exe"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/lld-link"
+      - "C:/Program Files/Python313/Scripts/lld-link.com"
+      - "C:/Program Files/Python313/Scripts/lld-link.exe"
+      - "C:/Program Files/Python313/Scripts/lld-link"
+      - "C:/Program Files/Python313/lld-link.com"
+      - "C:/Program Files/Python313/lld-link.exe"
+      - "C:/Program Files/Python313/lld-link"
       - "C:/ProgramData/Oracle/Java/javapath/lld-link.com"
       - "C:/ProgramData/Oracle/Java/javapath/lld-link.exe"
       - "C:/ProgramData/Oracle/Java/javapath/lld-link"
@@ -365,6 +383,9 @@ events:
       - "C:/Program Files/CMake/bin/lld-link.com"
       - "C:/Program Files/CMake/bin/lld-link.exe"
       - "C:/Program Files/CMake/bin/lld-link"
+      - "C:/Users/campb/.local/bin/lld-link.com"
+      - "C:/Users/campb/.local/bin/lld-link.exe"
+      - "C:/Users/campb/.local/bin/lld-link"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.com"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.exe"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/lld-link"
@@ -399,6 +420,8 @@ events:
         - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
         - "C:\\ProgramData\\Oracle\\Java\\javapath"
         - "C:\\Windows\\System32"
         - "C:\\Windows"
@@ -416,6 +439,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
         - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\campb\\.local\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\campb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\GitHubDesktop\\bin"
@@ -456,6 +480,8 @@ events:
       - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
       - "C:/ProgramData/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -469,6 +495,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
+      - "C:/Users/campb/.local/bin/"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
@@ -493,6 +520,8 @@ events:
         - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
         - "C:\\ProgramData\\Oracle\\Java\\javapath"
         - "C:\\Windows\\System32"
         - "C:\\Windows"
@@ -510,6 +539,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
         - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\campb\\.local\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\campb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\GitHubDesktop\\bin"
@@ -550,6 +580,8 @@ events:
       - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
       - "C:/ProgramData/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -563,6 +595,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
+      - "C:/Users/campb/.local/bin/"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
@@ -608,6 +641,8 @@ events:
         - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
         - "C:\\ProgramData\\Oracle\\Java\\javapath"
         - "C:\\Windows\\System32"
         - "C:\\Windows"
@@ -625,6 +660,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
         - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\campb\\.local\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\campb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\GitHubDesktop\\bin"
@@ -665,6 +701,8 @@ events:
       - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
       - "C:/ProgramData/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -678,6 +716,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
+      - "C:/Users/campb/.local/bin/"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
@@ -702,6 +741,8 @@ events:
         - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
         - "C:\\ProgramData\\Oracle\\Java\\javapath"
         - "C:\\Windows\\System32"
         - "C:\\Windows"
@@ -719,6 +760,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
         - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\campb\\.local\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\campb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\GitHubDesktop\\bin"
@@ -762,6 +804,8 @@ events:
       - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
       - "C:/ProgramData/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -775,6 +819,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
+      - "C:/Users/campb/.local/bin/"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
@@ -832,6 +877,8 @@ events:
         - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
         - "C:\\ProgramData\\Oracle\\Java\\javapath"
         - "C:\\Windows\\System32"
         - "C:\\Windows"
@@ -849,6 +896,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
         - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\campb\\.local\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\campb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\GitHubDesktop\\bin"
@@ -871,8 +919,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-9f62mp"
-      binary: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-9f62mp"
+      source: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e90ta2"
+      binary: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e90ta2"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -883,39 +931,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: false
       stdout: |
-        Change Dir: 'C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-9f62mp'
+        Change Dir: 'C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e90ta2'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_c3b65.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e73db.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.8.2+ce25c0108 for .NET Framework
-        Build started 26/07/2026 12:12:23 PM.
+        Build started 28/07/2026 9:22:39 PM.
         
-        Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f62mp\\cmTC_c3b65.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e90ta2\\cmTC_e73db.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f62mp\\Debug\\".
-          Creating directory "cmTC_c3b65.dir\\Debug\\cmTC_c3b65.tlog\\".
+          Creating directory "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e90ta2\\Debug\\".
+          Creating directory "cmTC_e73db.dir\\Debug\\cmTC_e73db.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_c3b65.dir\\Debug\\cmTC_c3b65.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_c3b65.dir\\Debug\\cmTC_c3b65.tlog\\unsuccessfulbuild".
+          Creating "cmTC_e73db.dir\\Debug\\cmTC_e73db.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_e73db.dir\\Debug\\cmTC_e73db.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_c3b65.dir\\Debug\\\\" /Fd"cmTC_c3b65.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_e73db.dir\\Debug\\\\" /Fd"cmTC_e73db.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36252 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_c3b65.dir\\Debug\\\\" /Fd"cmTC_c3b65.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_e73db.dir\\Debug\\\\" /Fd"cmTC_e73db.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f62mp\\Debug\\cmTC_c3b65.exe" /INCREMENTAL /ILK:"cmTC_c3b65.dir\\Debug\\cmTC_c3b65.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-9f62mp/Debug/cmTC_c3b65.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-9f62mp/Debug/cmTC_c3b65.lib" /MACHINE:X64  /machine:x64 cmTC_c3b65.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_c3b65.vcxproj -> C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f62mp\\Debug\\cmTC_c3b65.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e90ta2\\Debug\\cmTC_e73db.exe" /INCREMENTAL /ILK:"cmTC_e73db.dir\\Debug\\cmTC_e73db.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e90ta2/Debug/cmTC_e73db.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e90ta2/Debug/cmTC_e73db.lib" /MACHINE:X64  /machine:x64 cmTC_e73db.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_e73db.vcxproj -> C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e90ta2\\Debug\\cmTC_e73db.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_c3b65.dir\\Debug\\cmTC_c3b65.tlog\\unsuccessfulbuild".
-          Touching "cmTC_c3b65.dir\\Debug\\cmTC_c3b65.tlog\\cmTC_c3b65.lastbuildstate".
-        Done Building Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f62mp\\cmTC_c3b65.vcxproj" (default targets).
+          Deleting file "cmTC_e73db.dir\\Debug\\cmTC_e73db.tlog\\unsuccessfulbuild".
+          Touching "cmTC_e73db.dir\\Debug\\cmTC_e73db.tlog\\cmTC_e73db.lastbuildstate".
+        Done Building Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e90ta2\\cmTC_e73db.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:02.61
+        Time Elapsed 00:00:02.18
         
       exitCode: 0
   -
@@ -928,7 +976,7 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
-        link line: [  C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9f62mp\\Debug\\cmTC_c3b65.exe" /INCREMENTAL /ILK:"cmTC_c3b65.dir\\Debug\\cmTC_c3b65.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-9f62mp/Debug/cmTC_c3b65.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-9f62mp/Debug/cmTC_c3b65.lib" /MACHINE:X64  /machine:x64 cmTC_c3b65.dir\\Debug\\CMakeCXXCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe]
+        link line: [  C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-e90ta2\\Debug\\cmTC_e73db.exe" /INCREMENTAL /ILK:"cmTC_e73db.dir\\Debug\\cmTC_e73db.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e90ta2/Debug/cmTC_e73db.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-e90ta2/Debug/cmTC_e73db.lib" /MACHINE:X64  /machine:x64 cmTC_e73db.dir\\Debug\\CMakeCXXCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe]
         linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe 
         implicit libs: []
         implicit objs: []
@@ -956,7 +1004,7 @@ events:
       - "C:/Program Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake:2160:EVAL:2 (__FetchContent_doPopulation)"
       - "C:/Program Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake:2160 (cmake_language)"
       - "C:/Program Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake:2401 (__FetchContent_Populate)"
-      - "leafsense-core/CMakeLists.txt:93 (FetchContent_MakeAvailable)"
+      - "leafsense-core/CMakeLists.txt:95 (FetchContent_MakeAvailable)"
     mode: "program"
     variable: "GIT_EXECUTABLE"
     description: "Git command line client"
@@ -985,6 +1033,8 @@ events:
       - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
       - "C:/ProgramData/Oracle/Java/javapath/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
@@ -998,6 +1048,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
+      - "C:/Users/campb/.local/bin/"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/campb/AppData/Local/GitHubDesktop/bin/"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
@@ -1057,6 +1108,12 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.cmd.com"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.cmd.exe"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.cmd"
+      - "C:/Program Files/Python313/Scripts/git.cmd.com"
+      - "C:/Program Files/Python313/Scripts/git.cmd.exe"
+      - "C:/Program Files/Python313/Scripts/git.cmd"
+      - "C:/Program Files/Python313/git.cmd.com"
+      - "C:/Program Files/Python313/git.cmd.exe"
+      - "C:/Program Files/Python313/git.cmd"
       - "C:/ProgramData/Oracle/Java/javapath/git.cmd.com"
       - "C:/ProgramData/Oracle/Java/javapath/git.cmd.exe"
       - "C:/ProgramData/Oracle/Java/javapath/git.cmd"
@@ -1096,6 +1153,9 @@ events:
       - "C:/Program Files/CMake/bin/git.cmd.com"
       - "C:/Program Files/CMake/bin/git.cmd.exe"
       - "C:/Program Files/CMake/bin/git.cmd"
+      - "C:/Users/campb/.local/bin/git.cmd.com"
+      - "C:/Users/campb/.local/bin/git.cmd.exe"
+      - "C:/Users/campb/.local/bin/git.cmd"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/git.cmd.com"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/git.cmd.exe"
       - "C:/Users/campb/AppData/Local/Programs/Microsoft VS Code/bin/git.cmd"
@@ -1192,6 +1252,12 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.com"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git.exe"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/Tools/git"
+      - "C:/Program Files/Python313/Scripts/git.com"
+      - "C:/Program Files/Python313/Scripts/git.exe"
+      - "C:/Program Files/Python313/Scripts/git"
+      - "C:/Program Files/Python313/git.com"
+      - "C:/Program Files/Python313/git.exe"
+      - "C:/Program Files/Python313/git"
       - "C:/ProgramData/Oracle/Java/javapath/git.com"
       - "C:/ProgramData/Oracle/Java/javapath/git.exe"
       - "C:/ProgramData/Oracle/Java/javapath/git"
@@ -1239,6 +1305,8 @@ events:
         - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\"
         - "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
         - "C:\\ProgramData\\Oracle\\Java\\javapath"
         - "C:\\Windows\\System32"
         - "C:\\Windows"
@@ -1256,6 +1324,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
         - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\campb\\.local\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Users\\campb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
         - "C:\\Users\\campb\\AppData\\Local\\GitHubDesktop\\bin"
