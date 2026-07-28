@@ -12,3 +12,4 @@ C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\filters\median_filt
 C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\filters\exponential_filter.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\exponential_filter.obj
 C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\measurement\measurement_channel.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\measurement_channel.obj
 C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\measurement\measurement_channel_manager.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\measurement_channel_manager.obj
+C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\measurement\measurement_channel_controller.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\measurement_channel_controller.obj

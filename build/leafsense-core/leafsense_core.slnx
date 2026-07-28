@@ -17,6 +17,7 @@
 		<BuildDependency Project="frame_statistics_tests.vcxproj"/>
 		<BuildDependency Project="leafsense_core.vcxproj"/>
 		<BuildDependency Project="mean_filter_tests.vcxproj"/>
+		<BuildDependency Project="measurement_channel_controller_tests.vcxproj"/>
 		<BuildDependency Project="measurement_channel_tests.vcxproj"/>
 		<BuildDependency Project="median_filter_tests.vcxproj"/>
 		<BuildDependency Project="pixel_selection_tests.vcxproj"/>
@@ -73,6 +74,12 @@
 		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
 	</Project>
 	<Project Path="mean_filter_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5f707586-0148-3e2d-9230-f6e28a04fd2f">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="measurement_channel_controller_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="02f6c098-9635-3ad5-ac31-67096f422279">
 		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
 		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
 		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>

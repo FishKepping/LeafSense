@@ -230,6 +230,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{5F707586-0148-3E2D-9230-F6E28A04FD2F}</Project>
       <Name>mean_filter_tests</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\measurement_channel_controller_tests.vcxproj">
+      <Project>{02F6C098-9635-3AD5-AC31-67096F422279}</Project>
+      <Name>measurement_channel_controller_tests</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\measurement_channel_tests.vcxproj">
       <Project>{6DDDC2D2-3954-3956-B79E-92353D3FD563}</Project>
       <Name>measurement_channel_tests</Name>

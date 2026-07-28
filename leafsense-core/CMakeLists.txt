@@ -38,6 +38,7 @@ add_library(
     src/filters/exponential_filter.cpp
     src/measurement/measurement_channel.cpp
     src/measurement/measurement_channel_manager.cpp
+    src/measurement/measurement_channel_controller.cpp
 )
 
 add_library(
@@ -181,5 +182,10 @@ if(LEAFSENSE_BUILD_TESTS)
     leafsense_add_test(
         measurement_channel_tests
         tests/measurement_channel_test.cpp
+    )
+
+    leafsense_add_test(
+        measurement_channel_controller_tests
+        tests/measurement_channel_controller_test.cpp
     )
 endif()
