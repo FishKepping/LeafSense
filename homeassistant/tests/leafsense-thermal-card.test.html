@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>LeafSense card tests</title></head><body><pre id="out"></pre><script src="../www/leafsense-thermal-card.js"></script><script>
+const out=document.getElementById('out');let failed=0;
+function test(name,fn){try{fn();out.textContent+=`PASS ${name}\n`;}catch(e){failed++;out.textContent+=`FAIL ${name}: ${e.message}\n`;}}
+function assert(v,m){if(!v)throw new Error(m);}
+test('CRC32 standard vector',()=>{const bytes=new TextEncoder().encode('123456789');assert(window.LeafSenseThermal.crc32(bytes)===0xcbf43926,'CRC mismatch');});
+test('Palette endpoints differ',()=>{const a=window.LeafSenseThermal.colourFor(0),b=window.LeafSenseThermal.colourFor(1);assert(JSON.stringify(a)!==JSON.stringify(b),'palette endpoints equal');});
+test('Card registered',()=>assert(customElements.get('leafsense-thermal-card'),'custom element absent'));
+out.textContent+=failed?'\nTESTS FAILED':'\nALL TESTS PASSED';document.title=failed?'FAILED':'PASSED';
+</script></body></html>
