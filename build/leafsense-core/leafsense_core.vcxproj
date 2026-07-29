@@ -325,6 +325,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\measurement\measurement_channel_controller.cpp" />
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\transport\thermal_frame_packet.cpp" />
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\transport\thermal_frame_publisher.cpp" />
+    <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\rendering\thermal_renderer.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

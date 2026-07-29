@@ -52,6 +52,9 @@
     <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\transport\thermal_frame_publisher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\rendering\thermal_renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\CMakeLists.txt" />

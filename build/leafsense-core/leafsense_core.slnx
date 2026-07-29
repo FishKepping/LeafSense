@@ -26,6 +26,7 @@
 		<BuildDependency Project="thermal_frame_packet_tests.vcxproj"/>
 		<BuildDependency Project="thermal_frame_tests.vcxproj"/>
 		<BuildDependency Project="thermal_processor_tests.vcxproj"/>
+		<BuildDependency Project="thermal_renderer_tests.vcxproj"/>
 		<BuildDependency Project="threshold_roi_tests.vcxproj"/>
 		<Build Solution="Debug|*" Project="false"/>
 		<Build Solution="Release|*" Project="false"/>
@@ -129,6 +130,12 @@
 		<BuildDependency Project="leafsense_core.vcxproj"/>
 	</Project>
 	<Project Path="thermal_processor_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5cc88268-992b-3a1d-b296-2a9fd046a4ed">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="thermal_renderer_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="78623188-628d-3ba0-b96f-bd3632d9147e">
 		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
 		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
 		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
