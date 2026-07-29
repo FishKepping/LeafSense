@@ -100,7 +100,7 @@ events:
       The output was:
       0
       MSBuild version 18.8.2+ce25c0108 for .NET Framework
-      Build started 28/07/2026 9:55:34 PM.
+      Build started 29/07/2026 9:09:53 PM.
       
       Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\4.4.0\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -129,7 +129,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:02.37
+      Time Elapsed 00:00:05.50
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -919,8 +919,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-fwd468"
-      binary: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-fwd468"
+      source: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-3h0jnv"
+      binary: "C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-3h0jnv"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -931,39 +931,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: false
       stdout: |
-        Change Dir: 'C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-fwd468'
+        Change Dir: 'C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-3h0jnv'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_cadcb.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_7dafd.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.8.2+ce25c0108 for .NET Framework
-        Build started 28/07/2026 9:55:38 PM.
+        Build started 29/07/2026 9:10:01 PM.
         
-        Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwd468\\cmTC_cadcb.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h0jnv\\cmTC_7dafd.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwd468\\Debug\\".
-          Creating directory "cmTC_cadcb.dir\\Debug\\cmTC_cadcb.tlog\\".
+          Creating directory "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h0jnv\\Debug\\".
+          Creating directory "cmTC_7dafd.dir\\Debug\\cmTC_7dafd.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_cadcb.dir\\Debug\\cmTC_cadcb.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_cadcb.dir\\Debug\\cmTC_cadcb.tlog\\unsuccessfulbuild".
+          Creating "cmTC_7dafd.dir\\Debug\\cmTC_7dafd.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_7dafd.dir\\Debug\\cmTC_7dafd.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_cadcb.dir\\Debug\\\\" /Fd"cmTC_cadcb.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_7dafd.dir\\Debug\\\\" /Fd"cmTC_7dafd.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36252 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_cadcb.dir\\Debug\\\\" /Fd"cmTC_cadcb.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_7dafd.dir\\Debug\\\\" /Fd"cmTC_7dafd.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwd468\\Debug\\cmTC_cadcb.exe" /INCREMENTAL /ILK:"cmTC_cadcb.dir\\Debug\\cmTC_cadcb.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-fwd468/Debug/cmTC_cadcb.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-fwd468/Debug/cmTC_cadcb.lib" /MACHINE:X64  /machine:x64 cmTC_cadcb.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_cadcb.vcxproj -> C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwd468\\Debug\\cmTC_cadcb.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h0jnv\\Debug\\cmTC_7dafd.exe" /INCREMENTAL /ILK:"cmTC_7dafd.dir\\Debug\\cmTC_7dafd.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-3h0jnv/Debug/cmTC_7dafd.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-3h0jnv/Debug/cmTC_7dafd.lib" /MACHINE:X64  /machine:x64 cmTC_7dafd.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_7dafd.vcxproj -> C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h0jnv\\Debug\\cmTC_7dafd.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_cadcb.dir\\Debug\\cmTC_cadcb.tlog\\unsuccessfulbuild".
-          Touching "cmTC_cadcb.dir\\Debug\\cmTC_cadcb.tlog\\cmTC_cadcb.lastbuildstate".
-        Done Building Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwd468\\cmTC_cadcb.vcxproj" (default targets).
+          Deleting file "cmTC_7dafd.dir\\Debug\\cmTC_7dafd.tlog\\unsuccessfulbuild".
+          Touching "cmTC_7dafd.dir\\Debug\\cmTC_7dafd.tlog\\cmTC_7dafd.lastbuildstate".
+        Done Building Project "C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h0jnv\\cmTC_7dafd.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:02.21
+        Time Elapsed 00:00:03.22
         
       exitCode: 0
   -
@@ -976,7 +976,7 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
-        link line: [  C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fwd468\\Debug\\cmTC_cadcb.exe" /INCREMENTAL /ILK:"cmTC_cadcb.dir\\Debug\\cmTC_cadcb.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-fwd468/Debug/cmTC_cadcb.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-fwd468/Debug/cmTC_cadcb.lib" /MACHINE:X64  /machine:x64 cmTC_cadcb.dir\\Debug\\CMakeCXXCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe]
+        link line: [  C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\campb\\Documents\\GitHub\\LeafSense\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h0jnv\\Debug\\cmTC_7dafd.exe" /INCREMENTAL /ILK:"cmTC_7dafd.dir\\Debug\\cmTC_7dafd.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-3h0jnv/Debug/cmTC_7dafd.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/campb/Documents/GitHub/LeafSense/build/CMakeFiles/CMakeScratch/TryCompile-3h0jnv/Debug/cmTC_7dafd.lib" /MACHINE:X64  /machine:x64 cmTC_7dafd.dir\\Debug\\CMakeCXXCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe]
         linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe 
         implicit libs: []
         implicit objs: []
@@ -1004,7 +1004,7 @@ events:
       - "C:/Program Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake:2160:EVAL:2 (__FetchContent_doPopulation)"
       - "C:/Program Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake:2160 (cmake_language)"
       - "C:/Program Files/CMake/share/cmake-4.4/Modules/FetchContent.cmake:2401 (__FetchContent_Populate)"
-      - "leafsense-core/CMakeLists.txt:96 (FetchContent_MakeAvailable)"
+      - "leafsense-core/CMakeLists.txt:108 (FetchContent_MakeAvailable)"
     mode: "program"
     variable: "GIT_EXECUTABLE"
     description: "Git command line client"

@@ -230,6 +230,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{6949FDBC-7064-38CC-BFB7-72C047087930}</Project>
       <Name>rectangle_roi_tests</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\thermal_frame_packet_tests.vcxproj">
+      <Project>{93212F3F-631D-3A71-8D08-6D4C8FBB9E67}</Project>
+      <Name>thermal_frame_packet_tests</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\thermal_frame_tests.vcxproj">
       <Project>{B590DFA9-B5B7-3112-8F40-606A0A3F8C66}</Project>
       <Name>thermal_frame_tests</Name>

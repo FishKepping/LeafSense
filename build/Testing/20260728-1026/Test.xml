@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20260728-1026-Experimental"
+	Name="(empty)"
+	Generator="ctest-4.4.0"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Windows"
+	Hostname="LAPTOP-77JCFOC4"
+	OSRelease="10.0.18363"
+	OSVersion="Windows 10"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="15"
+	ModelID="0"
+	ModelName="AMD A9-9410 RADEON R5, 5 COMPUTE CORES 2C+3G"
+	ProcessorCacheSize="128"
+	NumberOfLogicalCPU="2"
+	NumberOfPhysicalCPU="2"
+	TotalVirtualMemory="1216"
+	TotalPhysicalMemory="7629"
+	LogicalProcessorsPerPhysical="1"
+	ProcessorClockFrequency="2900.000000"
+	>
+	<Testing>
+		<StartDateTime>Jul 29 21:12 New Zealand Standard Time</StartDateTime>
+		<StartTestTime>1785316326</StartTestTime>
+		<TestList/>
+		<EndDateTime>Jul 29 21:12 New Zealand Standard Time</EndDateTime>
+		<EndTestTime>1785316326</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

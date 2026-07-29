@@ -24,21 +24,33 @@ set(
 
 add_library(
     leafsense_core
+
+    # Core thermal data and processing
     src/thermal_frame.cpp
     src/frame_statistics.cpp
     src/amg8833_decoder.cpp
     src/amg8833_registers.cpp
     src/thermal_processor.cpp
+
+    # Regions of interest
     src/roi/pixel_selection.cpp
     src/roi/rectangle_roi.cpp
     src/roi/polygon_roi.cpp
     src/roi/threshold_roi.cpp
+
+    # Filters
     src/filters/mean_filter.cpp
     src/filters/median_filter.cpp
     src/filters/exponential_filter.cpp
+
+    # Measurement channels
     src/measurement/measurement_channel.cpp
     src/measurement/measurement_channel_manager.cpp
     src/measurement/measurement_channel_controller.cpp
+
+    # Milestone 2.3 thermal frame transport
+    src/transport/thermal_frame_packet.cpp
+    src/transport/thermal_frame_publisher.cpp
 )
 
 add_library(
@@ -187,5 +199,10 @@ if(LEAFSENSE_BUILD_TESTS)
     leafsense_add_test(
         measurement_channel_controller_tests
         tests/measurement_channel_controller_test.cpp
+    )
+
+    leafsense_add_test(
+        thermal_frame_packet_tests
+        tests/thermal_frame_packet_test.cpp
     )
 endif()
