@@ -1,0 +1,61 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    content: |
+      ## LeafSense Calibration
+
+      Calibration is applied sensor-wide before filtering, ROI processing,
+      frame transport, and dashboard rendering.
+
+      **Formula:** `calibrated = (raw × gain) + offset`
+
+  - type: entities
+    title: Calibration settings
+    show_header_toggle: false
+    entities:
+      - entity: number.leafsense_calibration_gain
+        name: Gain
+      - entity: number.leafsense_calibration_offset
+        name: Offset
+      - entity: number.leafsense_reference_temperature
+        name: Reference temperature
+      - entity: sensor.leafsense_calibration_current_reading
+        name: Current reading
+      - entity: sensor.leafsense_calibration_difference
+        name: Difference
+      - entity: sensor.leafsense_calibration_revision
+        name: Revision
+
+  - type: horizontal-stack
+    cards:
+      - type: button
+        entity: button.leafsense_apply_reference_calibration
+        name: Apply
+        icon: mdi:check-decagram
+        tap_action:
+          action: toggle
+
+      - type: button
+        entity: button.leafsense_save_calibration
+        name: Save
+        icon: mdi:content-save
+        tap_action:
+          action: toggle
+
+      - type: button
+        entity: button.leafsense_restore_calibration_defaults
+        name: Defaults
+        icon: mdi:restore
+        tap_action:
+          action: toggle
+
+  - type: gauge
+    entity: sensor.leafsense_calibration_difference
+    name: Reference difference
+    unit: "°C"
+    min: -5
+    max: 5
+    severity:
+      green: -0.2
+      yellow: 0.2
+      red: 1

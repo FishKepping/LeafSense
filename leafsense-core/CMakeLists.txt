@@ -31,6 +31,7 @@ add_library(
     src/transport/thermal_frame_packet.cpp
     src/transport/thermal_frame_publisher.cpp
     src/rendering/thermal_renderer.cpp
+    src/calibration/thermal_calibrator.cpp
 )
 
 add_library(leafsense::core ALIAS leafsense_core)
@@ -88,4 +89,5 @@ if(LEAFSENSE_BUILD_TESTS)
     leafsense_add_test(measurement_channel_controller_tests tests/measurement_channel_controller_test.cpp)
     leafsense_add_test(thermal_frame_packet_tests tests/thermal_frame_packet_test.cpp)
     leafsense_add_test(thermal_renderer_tests tests/thermal_renderer_test.cpp)
+    leafsense_add_test(thermal_calibrator_tests tests/thermal_calibrator_test.cpp)
 endif()

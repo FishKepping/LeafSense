@@ -20,4 +20,5 @@ include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/measurem
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/measurement_channel_controller_tests-b12d07c_include.cmake")
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/thermal_frame_packet_tests-b12d07c_include.cmake")
 include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/thermal_renderer_tests-b12d07c_include.cmake")
+include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/thermal_calibrator_tests-b12d07c_include.cmake")
 subdirs("../_deps/catch2-build")

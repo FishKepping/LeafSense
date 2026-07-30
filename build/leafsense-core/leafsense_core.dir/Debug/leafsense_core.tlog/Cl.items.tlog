@@ -16,3 +16,4 @@ C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\measurement\measure
 C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\transport\thermal_frame_packet.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\thermal_frame_packet.obj
 C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\transport\thermal_frame_publisher.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\thermal_frame_publisher.obj
 C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\rendering\thermal_renderer.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\thermal_renderer.obj
+C:\Users\campb\Documents\GitHub\LeafSense\leafsense-core\src\calibration\thermal_calibrator.cpp;C:\Users\campb\Documents\GitHub\LeafSense\build\leafsense-core\leafsense_core.dir\Debug\thermal_calibrator.obj

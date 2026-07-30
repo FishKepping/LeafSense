@@ -18,6 +18,7 @@ C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/measur
 C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/measurement_channel_controller_tests.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/thermal_frame_packet_tests.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/thermal_renderer_tests.dir
+C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/thermal_calibrator_tests.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/RUN_TESTS.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/CMakeFiles/ALL_BUILD.dir
 C:/Users/campb/Documents/GitHub/LeafSense/build/_deps/catch2-build/CMakeFiles/RUN_TESTS.dir

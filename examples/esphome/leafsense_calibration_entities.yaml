@@ -1,0 +1,151 @@
+# Milestone 2.6 calibration entities
+#
+# Merge these entities into the working LeafSense ESPHome configuration.
+# The lambdas assume the main component exposes:
+#
+#   id(leafsense_thermal).calibration()
+#
+# returning a CalibrationBridge reference.
+#
+# Rename leafsense_thermal if the component uses a different ID.
+
+number:
+  - platform: template
+    id: leafsense_calibration_gain
+    name: "LeafSense Calibration Gain"
+    icon: mdi:tune-vertical
+    entity_category: config
+    optimistic: true
+    restore_value: false
+    min_value: 0.5
+    max_value: 1.5
+    step: 0.001
+    initial_value: 1.0
+    set_action:
+      - lambda: |-
+          if (!id(leafsense_thermal).calibration().set_gain(x)) {
+            ESP_LOGE("leafsense.calibration", "Rejected gain %.4f", x);
+          }
+
+  - platform: template
+    id: leafsense_calibration_offset
+    name: "LeafSense Calibration Offset"
+    icon: mdi:thermometer-plus
+    entity_category: config
+    unit_of_measurement: "°C"
+    device_class: temperature
+    optimistic: true
+    restore_value: false
+    min_value: -20.0
+    max_value: 20.0
+    step: 0.1
+    initial_value: 0.0
+    set_action:
+      - lambda: |-
+          if (!id(leafsense_thermal).calibration().set_offset(x)) {
+            ESP_LOGE("leafsense.calibration", "Rejected offset %.3f", x);
+          }
+
+  - platform: template
+    id: leafsense_calibration_reference
+    name: "LeafSense Reference Temperature"
+    icon: mdi:thermometer-check
+    entity_category: config
+    unit_of_measurement: "°C"
+    device_class: temperature
+    optimistic: true
+    restore_value: true
+    min_value: -20.0
+    max_value: 100.0
+    step: 0.1
+    initial_value: 25.0
+
+sensor:
+  - platform: template
+    id: leafsense_calibration_current
+    name: "LeafSense Calibration Current Reading"
+    icon: mdi:thermometer
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: 2s
+    lambda: |-
+      // Replace current_frame_average() only if your component uses
+      // another method name for the calibrated full-frame mean.
+      return id(leafsense_thermal).current_frame_average();
+
+  - platform: template
+    id: leafsense_calibration_difference
+    name: "LeafSense Calibration Difference"
+    icon: mdi:delta
+    unit_of_measurement: "°C"
+    accuracy_decimals: 2
+    update_interval: 2s
+    lambda: |-
+      if (!id(leafsense_calibration_current).has_state()) {
+        return NAN;
+      }
+      return id(leafsense_calibration_reference).state -
+             id(leafsense_calibration_current).state;
+
+  - platform: template
+    id: leafsense_calibration_revision
+    name: "LeafSense Calibration Revision"
+    icon: mdi:counter
+    accuracy_decimals: 0
+    update_interval: 5s
+    lambda: |-
+      return static_cast<float>(
+          id(leafsense_thermal).calibration().settings().revision);
+
+button:
+  - platform: template
+    name: "LeafSense Apply Reference Calibration"
+    icon: mdi:check-decagram
+    entity_category: config
+    on_press:
+      - lambda: |-
+          if (!id(leafsense_calibration_current).has_state()) {
+            ESP_LOGE("leafsense.calibration", "No current reading");
+            return;
+          }
+
+          const bool applied =
+              id(leafsense_thermal).calibration().apply_reference(
+                  id(leafsense_calibration_current).state,
+                  id(leafsense_calibration_reference).state);
+
+          if (!applied) {
+            ESP_LOGE(
+                "leafsense.calibration",
+                "Reference calibration was rejected");
+            return;
+          }
+
+          const auto &settings =
+              id(leafsense_thermal).calibration().settings();
+
+          id(leafsense_calibration_gain).publish_state(settings.gain);
+          id(leafsense_calibration_offset).publish_state(settings.offset_c);
+
+  - platform: template
+    name: "LeafSense Save Calibration"
+    icon: mdi:content-save
+    entity_category: config
+    on_press:
+      - lambda: |-
+          id(leafsense_thermal).calibration().save();
+
+  - platform: template
+    name: "LeafSense Restore Calibration Defaults"
+    icon: mdi:restore
+    entity_category: config
+    on_press:
+      - lambda: |-
+          id(leafsense_thermal).calibration().restore_defaults();
+
+          const auto &settings =
+              id(leafsense_thermal).calibration().settings();
+
+          id(leafsense_calibration_gain).publish_state(settings.gain);
+          id(leafsense_calibration_offset).publish_state(settings.offset_c);
