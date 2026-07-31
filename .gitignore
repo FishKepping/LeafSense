@@ -1,9 +1,59 @@
-__pycache__/
-*.py[cod]
-*.log
-.env
+# Native build output
+/build/
+**/build/
+
+# CMake dependencies
+_deps/
+**/_deps/
+
+# ESPHome generated output
+.esphome/
+**/.esphome/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+_deps/
+compile_commands.json
+
+# Visual Studio generated files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+Debug/
+Release/
+x64/
+Win32/
+
+# Python virtual environments and caches
 .venv/
 venv/
-.DS_Store
+__pycache__/
+*.py[cod]
 
-examples/esphome/secrets.yaml
+# VS Code local settings
+.vscode/*
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# ESPHome secrets
+secrets.yaml
+<<<<<<< HEAD
+**/secrets.yaml
+=======
+**/secrets.yaml
+>>>>>>> d87b3d7 (Update .gitignore to include additional patterns)

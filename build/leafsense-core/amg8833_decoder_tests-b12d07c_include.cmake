@@ -1,5 +1,0 @@
-if(EXISTS "C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/amg8833_decoder_tests-b12d07c_tests.cmake")
-  include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/amg8833_decoder_tests-b12d07c_tests.cmake")
-else()
-  add_test(amg8833_decoder_tests_NOT_BUILT-b12d07c amg8833_decoder_tests_NOT_BUILT-b12d07c)
-endif()
