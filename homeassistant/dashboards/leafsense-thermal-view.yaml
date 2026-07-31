@@ -11,5 +11,6 @@ views:
         scale_mode: auto
         fixed_min: 15
         fixed_max: 40
+        temperature_unit: auto
         channel: 1
         service: esphome.leafsense_set_measurement_channel

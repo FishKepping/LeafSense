@@ -1,9 +1,16 @@
-<!doctype html><html><head><meta charset="utf-8"><title>LeafSense card tests</title></head><body><pre id="out"></pre><script src="../www/leafsense-thermal-card.js"></script><script>
+<!doctype html>
+<html><head><meta charset="utf-8"><title>LeafSense card tests</title></head>
+<body><pre id="out"></pre><script src="../www/leafsense-thermal-card.js"></script><script>
 const out=document.getElementById('out');let failed=0;
 function test(name,fn){try{fn();out.textContent+=`PASS ${name}\n`;}catch(e){failed++;out.textContent+=`FAIL ${name}: ${e.message}\n`;}}
 function assert(v,m){if(!v)throw new Error(m);}
+function near(a,b,e=.001){assert(Math.abs(a-b)<=e,`${a} != ${b}`);}
 test('CRC32 standard vector',()=>{const bytes=new TextEncoder().encode('123456789');assert(window.LeafSenseThermal.crc32(bytes)===0xcbf43926,'CRC mismatch');});
 test('Palette endpoints differ',()=>{const a=window.LeafSenseThermal.colourFor(0),b=window.LeafSenseThermal.colourFor(1);assert(JSON.stringify(a)!==JSON.stringify(b),'palette endpoints equal');});
 test('Card registered',()=>assert(customElements.get('leafsense-thermal-card'),'custom element absent'));
+test('Celsius converts to Fahrenheit',()=>near(window.LeafSenseThermal.toDisplayTemperature(0,'°F'),32));
+test('Fahrenheit converts to Celsius',()=>near(window.LeafSenseThermal.fromDisplayTemperature(212,'°F'),100));
+test('Rectangle creates four corners',()=>{const p=window.LeafSenseThermal.rectangleCorners({x:1,y:2},{x:5,y:6});assert(p.length===4,'wrong corner count');assert(p[2].x===5&&p[2].y===6,'wrong opposite corner');});
+test('Rotation preserves centre distance',()=>{const c={x:4,y:4},p={x:5,y:4},r=window.LeafSenseThermal.rotatePoint(p,c,Math.PI/2);near(r.x,4);near(r.y,5);});
 out.textContent+=failed?'\nTESTS FAILED':'\nALL TESTS PASSED';document.title=failed?'FAILED':'PASSED';
 </script></body></html>
