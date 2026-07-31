@@ -1,5 +1,0 @@
-if(EXISTS "C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/thermal_renderer_tests-b12d07c_tests.cmake")
-  include("C:/Users/campb/Documents/GitHub/LeafSense/build/leafsense-core/thermal_renderer_tests-b12d07c_tests.cmake")
-else()
-  add_test(thermal_renderer_tests_NOT_BUILT-b12d07c thermal_renderer_tests_NOT_BUILT-b12d07c)
-endif()
