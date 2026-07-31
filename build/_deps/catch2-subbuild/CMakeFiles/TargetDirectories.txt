@@ -1,0 +1,3 @@
+C:/Users/campb/Documents/GitHub/LeafSense/build/_deps/catch2-subbuild/CMakeFiles/catch2-populate.dir
+C:/Users/campb/Documents/GitHub/LeafSense/build/_deps/catch2-subbuild/CMakeFiles/ALL_BUILD.dir
+C:/Users/campb/Documents/GitHub/LeafSense/build/_deps/catch2-subbuild/CMakeFiles/ZERO_CHECK.dir

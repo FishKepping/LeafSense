@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution>
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e72d6a55-00dc-3143-964f-aa8ebc2df21b" DefaultStartup="true">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="amg8833_decoder_tests.vcxproj"/>
+		<BuildDependency Project="amg8833_registers_tests.vcxproj"/>
+		<BuildDependency Project="exponential_filter_tests.vcxproj"/>
+		<BuildDependency Project="frame_statistics_tests.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+		<BuildDependency Project="mean_filter_tests.vcxproj"/>
+		<BuildDependency Project="measurement_channel_controller_tests.vcxproj"/>
+		<BuildDependency Project="measurement_channel_tests.vcxproj"/>
+		<BuildDependency Project="median_filter_tests.vcxproj"/>
+		<BuildDependency Project="pixel_selection_tests.vcxproj"/>
+		<BuildDependency Project="polygon_roi_tests.vcxproj"/>
+		<BuildDependency Project="rectangle_roi_tests.vcxproj"/>
+		<BuildDependency Project="thermal_calibrator_tests.vcxproj"/>
+		<BuildDependency Project="thermal_frame_packet_tests.vcxproj"/>
+		<BuildDependency Project="thermal_frame_tests.vcxproj"/>
+		<BuildDependency Project="thermal_processor_tests.vcxproj"/>
+		<BuildDependency Project="thermal_renderer_tests.vcxproj"/>
+		<BuildDependency Project="threshold_roi_tests.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="../_deps/catch2-build/src/Catch2.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8d538cbe-01bf-4a2e-a98a-6c368fdf13d7">
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="../_deps/catch2-build/src/Catch2WithMain.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8bd3552a-2cfb-4a59-ab15-2031b97ada1e">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="RUN_TESTS.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="0b278c78-c697-33ec-ae08-891fa75a0768">
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="../ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e5271e05-e795-3d4a-80fa-694270adc96c"/>
+	<Project Path="amg8833_decoder_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="045c17e7-4b68-3fee-b9b6-87a706604105">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="amg8833_registers_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="85b0d48e-ce4d-3ddf-8d92-44b4a331c2c9">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="exponential_filter_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="0f1d14a0-f97c-3a09-bb1f-e899dd4a2552">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="frame_statistics_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="ce1dd70b-1c9e-39b5-85ab-d96a38e30a49">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="leafsense_core.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e653691c-5928-33f2-af63-ede2a1dfb92a">
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="mean_filter_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5f707586-0148-3e2d-9230-f6e28a04fd2f">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="measurement_channel_controller_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="02f6c098-9635-3ad5-ac31-67096f422279">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="measurement_channel_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="6dddc2d2-3954-3956-b79e-92353d3fd563">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="median_filter_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="b9bbcabc-798b-3a44-9db6-ba9873d71801">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="pixel_selection_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="48af0678-9883-31da-9eef-2e87bf36d2b2">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="polygon_roi_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="aa951a3a-ce76-342a-83a3-adfe1b66f947">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="rectangle_roi_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="6949fdbc-7064-38cc-bfb7-72c047087930">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="thermal_calibrator_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="2a631350-7dab-33f0-980a-e8083e13a51d">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="thermal_frame_packet_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="93212f3f-631d-3a71-8d08-6d4c8fbb9e67">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="thermal_frame_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="b590dfa9-b5b7-3112-8f40-606a0a3f8c66">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="thermal_processor_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5cc88268-992b-3a1d-b296-2a9fd046a4ed">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="thermal_renderer_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="78623188-628d-3ba0-b96f-bd3632d9147e">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+	<Project Path="threshold_roi_tests.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="c5e76c57-b7a9-3239-a76f-3b4775fafc6e">
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2.vcxproj"/>
+		<BuildDependency Project="../_deps/catch2-build/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="leafsense_core.vcxproj"/>
+	</Project>
+</Solution>
