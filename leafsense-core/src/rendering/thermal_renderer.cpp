@@ -4,7 +4,7 @@
 #include <array>
 #include <cmath>
 #include <limits>
-#include <stdexcept>
+#include <cassert>
 
 namespace leafsense::rendering {
 namespace {
@@ -54,10 +54,19 @@ RgbColor colourFromStops(const std::array<PaletteStop, StopCount>& stops, float 
 
 } // namespace
 
-const RgbColor& RenderedThermalImage::pixel(std::size_t x, std::size_t y) const
+const RgbColor& RenderedThermalImage::pixel(
+    std::size_t x,
+    std::size_t y) const
 {
-    if (x >= width || y >= height)
-        throw std::out_of_range("RenderedThermalImage pixel coordinate is out of range");
+    static constexpr RgbColor invalid_pixel{0U, 0U, 0U};
+
+    if (x >= width ||
+        y >= height ||
+        pixels.empty())
+    {
+        return invalid_pixel;
+    }
+
     return pixels[(y * width) + x];
 }
 
