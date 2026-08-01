@@ -32,11 +32,6 @@ add_library(
     src/transport/thermal_frame_publisher.cpp
     src/rendering/thermal_renderer.cpp
     src/calibration/thermal_calibrator.cpp
-        # Milestone 2.9 image-quality processing
-    src/processing/dead_pixel_corrector.cpp
-    src/processing/temporal_smoother.cpp
-    src/processing/spatial_median_filter.cpp
-    src/processing/thermal_processing_pipeline.cpp
 )
 
 add_library(leafsense::core ALIAS leafsense_core)
@@ -95,23 +90,4 @@ if(LEAFSENSE_BUILD_TESTS)
     leafsense_add_test(thermal_frame_packet_tests tests/thermal_frame_packet_test.cpp)
     leafsense_add_test(thermal_renderer_tests tests/thermal_renderer_test.cpp)
     leafsense_add_test(thermal_calibrator_tests tests/thermal_calibrator_test.cpp)
-    leafsense_add_test(
-        dead_pixel_corrector_tests
-        tests/dead_pixel_corrector_test.cpp
-    )
-
-    leafsense_add_test(
-        temporal_smoother_tests
-        tests/temporal_smoother_test.cpp
-    )
-
-    leafsense_add_test(
-        spatial_median_filter_tests
-        tests/spatial_median_filter_test.cpp
-    )
-
-    leafsense_add_test(
-        thermal_processing_pipeline_tests
-        tests/thermal_processing_pipeline_test.cpp
-    )
 endif()
