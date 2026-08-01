@@ -1,4 +1,4 @@
-#include "leafsense/measurement/measurement_channel_manager.h"
+#include "measurement_channel_manager.h"
 
 #include <cmath>
 #include <limits>
