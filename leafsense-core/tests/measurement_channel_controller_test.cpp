@@ -145,3 +145,20 @@ TEST_CASE("calibration changes have an independent revision")
     controller.setCalibrationOffset(-0.7f);
     REQUIRE(controller.calibrationRevision() == 1U);
 }
+
+TEST_CASE("pixel mask update is atomic and detects unchanged selections")
+{
+    MeasurementChannelManager manager;
+    MeasurementChannelController controller(manager);
+    leafsense::roi::PixelSelection selection;
+    REQUIRE(selection.add(2U));
+    REQUIRE(selection.add(10U));
+
+    REQUIRE(controller.setPixelSelection(0U, selection) ==
+            MeasurementChannelCommandStatus::Success);
+    REQUIRE(manager.channel(0U).type() == MeasurementChannelType::PixelMask);
+    REQUIRE(controller.revision(0U) == 1U);
+    REQUIRE(controller.setPixelSelection(0U, selection) ==
+            MeasurementChannelCommandStatus::NoChange);
+    REQUIRE(controller.revision(0U) == 1U);
+}

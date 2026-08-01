@@ -98,3 +98,21 @@ TEST_CASE("disabled channel reports unavailable")
     REQUIRE_FALSE(results[0].available);
     REQUIRE(results[0].valid_pixel_count == 0U);
 }
+
+TEST_CASE("pixel mask channel processes exactly the selected sensor cells")
+{
+    MeasurementChannelManager manager;
+    leafsense::roi::PixelSelection selection;
+    REQUIRE(selection.add(0U));
+    REQUIRE(selection.add(9U));
+    REQUIRE(selection.add(63U));
+    REQUIRE(manager.channel(0).setPixelSelection(selection));
+
+    const auto results = manager.process(makeFrame());
+    REQUIRE(manager.channel(0).type() == MeasurementChannelType::PixelMask);
+    REQUIRE(results[0].available);
+    REQUIRE(results[0].valid_pixel_count == 3U);
+    REQUIRE(results[0].minimum_temperature == Approx(0.0f));
+    REQUIRE(results[0].maximum_temperature == Approx(63.0f));
+    REQUIRE(results[0].average_temperature == Approx(24.0f));
+}

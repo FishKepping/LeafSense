@@ -28,6 +28,17 @@ private:
         float width,
         float height);
 
+    void service_set_pixel_mask_(
+        std::int32_t channel,
+        std::int32_t row_0,
+        std::int32_t row_1,
+        std::int32_t row_2,
+        std::int32_t row_3,
+        std::int32_t row_4,
+        std::int32_t row_5,
+        std::int32_t row_6,
+        std::int32_t row_7);
+
     void service_polygon_begin_(
         std::int32_t channel,
         std::int32_t point_count);

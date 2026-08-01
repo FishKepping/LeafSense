@@ -19,7 +19,8 @@ enum class MeasurementChannelCommandStatus : std::uint8_t
     InvalidPoint,
     NoPolygonEdit,
     PolygonIncomplete,
-    InvalidPolygon
+    InvalidPolygon,
+    InvalidPixelMask
 };
 
 struct MeasurementChannelState
@@ -27,6 +28,7 @@ struct MeasurementChannelState
     MeasurementChannelType type = MeasurementChannelType::Disabled;
     MeasurementRectangle rectangle{};
     MeasurementPolygon polygon{};
+    roi::PixelSelection selection{};
     std::uint32_t revision = 0U;
 };
 
@@ -43,6 +45,9 @@ public:
     MeasurementChannelCommandStatus setRectangle(
         std::size_t channel_index,
         const MeasurementRectangle& rectangle);
+    MeasurementChannelCommandStatus setPixelSelection(
+        std::size_t channel_index,
+        const roi::PixelSelection& selection);
 
     MeasurementChannelCommandStatus beginPolygon(
         std::size_t channel_index,

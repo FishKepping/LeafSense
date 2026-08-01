@@ -63,7 +63,7 @@ flowchart TB
         Decode["Decoding"]
         Filters["Spatial and temporal filtering"]
         Frames["ThermalFrame"]
-        Geometry["Rectangle and polygon geometry"]
+        Geometry["8×8 pixel mask"]
         RegionStats["Six-channel statistics"]
     end
 
@@ -296,13 +296,13 @@ Recovery is visible through health counters and snapshot-level flags. It is not 
 
 ## 9. Measurement-channel architecture
 
-Milestone 3.0 Alpha implements six fixed measurement channels. Each channel is always represented by the same Home Assistant entity set and may be disabled, a rectangle, or a bounded polygon. Home Assistant sends geometry at runtime; the ESP32 applies it to the processed frame and calculates minimum, maximum, average, and pixel count.
+Milestone 3.0 Alpha implements six fixed measurement channels. Each channel is always represented by the same Home Assistant entity set and may be disabled or contain an arbitrary 8×8 pixel mask. Home Assistant sends eight row masks at runtime; the ESP32 applies the selection to the processed frame and calculates minimum, maximum, average, and pixel count.
 
 ```mermaid
 flowchart LR
     Grid["ThermalFrame"]
     Transform["Card coordinate transform"]
-    Shape["Rectangle or polygon"]
+    Shape["8×8 pixel mask"]
     Mask["Native-pixel selection"]
     Stats["Channel statistics"]
     Entity["Six stable entity sets"]

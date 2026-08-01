@@ -11,6 +11,7 @@ The format is based on Keep a Changelog principles. The project has not yet made
 - Demonstrated live AMG8833 thermal rendering in Home Assistant.
 - Added a versioned Base64/CRC32 full-frame transport.
 - Added six fixed runtime measurement channels supporting disabled, rectangle, and polygon geometry.
+- Replaced the Home Assistant shape editor with direct click/drag pixel-mask editing and browser-persisted custom ROI names.
 - Published minimum, maximum, average, and pixel-count entities for every channel.
 - Added sensor-wide gain/offset calibration before measurement-channel processing, with explicit save and restore-default controls.
 - Added a custom thermal card with ROI editing, channel statistics, diagnostics, display settings, and calibration controls.

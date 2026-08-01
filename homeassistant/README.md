@@ -1,24 +1,24 @@
 # LeafSense Home Assistant dashboard — Milestone 3.0 Alpha
 
-The custom `leafsense-thermal-card` is a working hardware alpha. It decodes the live AMG8833 frame, draws a thermal image, displays six fixed measurement channels, and sends rectangle or polygon channel definitions to the ESP32.
+The custom `leafsense-thermal-card` is a working hardware alpha. It decodes the live AMG8833 frame, draws a thermal image, displays six fixed measurement channels, and sends direct 8×8 pixel-mask channel definitions to the ESP32.
 
 ## Confirmed working
 
 - Live Base64/CRC32 thermal frame decoding and rendering.
 - Six stable channel entity sets.
 - ESP32-generated minimum, maximum, average, and pixel-count statistics.
-- Rectangle and polygon geometry sent through ESPHome actions.
+- Click-toggle and drag paint/erase pixel-mask editing.
+- Browser-persisted custom ROI names shown on tabs and the thermal image.
 - Sensor-wide gain and offset written through Home Assistant entities.
 - Explicit calibration save and restore-default buttons.
 - Celsius/Fahrenheit display conversion, palettes, scaling, interpolation, grid, legend, and labels.
 
 ## Known alpha limitations
 
-- ROI editing is buggy and needs interaction and layout improvements.
-- ROI geometry exists only in the card's runtime state; refreshing the browser loses it.
+- ROI editing is still alpha and needs hardware testing across desktop and mobile browsers.
+- ROI geometry is stored per LeafSense device in the current browser. It survives a browser refresh, but it does not automatically follow the user to another browser or Home Assistant companion device.
 - The ESP32 does not yet persist channel geometry; restarting it disables the channels.
-- Writing calibration works, but entity discovery, value synchronisation, feedback, and layout need refinement.
-- Statistics work, but the six-channel display needs clearer visual grouping and better mobile behaviour.
+- Writing calibration works, but automatic entity discovery still depends on Home Assistant's generated entity IDs.
 - The installation below is provisional until it has been repeated from a clean Home Assistant and ESPHome setup.
 
 ## Provisional installation
@@ -54,13 +54,11 @@ If Home Assistant assigns different entity IDs, configure `channel_entities` or 
 The card uses separate ESPHome actions:
 
 - `leafsense_channel_disable`
-- `leafsense_channel_set_rectangle`
-- `leafsense_channel_polygon_begin`
-- `leafsense_channel_polygon_point`
-- `leafsense_channel_polygon_commit`
-- `leafsense_channel_polygon_cancel`
+- `leafsense_channel_set_pixel_mask`
 
-Coordinates use native sensor space from `0.0` through `8.0`. Rotated rectangles are transmitted as four-point polygons.
+The pixel-mask action accepts `channel` plus `row_0` through `row_7`. Each row is an integer from `0` to `255`; bit 0 is the leftmost pixel and bit 7 is the rightmost pixel.
+
+After a successful ESP32 action, the card stores all six ROI definitions in browser local storage using the thermal-frame entity and ESPHome action prefix as the device identity. A failed action restores only the affected channel to its last successfully saved geometry.
 
 ## Calibration behaviour
 
@@ -76,13 +74,13 @@ Calibration persistence does not imply ROI persistence; they are separate system
 
 ## Validation
 
-The browser test is at `tests/leafsense-thermal-card.test.html`. It covers packet CRC, colour output, card registration, temperature conversion, rectangle conversion, and rotation geometry. It does not yet provide full automated coverage of pointer editing, Home Assistant action calls, persistence, reconnection, or mobile layouts.
+The browser test is at `tests/leafsense-thermal-card.test.html`. It covers packet CRC, colour output, card registration, temperature conversion, device-scoped ROI storage keys, and stored pixel-mask/name validation. It does not yet provide full automated coverage of pointer editing, Home Assistant action calls, reconnection, or mobile layouts.
 
 Before a stable release, validate:
 
 - Browser refresh and Home Assistant restart.
 - ESP32 restart and power loss.
-- All six rectangle/polygon/disabled channels.
+- All six pixel-mask/disabled channels.
 - Calibration apply, save, restore, and reboot behaviour.
 - Desktop, tablet, and mobile pointer/touch editing.
 - A clean Device Builder and dashboard installation.

@@ -23,7 +23,7 @@ This is not yet a polished installation release. The ROI editor is buggy, ROI ge
 - Sensor-wide gain and offset calibration before channel processing.
 - Calibration values written to the ESP32; explicit save and restore-default controls.
 - Dead-pixel correction, temporal smoothing, and optional spatial filtering.
-- Six fixed measurement channels, each disabled, rectangle, or polygon.
+- Six fixed measurement channels, each disabled or defined by an arbitrary 8×8 pixel mask.
 - ESP32 calculation of channel minimum, maximum, average, and pixel count.
 - Stable Home Assistant entities for all six channels.
 - Live thermal rendering and ROI overlays in a custom Home Assistant card.

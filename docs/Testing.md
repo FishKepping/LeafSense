@@ -302,11 +302,11 @@ Run continuously and record:
 
 ## 11. Integration and Milestone 3.0 Alpha tests
 
-The repository includes `homeassistant/tests/leafsense-thermal-card.test.html` for packet CRC, palette output, registration, temperature conversion, rectangle conversion, and rotation geometry. ESPHome configurations must also be validated and compiled against the supported ESPHome version.
+The repository includes `homeassistant/tests/leafsense-thermal-card.test.html` for packet CRC, palette output, registration, temperature conversion, device-scoped storage, and pixel-mask/name validation. ESPHome configurations must also be validated and compiled against the supported ESPHome version.
 
 The current browser test is not sufficient to declare the card stable. Add automated or repeatable tests for:
 
-- Pointer and touch creation/editing of rectangles and polygons.
+- Pointer and touch click-toggle plus drag paint/erase editing of pixel masks.
 - All six channel action sequences and error rollback.
 - ROI save/restore across browser refresh and Home Assistant reconnect.
 - ESP32 channel restoration after restart and power loss.

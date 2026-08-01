@@ -12,7 +12,8 @@ enum class MeasurementChannelType : std::uint8_t
 {
     Disabled = 0,
     Rectangle = 1,
-    Polygon = 2
+    Polygon = 2,
+    PixelMask = 3
 };
 
 struct MeasurementPoint
@@ -45,6 +46,7 @@ public:
     void disable();
     bool setRectangle(const MeasurementRectangle& rectangle);
     bool setPolygon(const MeasurementPoint* points, std::size_t point_count);
+    bool setPixelSelection(const roi::PixelSelection& selection);
 
     bool enabled() const;
     bool valid() const;
@@ -64,6 +66,7 @@ private:
     MeasurementChannelType type_;
     MeasurementRectangle rectangle_;
     MeasurementPolygon polygon_;
+    roi::PixelSelection pixel_selection_;
 };
 
 }  // namespace leafsense::measurement

@@ -21,7 +21,8 @@ bool finitePoint(const MeasurementPoint& point)
 MeasurementChannel::MeasurementChannel()
     : type_(MeasurementChannelType::Disabled),
       rectangle_(),
-      polygon_()
+      polygon_(),
+      pixel_selection_()
 {
 }
 
@@ -30,6 +31,7 @@ void MeasurementChannel::disable()
     type_ = MeasurementChannelType::Disabled;
     rectangle_ = MeasurementRectangle{};
     polygon_ = MeasurementPolygon{};
+    pixel_selection_.clear();
 }
 
 bool MeasurementChannel::setRectangle(
@@ -47,6 +49,7 @@ bool MeasurementChannel::setRectangle(
 
     rectangle_ = rectangle;
     polygon_ = MeasurementPolygon{};
+    pixel_selection_.clear();
     type_ = MeasurementChannelType::Rectangle;
     return !selection().empty();
 }
@@ -76,6 +79,7 @@ bool MeasurementChannel::setPolygon(
 
     polygon_ = candidate;
     rectangle_ = MeasurementRectangle{};
+    pixel_selection_.clear();
     type_ = MeasurementChannelType::Polygon;
 
     if (selection().empty())
@@ -84,6 +88,16 @@ bool MeasurementChannel::setPolygon(
         return false;
     }
 
+    return true;
+}
+
+bool MeasurementChannel::setPixelSelection(const roi::PixelSelection& selection)
+{
+    if (selection.empty()) return false;
+    rectangle_ = MeasurementRectangle{};
+    polygon_ = MeasurementPolygon{};
+    pixel_selection_ = selection;
+    type_ = MeasurementChannelType::PixelMask;
     return true;
 }
 
@@ -114,6 +128,7 @@ const MeasurementPolygon& MeasurementChannel::polygon() const
 
 roi::PixelSelection MeasurementChannel::selection() const
 {
+    if (type_ == MeasurementChannelType::PixelMask) return pixel_selection_;
     roi::PixelSelection result;
 
     if (type_ == MeasurementChannelType::Rectangle)

@@ -20,7 +20,7 @@
 |---|---:|---|
 | Live thermal frame | ✅ | The AMG8833 image updates in the Home Assistant card. |
 | Six stable channels | ✅ | All channel entities exist; disabled channels remain unavailable. |
-| Rectangle and polygon channel processing | ✅ | Geometry sent to the ESP32 produces working statistics. |
+| Direct pixel-mask channel processing | 🧪 | Arbitrary 8×8 cell selections are sent to the ESP32 and retain the existing statistics entities. |
 | Channel min/max/average/pixel count | ✅ | Calculated on the ESP32 and published to Home Assistant. |
 | Sensor-wide calibration writes | ✅ | Gain and offset changes reach the ESP32. |
 | ROI editor | 🧪 | Usable as an alpha, but interactions remain buggy. |
@@ -33,7 +33,7 @@
 
 This is the project's next major goal.
 
-1. Stabilise rectangle and polygon creation, selection, movement, resizing, rotation, deletion, undo, and redo.
+1. Hardware-test click-toggle, drag paint/erase, undo, deletion, browser persistence, and all six pixel-mask channels.
 2. Define one versioned ROI representation and restore all six channel geometries after browser refresh and reconnection.
 3. Add ESP32-side channel persistence so a device restart does not silently disable configured ROIs.
 4. Improve calibration controls, value synchronisation, validation, save/default feedback, and error reporting.

@@ -61,6 +61,44 @@ MeasurementChannelCommandStatus MeasurementChannelController::setRectangle(
     return MeasurementChannelCommandStatus::Success;
 }
 
+MeasurementChannelCommandStatus MeasurementChannelController::setPixelSelection(
+    std::size_t channel_index,
+    const roi::PixelSelection& selection)
+{
+    if (!validChannel(channel_index))
+    {
+        return MeasurementChannelCommandStatus::InvalidChannel;
+    }
+    if (selection.empty())
+    {
+        return MeasurementChannelCommandStatus::InvalidPixelMask;
+    }
+
+    const MeasurementChannel& existing = manager_.channel(channel_index);
+    const roi::PixelSelection existing_selection = existing.selection();
+    bool equal = existing.type() == MeasurementChannelType::PixelMask &&
+                 existing_selection.size() == selection.size();
+    for (std::size_t index = 0U; equal && index < selection.size(); ++index)
+    {
+        equal = existing_selection.contains(selection[index]);
+    }
+    if (equal)
+    {
+        clearDraft(channel_index);
+        return MeasurementChannelCommandStatus::NoChange;
+    }
+
+    MeasurementChannel candidate;
+    if (!candidate.setPixelSelection(selection))
+    {
+        return MeasurementChannelCommandStatus::InvalidPixelMask;
+    }
+    manager_.channel(channel_index) = candidate;
+    clearDraft(channel_index);
+    incrementRevision(channel_index);
+    return MeasurementChannelCommandStatus::Success;
+}
+
 MeasurementChannelCommandStatus MeasurementChannelController::beginPolygon(
     std::size_t channel_index,
     std::size_t point_count)
@@ -201,6 +239,7 @@ MeasurementChannelState MeasurementChannelController::state(
     result.type = channel.type();
     result.rectangle = channel.rectangle();
     result.polygon = channel.polygon();
+    result.selection = channel.selection();
     result.revision = revisions_[channel_index];
     return result;
 }
@@ -305,6 +344,8 @@ const char* toString(MeasurementChannelCommandStatus status)
             return "polygon_incomplete";
         case MeasurementChannelCommandStatus::InvalidPolygon:
             return "invalid_polygon";
+        case MeasurementChannelCommandStatus::InvalidPixelMask:
+            return "invalid_pixel_mask";
     }
     return "unknown";
 }

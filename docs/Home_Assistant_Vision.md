@@ -10,13 +10,13 @@ The intended experience is an approachable Home Assistant dashboard where a user
 - Identify plants, leaves, trays, pots, or growing zones.
 - Draw regions directly over the image.
 - Drag, resize, and rename regions.
-- Select rectangles, polygons, and later other shapes.
+- Select exact AMG8833 pixels by clicking or drag-painting the 8×8 grid.
 - Monitor minimum, maximum, and average temperature for each region.
 - Combine leaf surface thermal data with air, humidity, light, soil, and other data to calulate VPD and other parameters. 
 - Create safe automations.
 - Understand sensor health and stale data.
 
-Milestone 3.0 Alpha now implements the central prototype: live thermal rendering, six fixed rectangle/polygon measurement channels, ESP32-computed statistics, and calibration writes. The editing, persistence, installation, and presentation work described here remains the path from the alpha prototype to a stable user experience.
+Milestone 3.0 Alpha now implements the central prototype: live thermal rendering, six fixed pixel-mask measurement channels, ESP32-computed statistics, and calibration writes. The editing, persistence, installation, and presentation work described here remains the path from the alpha prototype to a stable user experience.
 
 ## 2. Dashboard concept
 
@@ -24,7 +24,7 @@ Milestone 3.0 Alpha now implements the central prototype: live thermal rendering
 flowchart TB
     Header["LeafSense device and connection status"]
     Image["Live thermal image"]
-    Tools["Select / rectangle / polygon / move / delete"]
+    Tools["Edit pixels / undo / disable"]
     Regions["Named regions overlaid on image"]
     Cards["Region temperature cards"]
     Trends["Temperature and environment history"]
@@ -61,7 +61,7 @@ Potential later types:
 - Select.
 - Drag.
 - Resize.
-- Move polygon vertices.
+- Click cells to toggle and drag to paint or erase selections.
 - Rename.
 - Change display style.
 - Enable or disable.
@@ -99,7 +99,7 @@ A simple, explainable rule should be used first.
 
 ## 5. Region data model
 
-The current implementation uses six stable measurement channels. Each channel has a fixed numeric identity and a runtime type of disabled, rectangle, or polygon. A future persisted and versioned representation may also contain:
+The current implementation uses six stable measurement channels. Each channel has a fixed numeric identity and a runtime type of disabled or pixel mask. A future persisted and versioned representation may also contain:
 
 ```text
 Region
@@ -266,10 +266,10 @@ A language model may not be the best technical fit. Time-series forecasting, ano
 
 1. ✅ Scalar ESPHome entities.
 2. ✅ Full-frame transport and thermal rendering.
-3. ✅ Alpha rectangle/polygon channels and ESP32 statistics.
+3. 🧪 Alpha pixel-mask channels and ESP32 statistics.
 4. 🚧 Repair UI, persist/synchronise regions, and publish tested installation instructions.
 5. 🗓️ Add BME688 environmental context and leaf VPD using ROI temperatures.
-6. 💡 Add safeguardedmautomations.
+6. 💡 Add safeguarded actuator automations.
 7. 💡 Research prediction or AI assistance.
 
 Do not begin prediction work before stable region data and environmental history exist.

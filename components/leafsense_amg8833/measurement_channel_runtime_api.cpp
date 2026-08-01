@@ -44,6 +44,14 @@ void MeasurementChannelRuntimeApi::setup()
         });
 
     register_service(
+        &MeasurementChannelRuntimeApi::service_set_pixel_mask_,
+        "leafsense_channel_set_pixel_mask",
+        std::array<std::string, 9>{
+            "channel", "row_0", "row_1", "row_2", "row_3",
+            "row_4", "row_5", "row_6", "row_7"
+        });
+
+    register_service(
         &MeasurementChannelRuntimeApi::service_polygon_begin_,
         "leafsense_channel_polygon_begin",
         std::array<std::string, 2>{
@@ -147,6 +155,51 @@ void MeasurementChannelRuntimeApi::service_set_rectangle_(
                 width,
                 height
             }));
+}
+
+void MeasurementChannelRuntimeApi::service_set_pixel_mask_(
+    std::int32_t channel,
+    std::int32_t row_0,
+    std::int32_t row_1,
+    std::int32_t row_2,
+    std::int32_t row_3,
+    std::int32_t row_4,
+    std::int32_t row_5,
+    std::int32_t row_6,
+    std::int32_t row_7)
+{
+    std::size_t index = 0U;
+    if (!convert_channel_(channel, index))
+    {
+        log_result_("set_pixel_mask", channel,
+            leafsense::measurement::MeasurementChannelCommandStatus::InvalidChannel);
+        return;
+    }
+
+    const std::array<std::int32_t, 8> rows{
+        row_0, row_1, row_2, row_3, row_4, row_5, row_6, row_7};
+    leafsense::roi::PixelSelection selection;
+    for (std::size_t y = 0U; y < rows.size(); ++y)
+    {
+        if (rows[y] < 0 || rows[y] > 255)
+        {
+            log_result_("set_pixel_mask", channel,
+                leafsense::measurement::MeasurementChannelCommandStatus::InvalidPixelMask);
+            return;
+        }
+        for (std::size_t x = 0U; x < 8U; ++x)
+        {
+            if ((rows[y] & (1 << x)) != 0)
+            {
+                selection.add(static_cast<std::uint8_t>(y * 8U + x));
+            }
+        }
+    }
+
+    const auto status = selection.empty()
+        ? controller_->disable(index)
+        : controller_->setPixelSelection(index, selection);
+    log_result_("set_pixel_mask", channel, status);
 }
 
 void MeasurementChannelRuntimeApi::service_polygon_begin_(

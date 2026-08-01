@@ -1,6 +1,7 @@
 const LEAFSENSE_PACKET_SIZE = 156; const LEAFSENSE_INVALID_TEMPERATURE =
 -32768; const SENSOR_SIZE = 8; const CHANNEL_COUNT = 6; const
 SETTINGS_KEY = 'leafsense-thermal-card-settings-v3';
+const ROI_STORAGE_VERSION = 2;
 
 function crc32(bytes) { let crc = 0xffffffff; for (let i = 0; i <
 bytes.length; i += 1) { crc ^= bytes[i]; for (let bit = 0; bit < 8; bit
@@ -105,6 +106,10 @@ function toDisplayTemperatureDifference(celsiusDifference, unit) {
 class LeafSenseThermalCard extends HTMLElement { setConfig(config) { if
 (!config.entity) throw new Error('LeafSense card requires entity');
 
+    if (this.pendingSaves) {
+      this.pendingSaves.forEach((timeout) => clearTimeout(timeout));
+    }
+
     this.config = {
       title: 'LeafSense Thermal View',
       palette: 'thermal',
@@ -120,24 +125,23 @@ class LeafSenseThermalCard extends HTMLElement { setConfig(config) { if
     };
 
     this.settings = this.loadSettings();
-    this.rois = Array.from(
+    const emptyRois = Array.from(
       { length: CHANNEL_COUNT },
       (_, index) => ({
         channel: index + 1,
-        type: 'disabled',
-        points: [],
-        source: 'disabled',
+        type: 'disabled', pixels: [], name: `ROI ${index + 1}`,
       }),
     );
+    this.rois = this.loadRois(emptyRois);
 
     this.selectedChannel = clamp(Number(this.config.channel) || 1, 1, CHANNEL_COUNT);
-    this.tool = 'select';
+    this.tool = null;
     this.drag = null;
     this.history = [];
     this.future = [];
     this.frame = null;
-    this.editSnapshot = clone(this.rois);
-    this.pendingSave = null;
+    this.savedRois = clone(this.rois);
+    this.pendingSaves = new Map();
     this.renderShell();
 
 }
@@ -192,6 +196,49 @@ true, };
 saveSettings() { localStorage.setItem(SETTINGS_KEY,
 JSON.stringify(this.settings)); this.draw(); }
 
+roiStorageKey() {
+    const identity = `${this.config.entity}|${this.config.service_prefix}`;
+    return `leafsense-thermal-card-rois-v${ROI_STORAGE_VERSION}:${identity}`;
+}
+
+loadRois(fallback) {
+    try {
+      const stored = JSON.parse(localStorage.getItem(this.roiStorageKey()) || 'null');
+      if (!Array.isArray(stored) || stored.length !== CHANNEL_COUNT) return fallback;
+
+      return stored.map((roi, index) => {
+        const type = roi?.type === 'pixels' ? 'pixels' : 'disabled';
+        const pixels = Array.isArray(roi?.pixels)
+          ? [...new Set(roi.pixels.map(Number).filter((pixel) => Number.isInteger(pixel) && pixel >= 0 && pixel < 64))]
+          : [];
+        const points = Array.isArray(roi?.points)
+          ? roi.points
+            .filter((point) => Number.isFinite(point?.x) && Number.isFinite(point?.y))
+            .map((point) => ({
+              x: clamp(Number(point.x), 0, SENSOR_SIZE),
+              y: clamp(Number(point.y), 0, SENSOR_SIZE),
+            }))
+          : [];
+        const valid = type === 'disabled' || pixels.length > 0;
+
+        return valid
+          ? {
+            channel: index + 1,
+            type,
+            pixels,
+            name: String(roi?.name || `ROI ${index + 1}`).slice(0, 32),
+          }
+          : fallback[index];
+      });
+    } catch (_) {
+      return fallback;
+    }
+}
+
+saveRois(rois = this.rois) {
+    localStorage.setItem(this.roiStorageKey(), JSON.stringify(rois));
+}
+
 displayUnit() { if (this.settings.temperatureUnit === 'celsius') return
 '°C'; if (this.settings.temperatureUnit === 'fahrenheit') return '°F';
 
@@ -226,6 +273,8 @@ renderShell() { this.innerHTML = '';
           border-color:var(--primary-color)
         }
         .channelbtn.used:not(.active){border-color:var(--primary-color)}
+        .channelbtn{display:flex;flex-direction:column;align-items:center;gap:2px}
+        .channelbtn small{font-size:10px;opacity:.78;font-weight:400}
         .primary{background:var(--primary-color);color:var(--text-primary-color)}
         .danger{color:var(--error-color)}
         .layout{position:relative}
@@ -240,6 +289,8 @@ renderShell() { this.innerHTML = '';
           touch-action:none
         }
         .stage canvas{position:absolute;inset:0;width:100%;height:100%}
+        .heat{z-index:0}
+        .overlay{z-index:1}
         .heat.smooth{image-rendering:auto}
         .heat.pixelated{image-rendering:pixelated}
         .channelbar,.editbar{
@@ -250,6 +301,14 @@ renderShell() { this.innerHTML = '';
         }
         .channelbar{grid-template-columns:repeat(6,1fr)}
         .editbar{grid-template-columns:repeat(auto-fit,minmax(92px,1fr))}
+        .drawmenu{
+          display:none;
+          grid-template-columns:repeat(2,minmax(120px,1fr));
+          gap:7px;
+          max-width:680px;
+          margin:7px auto 0
+        }
+        .drawmenu.open{display:grid}
         .editorhint{
           max-width:680px;
           margin:7px auto 0;
@@ -327,6 +386,16 @@ renderShell() { this.innerHTML = '';
         }
         .settings-actions{display:flex;gap:8px;margin-top:12px}
         .hint{font-size:12px;color:var(--secondary-text-color);margin-top:8px}
+        button:disabled,input:disabled{cursor:not-allowed;opacity:.48}
+        @media (max-width:520px){
+          .wrap{padding:10px}
+          .channelbar{grid-template-columns:repeat(3,1fr)}
+          .editbar{grid-template-columns:repeat(2,1fr)}
+          .field{grid-template-columns:1fr 125px}
+          .calibration-actions{grid-template-columns:1fr}
+          .statusrow{grid-template-columns:1fr}
+          .statusrow span,.statusrow span:nth-child(2),.statusrow span:last-child{text-align:left}
+        }
       </style>
 
       <div class="wrap">
@@ -389,20 +458,9 @@ renderShell() { this.innerHTML = '';
 
             <details>
               <summary>ROI editor</summary>
-              <label class="field"><span>Snap to grid</span><input data-setting="snapGrid" type="checkbox"></label>
-              <label class="field">
-                <span>Rotation snap</span>
-                <select data-setting="rotationSnap">
-                  <option value="0">Off</option>
-                  <option value="5">5°</option>
-                  <option value="15">15°</option>
-                  <option value="30">30°</option>
-                  <option value="45">45°</option>
-                </select>
-              </label>
               <label class="field"><span>Coordinates</span><input data-setting="showCoordinates" type="checkbox"></label>
               <div class="hint">
-                Rectangle: drag once to create and save. Polygon: click vertices, then click the first point or double-click to finish and save. Select: drag shapes, corners, or the rotation handle; changes save automatically.
+                Select a channel, choose Edit pixels, then click cells or drag to paint and erase. Pixel selections are restored after a browser refresh.
               </div>
             </details>
 
@@ -424,9 +482,9 @@ renderShell() { this.innerHTML = '';
               <div class="field calDifferenceRow"><span>Difference</span><span class="readonly calDifference">—</span></div>
               <div class="field"><span>Revision</span><span class="readonly calRevision">—</span></div>
               <div class="calibration-actions">
-                <button class="primary calApply">Apply</button>
-                <button class="toolbtn calSave">Save</button>
-                <button class="danger calDefaults">Defaults</button>
+                <button class="primary calApply">Apply reference</button>
+                <button class="toolbtn calSave">Save to ESP</button>
+                <button class="danger calDefaults">Restore defaults</button>
               </div>
               <div class="hint calStatus">Calibration entities are detected automatically.</div>
             </details>
@@ -446,16 +504,15 @@ renderShell() { this.innerHTML = '';
         <div class="channelbar"></div>
 
         <div class="editbar">
-          <button class="toolbtn" data-tool="select">Select / Move</button>
-          <button class="toolbtn" data-tool="rectangle">Draw Rectangle</button>
-          <button class="toolbtn" data-tool="polygon">Draw Polygon</button>
+          <button class="toolbtn" data-tool="pixels">Edit pixels</button>
           <button class="toolbtn undo">Undo</button>
-          <button class="toolbtn redo">Redo</button>
           <button class="danger delete">Disable ROI</button>
         </div>
 
+        <label class="field roiNameField"><span>ROI name</span><input class="roiName" maxlength="32" type="text"></label>
+
         <div class="editorhint">
-          Choose a channel, then draw directly on the thermal image. ROI changes are sent to the ESP32 automatically.
+          Choose a channel, select Edit pixels, then click or drag across the thermal image. Names and selections are kept in this browser; masks are sent to the ESP32 automatically.
         </div>
 
         <div class="legendrow">
@@ -466,7 +523,7 @@ renderShell() { this.innerHTML = '';
         <div class="statusrow">
           <span class="cursor">Cursor —</span>
           <span class="status"></span>
-          <span class="angle">Angle —</span>
+          <span class="angle">Pixels —</span>
         </div>
       </div>
     `;
@@ -481,7 +538,10 @@ renderShell() { this.innerHTML = '';
 
     this.root.querySelector('.settingsToggle').addEventListener(
       'click',
-      () => this.toggleSettings(true),
+      (event) => {
+        event.stopPropagation();
+        this.toggleSettings(true);
+      },
     );
     this.root.querySelector('.closeSettings').addEventListener(
       'click',
@@ -494,35 +554,55 @@ renderShell() { this.innerHTML = '';
       this.saveSettings();
     });
 
+    this.root.querySelector('.settings').addEventListener(
+      'pointerdown',
+      (event) => event.stopPropagation(),
+    );
+    this._outsideSettingsHandler = (event) => {
+      const settings = this.root?.querySelector('.settings');
+      if (!settings?.classList.contains('open')) return;
+      if (settings.contains(event.target) || this.root.querySelector('.settingsToggle').contains(event.target)) return;
+      this.toggleSettings(false);
+    };
+    document.addEventListener('pointerdown', this._outsideSettingsHandler);
+
     this.root.querySelectorAll('[data-tool]').forEach((button) => {
       button.addEventListener('click', () => {
-        this.tool = button.dataset.tool;
+        this.tool = this.tool === button.dataset.tool ? null : button.dataset.tool;
         this.updateToolbar();
         this.drawOverlay();
       });
     });
 
+    this.root.querySelector('.roiName').addEventListener('input', (event) => {
+      const roi = this.selectedRoi();
+      roi.name = event.target.value.slice(0, 32) || `ROI ${roi.channel}`;
+      this.savedRois[roi.channel - 1].name = roi.name;
+      this.saveRois(this.savedRois);
+      this.updateChannelTabs();
+      this.drawOverlay();
+    });
+
     this.root.querySelector('.undo').addEventListener('click', () => this.undo());
-    this.root.querySelector('.redo').addEventListener('click', () => this.redo());
     this.root.querySelector('.delete').addEventListener('click', () => this.deleteSelected());
 
-    this.root.querySelectorAll('[data-setting]').forEach((element) => {
-      element.addEventListener('change', () => this.readSettingsControls());
-    });
-
-    this.root.querySelector('.calGain').addEventListener('change', (event) => {
-      this.setCalibrationNumber('gain', Number(event.target.value));
-    });
-    this.root.querySelector('.calOffset').addEventListener('change', (event) => {
-      this.setCalibrationNumber('offset', Number(event.target.value));
-    });
-    this.root.querySelector('.calReference').addEventListener('change', (event) => {
-      this.setCalibrationNumber('reference', Number(event.target.value));
-    });
-    this.root.querySelector('.calApply').addEventListener('click', () => {
+    [['.calGain', 'gain'], ['.calOffset', 'offset'], ['.calReference', 'reference']]
+      .forEach(([selector, kind]) => {
+        const input = this.root.querySelector(selector);
+        input.inputMode = 'decimal';
+        input.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            input.blur();
+          }
+        });
+      });
+    this.root.querySelector('.calApply').addEventListener('click', async () => {
+      await this.applyTypedCalibration();
       this.pressCalibrationButton('apply');
     });
-    this.root.querySelector('.calSave').addEventListener('click', () => {
+    this.root.querySelector('.calSave').addEventListener('click', async () => {
+      await this.applyTypedCalibration();
       this.pressCalibrationButton('save');
     });
     this.root.querySelector('.calDefaults').addEventListener('click', () => {
@@ -535,7 +615,7 @@ renderShell() { this.innerHTML = '';
     this.overlay.addEventListener('pointercancel', (event) => this.pointerUp(event));
     this.overlay.addEventListener('dblclick', (event) => {
       event.preventDefault();
-      if (this.tool === 'polygon') this.finishPolygon();
+      event.preventDefault();
     });
 
     this.syncSettingsControls();
@@ -543,6 +623,13 @@ renderShell() { this.innerHTML = '';
     this.updateToolbar();
     this.updateLegend();
 
+}
+
+disconnectedCallback() {
+    if (this._outsideSettingsHandler) {
+      document.removeEventListener('pointerdown', this._outsideSettingsHandler);
+    }
+    this.pendingSaves?.forEach((timeout) => clearTimeout(timeout));
 }
 
 buildChannelTabs() { const container =
@@ -555,7 +642,7 @@ this.root.querySelector('.channelbar'); container.innerHTML = '';
       button.textContent = `ROI ${channel}`;
       button.addEventListener('click', () => {
         this.selectedChannel = channel;
-        this.tool = 'select';
+        this.tool = null;
         this.updateToolbar();
         this.updateChannelTabs();
         this.drawOverlay();
@@ -580,23 +667,44 @@ updateChannelTabs() { if (!this.root) return;
         roi?.type !== 'disabled' || stats.available,
       );
 
-      const type =
-        roi?.type === 'rectangle'
-          ? 'Rect'
-          : roi?.type === 'polygon'
-            ? 'Poly'
-            : stats.available
-              ? 'Live'
-              : 'Off';
+      const type = roi?.type === 'pixels' ? `${roi.pixels.length} px` : stats.available ? 'Live' : 'Off';
 
-      button.textContent = `${channel} · ${type}`;
+      const unit = this.displayUnit();
+      const average = stats.available
+        ? `${toDisplayTemperature(stats.average, unit).toFixed(1)} ${unit}`
+        : 'No data';
+      button.innerHTML = `<span>${roi?.name || `ROI ${channel}`} · ${type}</span><small>${average}</small>`;
     });
+    const nameInput = this.root.querySelector('.roiName');
+    if (nameInput) nameInput.value = this.selectedRoi()?.name || `ROI ${this.selectedChannel}`;
 
 }
 
 toggleSettings(open) {
-this.root.querySelector('.settings').classList.toggle('open', open); if
-(open) this.syncCalibrationControls(); }
+    const panel = this.root.querySelector('.settings');
+    if (!open && panel.classList.contains('open')) {
+      this.readSettingsControls();
+      this.applyTypedCalibration();
+    }
+    panel.classList.toggle('open', open);
+    if (open) this.syncCalibrationControls();
+}
+
+async applyTypedCalibration() {
+    const controls = [
+      ['gain', this.root.querySelector('.calGain')],
+      ['offset', this.root.querySelector('.calOffset')],
+      ['reference', this.root.querySelector('.calReference')],
+    ];
+    for (const [kind, input] of controls) {
+      if (!input || input.disabled || !input.value.trim()) continue;
+      const value = Number(input.value);
+      const entityValue = this.stateNumber(this.calibrationEntity(kind));
+      if (Number.isFinite(value) && (!Number.isFinite(entityValue) || value !== entityValue)) {
+        await this.setCalibrationNumber(kind, value);
+      }
+    }
+}
 
 syncSettingsControls() {
 this.root.querySelectorAll('[data-setting]').forEach((element) => {
@@ -619,23 +727,25 @@ element.value; });
 updateToolbar() {
 this.root.querySelectorAll('[data-tool]').forEach((button) => {
 button.classList.toggle('active', button.dataset.tool === this.tool);
-}); }
+});
+    this.root.querySelector('.undo').disabled = this.history.length === 0;
+}
 
 pushHistory() { this.history.push(clone(this.rois)); if
-(this.history.length > 30) this.history.shift(); this.future = []; }
+(this.history.length > 30) this.history.shift(); this.future = []; this.updateToolbar(); }
 
 undo() { if (!this.history.length) return;
 this.future.push(clone(this.rois)); this.rois = this.history.pop();
-this.updateChannelTabs(); this.drawOverlay(); this.scheduleApplyRoi(); }
+this.updateChannelTabs(); this.drawOverlay(); this.scheduleApplyRoi(this.selectedChannel); this.updateToolbar(); }
 
 redo() { if (!this.future.length) return;
 this.history.push(clone(this.rois)); this.rois = this.future.pop();
-this.updateChannelTabs(); this.drawOverlay(); this.scheduleApplyRoi(); }
+this.updateChannelTabs(); this.drawOverlay(); this.scheduleApplyRoi(this.selectedChannel); }
 
-deleteSelected() { this.pushHistory(); this.rois[this.selectedChannel -
-1] = { channel: this.selectedChannel, type: 'disabled', points: [],
-source: 'disabled', }; this.updateChannelTabs(); this.drawOverlay();
-this.applyRoi(); }
+deleteSelected() { this.pushHistory(); const previous = this.selectedRoi(); this.rois[this.selectedChannel -
+1] = { channel: this.selectedChannel, type: 'disabled', pixels: [],
+name: previous.name || `ROI ${this.selectedChannel}`, }; this.updateChannelTabs(); this.drawOverlay();
+this.applyRoi(this.selectedChannel); }
 
 setStatus(text, error = false) { if (!this.root) return; const element =
 this.root.querySelector('.status'); element.textContent = text;
@@ -776,6 +886,19 @@ this.overlay.getBoundingClientRect(); return this.snapPoint({ x:
 
 selectedRoi() { return this.rois[this.selectedChannel - 1]; }
 
+discardIncompletePolygon() {
+    const roi = this.selectedRoi();
+    if (this.tool !== 'polygon' || roi.type !== 'polygon' || roi.points.length >= 3) {
+      return;
+    }
+
+    this.rois[this.selectedChannel - 1] = clone(
+      this.savedRois[this.selectedChannel - 1],
+    );
+    this.updateChannelTabs();
+    this.drawOverlay();
+}
+
 nearestVertex(roi, point, radius = 0.35) { let best = -1; let
 bestDistance = radius;
 
@@ -828,181 +951,27 @@ pointInPolygon(point, points) { let inside = false;
 
 }
 
-pointerDown(event) { const point = this.pointFromEvent(event);
-this.updateCursor(point);
-
+pointerDown(event) { const point = this.pointFromEvent(event); this.updateCursor(point);
+    if (this.tool !== 'pixels') return;
     this.overlay.setPointerCapture(event.pointerId);
+    this.pushHistory();
     const roi = this.selectedRoi();
-
-    if (this.tool === 'rectangle') {
-      this.pushHistory();
-      this.rois[this.selectedChannel - 1] = {
-        channel: this.selectedChannel,
-        type: 'rectangle',
-        source: 'rectangle',
-        points: [point, point],
-        angle: 0,
-      };
-      this.drag = {
-        kind: 'draw-rectangle',
-        start: point,
-      };
-    } else if (this.tool === 'polygon') {
-      if (roi.source !== 'polygon') {
-        this.pushHistory();
-        this.rois[this.selectedChannel - 1] = {
-          channel: this.selectedChannel,
-          type: 'polygon',
-          source: 'polygon',
-          points: [],
-          angle: 0,
-        };
-      }
-
-      const active = this.selectedRoi();
-
-      if (
-        active.points.length >= 3 &&
-        distance(active.points[0], point) < 0.45
-      ) {
-        this.finishPolygon();
-        return;
-      }
-
-      active.points.push(point);
-      this.drawOverlay();
-      return;
-    } else if (this.tool === 'select' && roi.type !== 'disabled') {
-      const polygon = this.roiPolygon(roi);
-      const handle = this.rotationHandle({ points: polygon });
-      const vertex = this.nearestVertex({ points: polygon }, point);
-
-      if (distance(handle, point) < 0.42) {
-        this.pushHistory();
-        const centre = centroid(polygon);
-        this.drag = {
-          kind: 'rotate',
-          centre,
-          startAngle: Math.atan2(
-            point.y - centre.y,
-            point.x - centre.x,
-          ),
-          original: clone(polygon),
-        };
-      } else if (vertex >= 0) {
-        this.pushHistory();
-        if (roi.source === 'rectangle') {
-          roi.points = polygon;
-          roi.source = 'polygon';
-          roi.type = 'polygon';
-        }
-        this.drag = {
-          kind: 'vertex',
-          index: vertex,
-        };
-      } else if (this.pointInPolygon(point, polygon)) {
-        this.pushHistory();
-        this.drag = {
-          kind: 'move',
-          start: point,
-          original: clone(roi.points),
-        };
-      }
-    }
-
-    this.drawOverlay();
-
+    if (!Array.isArray(roi.pixels)) roi.pixels = [];
+    const pixel = clamp(Math.floor(point.y), 0, 7) * 8 + clamp(Math.floor(point.x), 0, 7);
+    this.drag = { kind: 'paint-pixels', erase: roi.pixels.includes(pixel), visited: new Set() };
+    this.paintPixel(pixel);
 }
 
-pointerMove(event) { const point = this.pointFromEvent(event);
-this.updateCursor(point);
-
-    if (!this.drag) return;
-
-    const roi = this.selectedRoi();
-
-    if (this.drag.kind === 'draw-rectangle') {
-      roi.points[1] = point;
-    } else if (this.drag.kind === 'vertex') {
-      roi.points[this.drag.index] = point;
-    } else if (this.drag.kind === 'move') {
-      const requestedDeltaX = point.x - this.drag.start.x;
-      const requestedDeltaY = point.y - this.drag.start.y;
-      const xs = this.drag.original.map((vertex) => vertex.x);
-      const ys = this.drag.original.map((vertex) => vertex.y);
-
-      const deltaX = clamp(
-        requestedDeltaX,
-        -Math.min(...xs),
-        SENSOR_SIZE - Math.max(...xs),
-      );
-      const deltaY = clamp(
-        requestedDeltaY,
-        -Math.min(...ys),
-        SENSOR_SIZE - Math.max(...ys),
-      );
-
-      roi.points = this.drag.original.map((vertex) => ({
-        x: vertex.x + deltaX,
-        y: vertex.y + deltaY,
-      }));
-    } else if (this.drag.kind === 'rotate') {
-      let angle =
-        Math.atan2(
-          point.y - this.drag.centre.y,
-          point.x - this.drag.centre.x,
-        ) - this.drag.startAngle;
-
-      const snap = Number(this.settings.rotationSnap);
-      if (snap > 0) {
-        const step = snap * Math.PI / 180;
-        angle = Math.round(angle / step) * step;
-      }
-
-      const rotated = this.drag.original.map((vertex) =>
-        rotatePoint(vertex, this.drag.centre, angle),
-      );
-
-      const insideSensor = rotated.every(
-        (vertex) =>
-          vertex.x >= 0 &&
-          vertex.x <= SENSOR_SIZE &&
-          vertex.y >= 0 &&
-          vertex.y <= SENSOR_SIZE,
-      );
-
-      if (insideSensor) {
-        roi.points = rotated.map((vertex) => this.snapPoint(vertex));
-        roi.type = 'polygon';
-        roi.source = 'polygon';
-        roi.angle = angle * 180 / Math.PI;
-      }
-    }
-
-    this.drawOverlay();
-
+pointerMove(event) { const point = this.pointFromEvent(event); this.updateCursor(point);
+    if (this.drag?.kind !== 'paint-pixels') return;
+    const pixel = clamp(Math.floor(point.y), 0, 7) * 8 + clamp(Math.floor(point.x), 0, 7);
+    this.paintPixel(pixel);
 }
 
 pointerUp(event) { const completedDrag = this.drag;
-
-    if (completedDrag?.kind === 'draw-rectangle') {
-      const roi = this.selectedRoi();
-
-      if (distance(roi.points[0], roi.points[1]) < 0.15) {
-        if (this.history.length) {
-          this.rois = this.history.pop();
-          this.future = [];
-          this.updateChannelTabs();
-        }
-      } else {
-        this.tool = 'select';
-        this.updateToolbar();
-        this.updateChannelTabs();
-        this.applyRoi();
-      }
-    } else if (completedDrag) {
+    if (completedDrag?.kind === 'paint-pixels') {
       this.updateChannelTabs();
-      this.scheduleApplyRoi();
+      this.scheduleApplyRoi(this.selectedChannel);
     }
 
     this.drag = null;
@@ -1015,6 +984,18 @@ pointerUp(event) { const completedDrag = this.drag;
 
 }
 
+paintPixel(pixel) {
+    if (this.drag?.visited.has(pixel)) return;
+    this.drag.visited.add(pixel);
+    const roi = this.selectedRoi();
+    const selected = new Set(roi.pixels || []);
+    if (this.drag.erase) selected.delete(pixel); else selected.add(pixel);
+    roi.pixels = [...selected].sort((a, b) => a - b);
+    roi.type = roi.pixels.length ? 'pixels' : 'disabled';
+    roi.name ||= `ROI ${roi.channel}`;
+    this.drawOverlay();
+}
+
 finishPolygon() { const roi = this.selectedRoi();
 
     if (roi.type !== 'polygon' || roi.points.length < 3) {
@@ -1023,9 +1004,20 @@ finishPolygon() { const roi = this.selectedRoi();
     }
 
     const last = roi.points[roi.points.length - 1];
+    const previous = roi.points[roi.points.length - 2];
+    if (previous && distance(last, previous) < 0.15) {
+      roi.points.pop();
+    }
+
+    if (roi.points.length < 3) {
+      this.setStatus('Polygon requires at least three distinct points', true);
+      return;
+    }
+
+    const finalPoint = roi.points[roi.points.length - 1];
     if (
       roi.points.length > 3 &&
-      distance(last, roi.points[0]) < 0.15
+      distance(finalPoint, roi.points[0]) < 0.15
     ) {
       roi.points.pop();
     }
@@ -1034,13 +1026,20 @@ finishPolygon() { const roi = this.selectedRoi();
     this.updateToolbar();
     this.updateChannelTabs();
     this.drawOverlay();
-    this.applyRoi();
+    this.applyRoi(this.selectedChannel);
 
 }
 
-scheduleApplyRoi() { if (this.pendingSave)
-clearTimeout(this.pendingSave); this.pendingSave = setTimeout(() => {
-this.pendingSave = null; this.applyRoi(); }, 350); }
+scheduleApplyRoi(channel = this.selectedChannel) {
+    const existing = this.pendingSaves.get(channel);
+    if (existing) clearTimeout(existing);
+
+    const timeout = setTimeout(() => {
+      this.pendingSaves.delete(channel);
+      this.applyRoi(channel);
+    }, 350);
+    this.pendingSaves.set(channel, timeout);
+}
 
 updateCursor(point) { if (!this.frame) return;
 
@@ -1083,78 +1082,28 @@ drawOverlay() { if (!this.overlay) return;
     }
 
     for (const roi of this.rois) {
-      const polygon = this.roiPolygon(roi);
-      if (roi.type === 'disabled' || polygon.length < 2) continue;
-
+      if (roi.type !== 'pixels' || !roi.pixels?.length) continue;
       const selected = roi.channel === this.selectedChannel;
-      context.strokeStyle = selected
-        ? '#ffffff'
-        : 'rgba(255,255,255,.75)';
-      context.fillStyle = selected
-        ? 'rgba(255,255,255,.13)'
-        : 'rgba(255,255,255,.055)';
+      const colours = ['#00e5ff', '#ffea00', '#ff4081', '#76ff03', '#ff9100', '#b388ff'];
+      const colour = colours[(roi.channel - 1) % colours.length];
+      const cellWidth = w / SENSOR_SIZE;
+      const cellHeight = h / SENSOR_SIZE;
+      context.fillStyle = selected ? `${colour}72` : `${colour}4a`;
+      context.strokeStyle = colour;
       context.lineWidth = selected ? 3 : 2;
-
-      context.beginPath();
-      polygon.forEach((point, index) => {
-        const x = (point.x / SENSOR_SIZE) * w;
-        const y = (point.y / SENSOR_SIZE) * h;
-        if (index === 0) context.moveTo(x, y);
-        else context.lineTo(x, y);
+      const centres = [];
+      roi.pixels.forEach((pixel) => {
+        const x = pixel % SENSOR_SIZE;
+        const y = Math.floor(pixel / SENSOR_SIZE);
+        context.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+        context.strokeRect(x * cellWidth + 1, y * cellHeight + 1, cellWidth - 2, cellHeight - 2);
+        centres.push({ x: x + 0.5, y: y + 0.5 });
       });
-      if (polygon.length > 2) context.closePath();
-      context.fill();
-      context.stroke();
-
-      if (this.settings.showLabels) {
-        this.drawRoiLabel(context, roi, polygon, w, h);
-      }
-
-      if (selected && this.tool === 'select') {
-        context.fillStyle = '#ffffff';
-
-        polygon.forEach((point) => {
-          context.beginPath();
-          context.arc(
-            (point.x / SENSOR_SIZE) * w,
-            (point.y / SENSOR_SIZE) * h,
-            6,
-            0,
-            Math.PI * 2,
-          );
-          context.fill();
-        });
-
-        const rotationHandle = this.rotationHandle({ points: polygon });
-        const centre = centroid(polygon);
-
-        context.strokeStyle = '#ffffff';
-        context.beginPath();
-        context.moveTo(
-          (centre.x / SENSOR_SIZE) * w,
-          (centre.y / SENSOR_SIZE) * h,
-        );
-        context.lineTo(
-          (rotationHandle.x / SENSOR_SIZE) * w,
-          (rotationHandle.y / SENSOR_SIZE) * h,
-        );
-        context.stroke();
-
-        context.beginPath();
-        context.arc(
-          (rotationHandle.x / SENSOR_SIZE) * w,
-          (rotationHandle.y / SENSOR_SIZE) * h,
-          8,
-          0,
-          Math.PI * 2,
-        );
-        context.fill();
-      }
+      if (this.settings.showLabels) this.drawRoiLabel(context, roi, centres, w, h);
     }
 
     const roi = this.selectedRoi();
-    this.root.querySelector('.angle').textContent =
-      roi.angle ? `Angle ${roi.angle.toFixed(0)}°` : 'Angle 0°';
+    this.root.querySelector('.angle').textContent = `Pixels ${roi.pixels?.length || 0}`;
 
 }
 
@@ -1162,7 +1111,7 @@ drawRoiLabel(context, roi, polygon, width, height) { const centre =
 centroid(polygon); const stats = this.channelStats(roi.channel); const
 unit = this.displayUnit();
 
-    const lines = [`ROI ${roi.channel}`];
+    const lines = [roi.name || `ROI ${roi.channel}`];
 
     if (stats.available) {
       lines.push(
@@ -1545,21 +1494,10 @@ async callLeafSenseService(name, payload) { const resolved =
 this.resolveLeafSenseService(name); await this._hass.callService(
 resolved.domain, resolved.service, payload, ); }
 
-async applyRoi() { const roi = this.selectedRoi(); const polygon =
-this.roiPolygon(roi);
+async applyRoi(channel = this.selectedChannel) { const roi = this.rois[channel - 1];
 
     if (!this._hass) {
       this.setStatus('Home Assistant connection unavailable', true);
-      return;
-    }
-
-    if (roi.type === 'rectangle' && roi.points.length !== 2) {
-      this.setStatus('Draw a rectangle first', true);
-      return;
-    }
-
-    if (roi.type === 'polygon' && polygon.length < 3) {
-      this.setStatus('Polygon requires at least three points', true);
       return;
     }
 
@@ -1569,61 +1507,29 @@ this.roiPolygon(roi);
           'leafsense_channel_disable',
           { channel: roi.channel },
         );
-      } else if (roi.type === 'rectangle') {
-        const first = roi.points[0];
-        const second = roi.points[1];
-
-        await this.callLeafSenseService(
-          'leafsense_channel_set_rectangle',
-          {
-            channel: roi.channel,
-            x: round3(Math.min(first.x, second.x)),
-            y: round3(Math.min(first.y, second.y)),
-            width: round3(Math.abs(second.x - first.x)),
-            height: round3(Math.abs(second.y - first.y)),
-          },
-        );
       } else {
-        await this.callLeafSenseService(
-          'leafsense_channel_polygon_begin',
-          {
-            channel: roi.channel,
-            point_count: polygon.length,
-          },
-        );
-
-        try {
-          for (let index = 0; index < polygon.length; index += 1) {
-            await this.callLeafSenseService(
-              'leafsense_channel_polygon_point',
-              {
-                channel: roi.channel,
-                point_index: index,
-                x: round3(polygon[index].x),
-                y: round3(polygon[index].y),
-              },
-            );
+        const selected = new Set(roi.pixels || []);
+        const payload = { channel: roi.channel };
+        for (let y = 0; y < SENSOR_SIZE; y += 1) {
+          let row = 0;
+          for (let x = 0; x < SENSOR_SIZE; x += 1) {
+            if (selected.has(y * SENSOR_SIZE + x)) row |= (1 << x);
           }
-
-          await this.callLeafSenseService(
-            'leafsense_channel_polygon_commit',
-            { channel: roi.channel },
-          );
-        } catch (error) {
-          await this.callLeafSenseService(
-            'leafsense_channel_polygon_cancel',
-            { channel: roi.channel },
-          );
-          throw error;
+          payload[`row_${y}`] = row;
         }
+        await this.callLeafSenseService(
+          'leafsense_channel_set_pixel_mask',
+          payload,
+        );
       }
 
-      this.setStatus(`ROI ${roi.channel} saved automatically`);
-      this.editSnapshot = clone(this.rois);
+      this.savedRois[roi.channel - 1] = clone(roi);
+      this.saveRois(this.savedRois);
+      this.setStatus(`ROI ${roi.channel} saved to ESP and browser`);
       this.updateChannelTabs();
     } catch (error) {
-      if (this.editSnapshot) {
-        this.rois = clone(this.editSnapshot);
+      if (this.savedRois?.[roi.channel - 1]) {
+        this.rois[roi.channel - 1] = clone(this.savedRois[roi.channel - 1]);
         this.updateChannelTabs();
         this.drawOverlay();
       }
@@ -1637,7 +1543,7 @@ this.roiPolygon(roi);
 } }
 
 customElements.define('leafsense-thermal-card', LeafSenseThermalCard);
-window.LeafSenseThermal = { parseThermalFramePacket, crc32, colourFor,
+window.LeafSenseThermal = { LeafSenseThermalCard, parseThermalFramePacket, crc32, colourFor,
 rectangleCorners, rotatePoint, toDisplayTemperature,
 toDisplayTemperatureDifference, fromDisplayTemperature }; window.customCards = window.customCards || [];
 window.customCards.push({ type: 'leafsense-thermal-card', name:

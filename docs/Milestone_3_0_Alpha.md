@@ -9,7 +9,7 @@ Milestone 3.0 Alpha records the first demonstrated end-to-end LeafSense thermal-
 - Live AMG8833 frame acquisition on ESP32 through ESPHome.
 - Full thermal image displayed in Home Assistant.
 - Six fixed measurement channels exposed as stable entity sets.
-- Rectangle and polygon geometry written from Home Assistant to the ESP32.
+- Direct 8×8 pixel masks written from Home Assistant to the ESP32.
 - Correct per-channel minimum, maximum, average, and pixel-count results.
 - Sensor-wide calibration values written to the ESP32.
 
@@ -35,7 +35,7 @@ flowchart LR
     ROI --> Out["Frame packet and HA entities"]
 ```
 
-Each channel is always addressable as channel 1–6 and may be disabled, a rectangle, or a polygon. A disabled channel keeps its entity identities but publishes no usable measurement.
+Each channel is always addressable as channel 1–6 and may be disabled or contain an arbitrary set of AMG8833 pixels. A disabled channel keeps its entity identities but publishes no usable measurement. Custom channel names currently live in browser storage.
 
 ## Exit criteria
 
