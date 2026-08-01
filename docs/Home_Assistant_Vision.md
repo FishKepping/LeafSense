@@ -269,7 +269,7 @@ A language model may not be the best technical fit. Time-series forecasting, ano
 3. ✅ Alpha rectangle/polygon channels and ESP32 statistics.
 4. 🚧 Repair UI, persist/synchronise regions, and publish tested installation instructions.
 5. 🗓️ Add BME688 environmental context and leaf VPD using ROI temperatures.
-6. 💡 Add safeguarded actuator automations.
+6. 💡 Add safeguardedmautomations.
 7. 💡 Research prediction or AI assistance.
 
 Do not begin prediction work before stable region data and environmental history exist.

@@ -124,7 +124,7 @@ PowerShell:
 
 ```powershell
 Remove-Item -Recurse -Force build
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DLEAFSENSE_BUILD_TESTS=ON
+cmake -S . -B build -G "Visual Studio 18 2026" -A x64 -DLEAFSENSE_BUILD_TESTS=ON
 cmake --build build --config Debug
 ctest --test-dir build -C Debug --output-on-failure
 ```
@@ -133,7 +133,7 @@ Command Prompt:
 
 ```bat
 rmdir /s /q build
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DLEAFSENSE_BUILD_TESTS=ON
+cmake -S . -B build -G "Visual Studio 18 2026" -A x64 -DLEAFSENSE_BUILD_TESTS=ON
 cmake --build build --config Debug
 ctest --test-dir build -C Debug --output-on-failure
 ```
@@ -159,7 +159,7 @@ Get-Command cmake
 When `cmake.exe` exists but is not on `PATH`, for example under:
 
 ```text
-C:\Program Files\CMake\bin\cmake.exe
+\Program Files\CMake\bin\cmake.exe
 ```
 
 restart the terminal after installation or add that directory to the system `PATH`.
