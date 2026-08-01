@@ -45,10 +45,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Logs and temporary files
-*.log
-*.tmp
-*.bak
+examples/esphome/secrets.yaml
 
 # ESPHome secrets
 secrets.yaml
