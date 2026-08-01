@@ -113,7 +113,7 @@ Benefits:
 - Bus failures can be simulated deterministically.
 - Driver code does not own platform lifecycle.
 
-The future ESPHome adapter should translate ESPHome I²C return behavior into the exact success/failure contract expected by `Amg8833Bus`.
+The ESPHome adapter translates ESPHome I²C return behaviour into the exact success/failure contract expected by `Amg8833Bus`.
 
 ## 5. Initialization
 
@@ -328,7 +328,7 @@ See [Telemetry](Telemetry.md) for the field groups and mapping rules.
 
 ## 16. ESPHome adapter requirements
 
-The future ESPHome component should:
+The ESPHome component should continue to:
 
 - Implement or own an `Amg8833Bus` adapter.
 - Create and initialize the driver.

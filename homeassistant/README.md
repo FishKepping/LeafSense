@@ -1,82 +1,88 @@
-# LeafSense Home Assistant dashboard — Milestone 2.7
+# LeafSense Home Assistant dashboard — Milestone 3.0 Alpha
 
-Milestone 2.7 upgrades the thermal card into an intuitive ROI editor while retaining the Milestone 2.5 packet and ESPHome service contracts.
+The custom `leafsense-thermal-card` is a working hardware alpha. It decodes the live AMG8833 frame, draws a thermal image, displays six fixed measurement channels, and sends rectangle or polygon channel definitions to the ESP32.
 
-## Features
+## Confirmed working
 
-- Decodes the Base64/CRC32 AMG8833 packet.
-- Displays six stable measurement channels.
-- Rectangle drag drawing.
-- Polygon point drawing.
-- Move and vertex editing.
-- Rotation handles for rectangles and polygons.
-- Configurable 5°, 15°, 30° or 45° rotation snapping.
-- Undo, redo, duplicate, delete, save and cancel.
-- Automatic, Celsius or Fahrenheit display.
-- Automatic or fixed temperature scaling.
-- Thermal, iron and greyscale palettes.
-- Smooth or pixelated rendering.
-- Optional sensor grid, legend and ROI labels.
-- Slide-out display, scale, ROI, diagnostics and calibration settings.
-- Browser-local preference persistence.
+- Live Base64/CRC32 thermal frame decoding and rendering.
+- Six stable channel entity sets.
+- ESP32-generated minimum, maximum, average, and pixel-count statistics.
+- Rectangle and polygon geometry sent through ESPHome actions.
+- Sensor-wide gain and offset written through Home Assistant entities.
+- Explicit calibration save and restore-default buttons.
+- Celsius/Fahrenheit display conversion, palettes, scaling, interpolation, grid, legend, and labels.
 
-LeafSense firmware, packets, calibration and ROI calculations remain Celsius internally. Fahrenheit conversion is display-only.
+## Known alpha limitations
 
-## Installation
+- ROI editing is buggy and needs interaction and layout improvements.
+- ROI geometry exists only in the card's runtime state; refreshing the browser loses it.
+- The ESP32 does not yet persist channel geometry; restarting it disables the channels.
+- Writing calibration works, but entity discovery, value synchronisation, feedback, and layout need refinement.
+- Statistics work, but the six-channel display needs clearer visual grouping and better mobile behaviour.
+- The installation below is provisional until it has been repeated from a clean Home Assistant and ESPHome setup.
 
-1. Copy `www/leafsense-thermal-card.js` to `/config/www/leafsense-thermal-card.js`.
-2. In Home Assistant, open **Settings → Dashboards → Resources**.
-3. Add `/local/leafsense-thermal-card.js` as a JavaScript module.
-4. Copy `dashboards/leafsense-thermal-view.yaml` into your dashboard and correct the entity/service IDs if necessary.
-5. Hard-refresh with `Ctrl+F5`.
+## Provisional installation
 
-## Editing workflow
+1. Install and flash the LeafSense ESPHome configuration. The Device Builder import target is:
 
-1. Press the pencil button.
-2. Select Channel 1–6.
-3. Choose **Rectangle** and drag, or **Polygon** and click each vertex.
-4. Switch to **Select**.
-5. Drag inside a shape to move it.
-6. Drag a white vertex to reshape it.
-7. Drag the circular handle above the ROI to rotate it.
-8. Press **Save** to send the channel to ESPHome or **Cancel** to restore the editor snapshot.
+   ```text
+   github://FishKepping/LeafSense/leafsense-amg8833.yaml@main
+   ```
 
-An unrotated rectangle is sent using the existing two-point `rectangle` contract. Once rotated, it is sent as a four-point `polygon`; this avoids adding a new firmware geometry type.
+2. Copy `www/leafsense-thermal-card.js` to `/config/www/leafsense-thermal-card.js`.
+3. In Home Assistant, open **Settings → Dashboards → Resources**.
+4. Add `/local/leafsense-thermal-card.js` as a JavaScript module.
+5. Add the card YAML from `dashboards/leafsense-thermal-view.yaml` and correct entity/action prefixes if necessary.
+6. Hard-refresh the browser with `Ctrl+F5`.
 
-## Service contract
+Do not treat these as final public installation instructions yet. Clean-install testing and a complete Device Builder/package guide are the next milestone.
 
-Default service:
-
-`esphome.leafsense_set_measurement_channel`
+## Card configuration
 
 ```yaml
+type: custom:leafsense-thermal-card
+title: LeafSense Thermal View
+entity: text_sensor.leafsense_thermal_frame
 channel: 1
-type: rectangle  # disabled, rectangle or polygon
-points: '[{"x":1.0,"y":1.0},{"x":6.0,"y":5.0}]'
+service_prefix: esphome.leafsense_amg8833
 ```
 
-All coordinates remain in sensor space from `0.0` through `8.0`.
+If Home Assistant assigns different entity IDs, configure `channel_entities` or `calibration_entities` explicitly. If it assigns a different ESPHome action prefix, open **Developer Tools → Actions**, find `leafsense_channel_disable`, and update `service_prefix`.
 
-## Settings
+## Runtime action contract
 
-The gear panel contains:
+The card uses separate ESPHome actions:
 
-- **Display:** unit, palette, interpolation, grid, legend and labels.
-- **Temperature scale:** automatic/fixed and display-unit min/max.
-- **ROI editor:** grid snapping, rotation snapping and coordinates.
-- **Diagnostics:** frame sequence, protocol, CRC, calibration revision and dimensions.
-- **Calibration:** explains the sensor-wide firmware boundary and links conceptually to the existing calibration dashboard.
+- `leafsense_channel_disable`
+- `leafsense_channel_set_rectangle`
+- `leafsense_channel_polygon_begin`
+- `leafsense_channel_polygon_point`
+- `leafsense_channel_polygon_commit`
+- `leafsense_channel_polygon_cancel`
 
-Settings are stored in browser `localStorage`; they do not alter firmware values.
+Coordinates use native sensor space from `0.0` through `8.0`. Rotated rectangles are transmitted as four-point polygons.
 
-## Tests
+## Calibration behaviour
 
-Open `tests/leafsense-thermal-card.test.html` in a browser. Expected result:
+Calibration is applied to the entire AMG8833 before dead-pixel correction, smoothing, and channel calculations:
 
-`ALL TESTS PASSED`
+```text
+calibrated temperature = (raw temperature × gain) + offset
+```
 
-The test covers CRC32, palette output, card registration, Celsius/Fahrenheit conversion, rectangle conversion and rotation geometry.
+Changing gain or offset updates the running ESP32 state. Press **Save Calibration** to persist it across a restart. **Restore Calibration Defaults** restores gain `1.0` and offset `0.0`.
 
-## Hardware validation
+Calibration persistence does not imply ROI persistence; they are separate systems.
 
-Use `HARDWARE_VALIDATION_2_7A.md` and complete the 24-hour stability checkpoint before Milestone 2.8.
+## Validation
+
+The browser test is at `tests/leafsense-thermal-card.test.html`. It covers packet CRC, colour output, card registration, temperature conversion, rectangle conversion, and rotation geometry. It does not yet provide full automated coverage of pointer editing, Home Assistant action calls, persistence, reconnection, or mobile layouts.
+
+Before a stable release, validate:
+
+- Browser refresh and Home Assistant restart.
+- ESP32 restart and power loss.
+- All six rectangle/polygon/disabled channels.
+- Calibration apply, save, restore, and reboot behaviour.
+- Desktop, tablet, and mobile pointer/touch editing.
+- A clean Device Builder and dashboard installation.

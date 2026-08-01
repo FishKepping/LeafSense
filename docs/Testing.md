@@ -19,7 +19,7 @@ Passing native tests does not replace hardware validation, but it makes hardware
 ```mermaid
 flowchart TB
     Hardware["ESP32 + AMG8833 validation<br/>smallest number, highest realism"]
-    Integration["Future ESPHome integration tests"]
+    Integration["ESPHome compile and browser-card tests"]
     Driver["Driver, recovery, interrupt,<br/>snapshot and telemetry tests"]
     Core["Decoder, frame and filter tests<br/>largest number, fastest"]
 
@@ -300,7 +300,24 @@ Run continuously and record:
 - Stale frames.
 - Temperature stability.
 
-## 11. Future integration tests
+## 11. Integration and Milestone 3.0 Alpha tests
+
+The repository includes `homeassistant/tests/leafsense-thermal-card.test.html` for packet CRC, palette output, registration, temperature conversion, rectangle conversion, and rotation geometry. ESPHome configurations must also be validated and compiled against the supported ESPHome version.
+
+The current browser test is not sufficient to declare the card stable. Add automated or repeatable tests for:
+
+- Pointer and touch creation/editing of rectangles and polygons.
+- All six channel action sequences and error rollback.
+- ROI save/restore across browser refresh and Home Assistant reconnect.
+- ESP32 channel restoration after restart and power loss.
+- Calibration entity discovery, writes, save/default actions, and state synchronisation.
+- Channel-statistics availability and presentation.
+- Clean Device Builder import and package installation.
+- Desktop, tablet, and mobile layouts.
+
+Until those pass, describe the dashboard as Milestone 3.0 Alpha.
+
+## 12. Future integration tests
 
 When the ESPHome component is added, tests should verify:
 
@@ -315,7 +332,7 @@ When the ESPHome component is added, tests should verify:
 - No publication of invalid default temperatures.
 - Region configuration once introduced.
 
-## 12. Definition of tested
+## 13. Definition of tested
 
 A feature is considered adequately tested when:
 

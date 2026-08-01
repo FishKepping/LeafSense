@@ -218,9 +218,15 @@ Typical responsibilities:
 - Telemetry projection.
 - Driver-level tests.
 
-### Platform and future directories
+### Platform and user-interface directories
 
-Firmware, ESPHome, Home Assistant, simulation, examples, and tooling should depend on the native core rather than duplicating its behavior.
+- `components/leafsense_amg8833/` is the Git-importable ESPHome component.
+- `packages/leafsense_amg8833.yaml` publishes the thermal frame, calibration controls, and six channel entity sets.
+- `leafsense-amg8833.yaml` is the ESPHome Device Builder import manifest.
+- `homeassistant/www/leafsense-thermal-card.js` is the current Home Assistant thermal card.
+- `homeassistant/dashboards/` contains dashboard examples.
+
+Platform and UI code should use the native core rather than duplicating calibration, ROI, or statistics rules.
 
 ## 10. Coding standards
 

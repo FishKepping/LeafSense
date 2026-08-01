@@ -63,8 +63,8 @@ flowchart TB
         Decode["Decoding"]
         Filters["Spatial and temporal filtering"]
         Frames["ThermalFrame"]
-        Geometry["Future ROI geometry"]
-        RegionStats["Future region statistics"]
+        Geometry["Rectangle and polygon geometry"]
+        RegionStats["Six-channel statistics"]
     end
 
     subgraph Platform["Platform layer"]
@@ -94,11 +94,11 @@ Owns communication with a sensor, initialization, status handling, error reporti
 
 Contains platform-independent data types and transformations. It decodes raw sensor data, constructs `ThermalFrame` instances, and applies optional filtering.
 
-Future geometry and region-statistics modules will also live here because their behavior does not depend on Home Assistant.
+Geometry and region-statistics modules live here because their behaviour does not depend on Home Assistant. Six fixed channels bound ESP32 memory use while allowing runtime geometry changes without entity recreation.
 
 ### Platform layer
 
-Adapts platform-independent results to a deployment environment. Milestone 1.8 introduced the flat telemetry contract that will feed the ESPHome component.
+Adapts platform-independent results to ESPHome. The current component publishes scalar telemetry, a full-frame packet, calibration controls, and six stable channel entity sets, and registers runtime actions for channel geometry.
 
 ### Experience layer
 
@@ -123,7 +123,7 @@ flowchart TD
     Snapshot["Amg8833Snapshot"]
     Project["Amg8833TelemetryProjector::project()"]
     Telemetry["Amg8833Telemetry"]
-    Publish["Future ESPHome publication"]
+    Publish["ESPHome publication"]
 
     Start --> Reader --> FrameRead --> Status --> Thermistor --> Pixels --> Process --> Frame --> Summary --> MapDecision
     MapDecision -- Yes --> InterruptMap --> Health
@@ -294,18 +294,18 @@ flowchart TD
 
 Recovery is visible through health counters and snapshot-level flags. It is not hidden from callers.
 
-## 9. Planned region-of-interest architecture
+## 9. Measurement-channel architecture
 
-Regions of interest are planned but not yet implemented.
+Milestone 3.0 Alpha implements six fixed measurement channels. Each channel is always represented by the same Home Assistant entity set and may be disabled, a rectangle, or a bounded polygon. Home Assistant sends geometry at runtime; the ESP32 applies it to the processed frame and calculates minimum, maximum, average, and pixel count.
 
 ```mermaid
 flowchart LR
     Grid["ThermalFrame"]
-    Transform["Display-to-sensor coordinate transform"]
-    Shape["Rectangle / polygon / other shape"]
-    Mask["Pixel coverage or weighted mask"]
-    Stats["Region statistics"]
-    Entity["Home Assistant region entities"]
+    Transform["Card coordinate transform"]
+    Shape["Rectangle or polygon"]
+    Mask["Native-pixel selection"]
+    Stats["Channel statistics"]
+    Entity["Six stable entity sets"]
 
     Grid --> Transform
     Shape --> Transform
@@ -315,16 +315,9 @@ flowchart LR
     Stats --> Entity
 ```
 
-Important future design decisions include:
+The fixed limit of six channels preserves predictable memory use and leaves room for future environmental sensors. Calibration occurs once for the whole sensor before channel processing. The remaining architecture work is a versioned persistence format and safe synchronisation after browser, Home Assistant, or ESP32 restarts.
 
-- Whether partly covered pixels receive binary or weighted membership.
-- How coordinates remain stable when the thermal image is interpolated.
-- How regions are stored and restored.
-- How many regions an ESP32 node can process.
-- Whether region definitions are processed on-device, in Home Assistant, or split between both.
-- How edits are synchronized safely.
-
-## 10. Planned Home Assistant data flow
+## 10. Current Home Assistant data flow
 
 ```mermaid
 sequenceDiagram
@@ -345,7 +338,7 @@ sequenceDiagram
     ESP->>HA: Region min / max / average
 ```
 
-This sequence is a target design and may change during implementation.
+This sequence is implemented in the alpha. The ROI save/restore path is incomplete: the browser does not currently reconstruct geometry after refresh and the ESP32 does not persist channel geometry across restart.
 
 ## 11. Future prediction layer
 
@@ -406,7 +399,7 @@ flowchart TB
     InterruptTests["Interrupt tests"]
     SnapshotTests["Snapshot tests"]
     TelemetryTests["Telemetry tests"]
-    FutureIntegration["Future ESPHome integration tests"]
+    FutureIntegration["ESPHome and browser integration tests"]
     Hardware["ESP32 hardware tests"]
 
     Fake --> DriverTests

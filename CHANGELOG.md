@@ -6,6 +6,19 @@ The format is based on Keep a Changelog principles. The project has not yet made
 
 ## [Unreleased]
 
+### Milestone 3.0 Alpha checkpoint
+
+- Demonstrated live AMG8833 thermal rendering in Home Assistant.
+- Added a versioned Base64/CRC32 full-frame transport.
+- Added six fixed runtime measurement channels supporting disabled, rectangle, and polygon geometry.
+- Published minimum, maximum, average, and pixel-count entities for every channel.
+- Added sensor-wide gain/offset calibration before measurement-channel processing, with explicit save and restore-default controls.
+- Added a custom thermal card with ROI editing, channel statistics, diagnostics, display settings, and calibration controls.
+- Added a Git-importable ESPHome component, reusable package, and Device Builder import manifest.
+- Recorded alpha limitations: buggy ROI UI, no ROI restoration after browser refresh, no channel persistence after ESP32 restart, and unfinished calibration/statistics UX.
+- Set the next release objective to a tested Home Assistant dashboard and ESPHome Device Builder/package installation path.
+- Planned BME688 environmental sensing and VPD calculations using ROI leaf temperature after the thermal/ROI release is stable.
+
 ### Added
 
 - Platform-independent C++17 thermal core.

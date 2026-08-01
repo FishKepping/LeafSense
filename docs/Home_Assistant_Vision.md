@@ -16,7 +16,7 @@ The intended experience is an approachable Home Assistant dashboard where a user
 - Create safe automations.
 - Understand sensor health and stale data.
 
-This document describes future direction, not current functionality.
+Milestone 3.0 Alpha now implements the central prototype: live thermal rendering, six fixed rectangle/polygon measurement channels, ESP32-computed statistics, and calibration writes. The editing, persistence, installation, and presentation work described here remains the path from the alpha prototype to a stable user experience.
 
 ## 2. Dashboard concept
 
@@ -99,7 +99,7 @@ A simple, explainable rule should be used first.
 
 ## 5. Region data model
 
-A future region definition may contain:
+The current implementation uses six stable measurement channels. Each channel has a fixed numeric identity and a runtime type of disabled, rectangle, or polygon. A future persisted and versioned representation may also contain:
 
 ```text
 Region
@@ -166,21 +166,19 @@ Disadvantages:
 
 ### Hybrid
 
-Likely target:
+Current design:
 
 1. Home Assistant displays the frame and edits shapes.
-2. Shapes are stored in Home Assistant.
+2. Shapes are held by the card during the browser session; durable Home Assistant storage is next-step work.
 3. Compact normalized region definitions are sent to the ESP32.
 4. The ESP32 computes basic region statistics.
 5. Home Assistant displays those statistics and history.
 
-This must be validated with ESPHome's available APIs and component model.
+The transport and ESP32 calculation path has been validated on hardware. Browser and ESP32 persistence still need implementation and restart testing.
 
 ## 8. Thermal image transport
 
-A thermal image requires all 64 pixel values, which are separate from the scalar Milestone 1.8 telemetry.
-
-Potential approaches must be evaluated for:
+Milestone 3.0 Alpha transports all 64 pixels in a versioned Base64 packet protected by CRC32 and published through an ESPHome text sensor. Ongoing validation covers:
 
 - Update rate.
 - Payload size.
@@ -191,7 +189,7 @@ Potential approaches must be evaluated for:
 - Multiple devices.
 - Version compatibility.
 
-The design should avoid creating 64 frequently updating standard sensors unless testing shows that it is acceptable.
+LeafSense therefore avoids creating 64 frequently updating standard sensor entities.
 
 ## 9. Automation model
 
@@ -266,18 +264,12 @@ A language model may not be the best technical fit. Time-series forecasting, ano
 
 ## 13. Suggested implementation stages
 
-```mermaid
-flowchart LR
-    A["Scalar ESPHome entities"]
-    B["Full-frame transport prototype"]
-    C["Read-only thermal dashboard"]
-    D["Rectangle ROI"]
-    E["Polygon ROI"]
-    F["Persist and sync regions"]
-    G["Region automations"]
-    H["Prediction research"]
-
-    A --> B --> C --> D --> E --> F --> G --> H
-```
+1. ✅ Scalar ESPHome entities.
+2. ✅ Full-frame transport and thermal rendering.
+3. ✅ Alpha rectangle/polygon channels and ESP32 statistics.
+4. 🚧 Repair UI, persist/synchronise regions, and publish tested installation instructions.
+5. 🗓️ Add BME688 environmental context and leaf VPD using ROI temperatures.
+6. 💡 Add safeguarded actuator automations.
+7. 💡 Research prediction or AI assistance.
 
 Do not begin prediction work before stable region data and environmental history exist.

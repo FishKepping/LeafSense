@@ -2,121 +2,89 @@
 
 > Open-source thermal plant monitoring for ESPHome and Home Assistant.
 
-LeafSense is a modular plant-monitoring platform built around ESP32 devices, ESPHome, Home Assistant, and thermal imaging. Its first hardware target is the Panasonic AMG8833 Grid-EYE 8 × 8 thermal sensor.
-
-The project is being developed both as a practical plant-monitoring system and as a reusable, well-tested embedded software platform. The immediate goal is reliable thermal acquisition and publication. The longer-term goal is an easy-to-use Home Assistant experience where users can draw regions of interest over a thermal image and monitor the minimum, maximum, and average temperatures inside those regions.
+LeafSense is a modular ESP32 plant-monitoring platform. It currently combines an AMG8833 8 × 8 thermal sensor, ESPHome, and a custom Home Assistant card that displays a live thermal image and sends editable measurement regions to the ESP32.
 
 ## Project status
 
-**Version:** `v0.1 — Seed`  
-**Status:** Early development  
-**Current completed milestone:** `1.8 — Publication-ready telemetry`  
-**Next major objective:** ESPHome platform integration
+**Version:** `3.0.0-alpha.1`
 
-The native C++ thermal core and AMG8833 driver are being developed and tested independently of ESPHome. This keeps the hardware and processing logic reusable while allowing ESPHome to remain the primary deployment platform.
+**Milestone:** `3.0 Alpha — end-to-end thermal camera prototype`
 
-## Vision
+**Status:** Working hardware alpha with known dashboard and persistence issues
 
-LeafSense is intended to provide:
+The complete data path has been demonstrated on hardware: the AMG8833 frame reaches Home Assistant, the thermal image renders live, six stable measurement channels appear, ROI definitions can be written to the ESP32, and per-channel minimum, maximum, average, and pixel-count statistics update.
 
-- ESP32 thermal-sensing nodes managed through ESPHome.
-- A Home Assistant dashboard that displays thermal data clearly.
-- User-defined thermal regions of interest.
-- Draggable rectangles, polygons, and other region shapes.
-- Minimum, maximum, and average temperatures for each region.
-- Environmental sensors and automation controls.
-- A modular architecture that can support additional sensors.
-- Future environmental prediction and control assistance using a compact local model or similar edge-intelligence approach.
+This is not yet a polished installation release. The ROI editor is buggy, ROI geometry is lost when the browser refreshes and after the ESP32 restarts, and the calibration and channel-statistics interfaces need refinement.
 
-The predictive features are future work. They will only be introduced after the sensor, processing, ESPHome, and Home Assistant foundations are stable.
+## What works now
+
+- ESP32/ESPHome acquisition from the Panasonic AMG8833.
+- Full 8 × 8 frame transport using a versioned Base64 packet with CRC32.
+- Sensor-wide gain and offset calibration before channel processing.
+- Calibration values written to the ESP32; explicit save and restore-default controls.
+- Dead-pixel correction, temporal smoothing, and optional spatial filtering.
+- Six fixed measurement channels, each disabled, rectangle, or polygon.
+- ESP32 calculation of channel minimum, maximum, average, and pixel count.
+- Stable Home Assistant entities for all six channels.
+- Live thermal rendering and ROI overlays in a custom Home Assistant card.
+- Runtime ROI updates through ESPHome actions without editing YAML or reflashing.
+- Native CMake/Catch2 tests for the reusable core and driver.
+
+## Known Milestone 3.0 Alpha limitations
+
+- ROI creation and editing controls remain unreliable and need UI work.
+- ROI geometry is not restored after a browser refresh.
+- ROI geometry is not persisted by the ESP32 and returns to disabled after a device restart.
+- Calibration writes reach the ESP32, but the card's calibration workflow and feedback need improvement.
+- Channel statistics are correct, but their dashboard presentation needs improvement.
+- The install path and Home Assistant/ESPHome package are still being validated and documented for repeatable use.
 
 ## Current architecture
 
 ```mermaid
 flowchart LR
-    Sensor["AMG8833<br/>8 × 8 thermal sensor"]
-    Bus["Amg8833Bus<br/>platform abstraction"]
-    Driver["Amg8833Driver<br/>acquisition and recovery"]
-    Processor["ThermalProcessor<br/>decode and filtering"]
-    Frame["ThermalFrame<br/>processed 64-pixel frame"]
-    Snapshot["Amg8833SnapshotReader<br/>frame + summary + diagnostics"]
-    Telemetry["Amg8833TelemetryProjector<br/>Milestone 1.8"]
-    ESPHome["ESPHome component<br/>next integration layer"]
-    HA["Home Assistant<br/>entities and dashboard"]
-
-    Sensor --> Bus --> Driver --> Processor --> Frame --> Snapshot --> Telemetry --> ESPHome --> HA
+    Sensor["AMG8833"] --> Driver["Driver and recovery"]
+    Driver --> Process["Calibration and filtering"]
+    Process --> Channels["Six measurement channels"]
+    Channels --> Packet["Frame packet and entities"]
+    Packet --> HA["Home Assistant thermal card"]
 ```
 
-Milestone 1.8 is the boundary between the rich native driver model and the future ESPHome component. It converts a complete AMG8833 snapshot into flat, publication-ready values that ESPHome can expose without depending on driver internals.
+All thermal calculations remain in Celsius. The dashboard may convert values for display. Calibration is sensor-wide and is applied before the six measurement channels are evaluated.
 
-See [Architecture](docs/Architecture.md), [AMG8833 Driver](docs/Driver_AMG8833.md), and [Telemetry](docs/Telemetry.md) for details.
+## Next major goal
 
-## Implemented foundation
+The next phase is to turn the alpha prototype into a repeatable Home Assistant experience:
 
-The current repository includes:
+1. Repair and simplify the thermal-card ROI editor.
+2. Persist and restore ROI geometry reliably.
+3. Improve calibration controls, feedback, and validation.
+4. Improve the presentation of six-channel statistics.
+5. Test a clean installation from ESPHome Device Builder and Home Assistant.
+6. Publish verified wiring, ESPHome package, dashboard installation, upgrade, and troubleshooting instructions.
 
-- A platform-independent C++17 thermal core.
-- An immutable-by-consumer `ThermalFrame` data model.
-- AMG8833 register decoding.
-- Optional spatial and exponential filtering.
-- A dependency-injected AMG8833 bus interface.
-- Sensor initialization and frame acquisition.
-- Driver health and automatic recovery tracking.
-- Hardware interrupt configuration and interrupt-map decoding.
-- Unified capture snapshots.
-- Publication-ready telemetry projection.
-- Native CMake builds.
-- Catch2 unit tests.
-- Compiler warnings enabled for supported toolchains.
+After that foundation is stable, LeafSense will expand into plant-specific environmental monitoring. The planned next sensor is the BME688 for air temperature, humidity, pressure, and VOC/gas measurements. CO₂ will only be described as estimated when derived from gas sensing; a dedicated CO₂ sensor can be added if true CO₂ measurement is required. LeafSense will calculate VPD using air conditions and ROI leaf temperature as the leaf-temperature offset, then display those results alongside the thermal image.
 
-## Planned user experience
-
-```mermaid
-flowchart TD
-    Camera["ESP32 + thermal sensor"]
-    Image["Thermal image in Home Assistant"]
-    Draw["User draws or drags a region"]
-    Region["Rectangle / polygon / saved ROI"]
-    Stats["Region min / max / average"]
-    Rules["Home Assistant automation"]
-    Control["Fans / pumps / shades / alerts"]
-
-    Camera --> Image --> Draw --> Region --> Stats --> Rules --> Control
-```
-
-This dashboard and region editor are planned features and are not yet implemented.
+Fans and other actuators, followed by guarded automation or AI-assisted control, are later phases.
 
 ## Repository layout
 
 ```text
 LeafSense/
-├── leafsense-core/          Platform-independent thermal data and processing
-├── drivers/
-│   └── amg8833/             AMG8833 bus interface, driver, snapshots and telemetry
-├── firmware/                Future device firmware and ESPHome integration
-├── homeassistant/           Future dashboards and Home Assistant resources
-├── simulator/               Future simulation tooling
-├── examples/                Example configurations and usage
-├── tools/                   Development utilities
-├── docs/                    Architecture and developer documentation
-├── CMakeLists.txt           Native project build
-├── CONTRIBUTING.md          Contribution workflow
-├── CHANGELOG.md             Project history
-└── LICENSE                  MIT License
+├── components/             Git-importable ESPHome component
+├── packages/               Reusable ESPHome package
+├── leafsense-core/         Platform-independent processing and ROI logic
+├── drivers/amg8833/        AMG8833 driver, snapshots, health and recovery
+├── firmware/esphome/       ESPHome integration sources
+├── homeassistant/          Thermal card, dashboard YAML and browser tests
+├── examples/esphome/       Example and import configurations
+├── docs/                   Architecture, roadmap and developer guides
+└── leafsense-amg8833.yaml  ESPHome Device Builder import manifest
 ```
 
-Some directories are placeholders for later roadmap stages.
+## Native build and test
 
-## Build and test
-
-Requirements:
-
-- CMake 3.20 or newer
-- A C++17 compiler
-- Git
-- Catch2, supplied through the repository's configured dependency process
-
-Typical native build:
+Requirements: CMake 3.20+, a C++17 compiler, and Git.
 
 ```bash
 cmake -S . -B build -DLEAFSENSE_BUILD_TESTS=ON
@@ -124,42 +92,22 @@ cmake --build build --config Debug
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-On a single-configuration generator such as Ninja, omit `-C Debug` from the `ctest` command.
-
-Detailed Windows and cross-platform instructions are in [Development](docs/Development.md).
-
-## Development principles
-
-LeafSense follows these standards:
-
-1. Keep sensor and processing code independent of ESPHome.
-2. Use dependency injection at hardware boundaries.
-3. Prefer fixed-size storage and avoid heap allocation in core runtime paths.
-4. Keep data objects simple and predictable.
-5. Develop functionality with unit tests.
-6. Treat warnings as useful defects, not background noise.
-7. Keep commits focused and leave the project buildable.
-8. Update documentation alongside code.
-9. Prefer simple, explicit designs over clever abstractions.
-10. Preserve published APIs where practical.
+For Ninja or another single-configuration generator, omit `-C Debug` from `ctest`.
 
 ## Documentation
 
-- [Project charter](docs/PROJECT_CHARTER.md)
+- [Milestone 3.0 Alpha status](docs/Milestone_3_0_Alpha.md)
+- [Home Assistant dashboard](homeassistant/README.md)
 - [Architecture](docs/Architecture.md)
 - [Roadmap](docs/Roadmap.md)
 - [Development guide](docs/Development.md)
 - [Testing guide](docs/Testing.md)
-- [AMG8833 driver design](docs/Driver_AMG8833.md)
-- [Telemetry and Milestone 1.8](docs/Telemetry.md)
-- [Home Assistant vision](docs/Home_Assistant_Vision.md)
+- [AMG8833 driver](docs/Driver_AMG8833.md)
+- [Telemetry](docs/Telemetry.md)
+- [Project charter](docs/PROJECT_CHARTER.md)
 
-## Contributing
+## Contributing and licence
 
-LeafSense is primarily developed for its maintainer's own plant-monitoring system, but contributions, testing, documentation improvements, and hardware feedback are welcome.
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
-
-## License
+Contributions, hardware testing, and documentation improvements are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 LeafSense is released under the [MIT License](LICENSE).

@@ -25,13 +25,13 @@ flowchart LR
     Snapshot["Amg8833Snapshot"]
     Projector["Amg8833TelemetryProjector<br/>Milestone 1.8"]
     Telemetry["Amg8833Telemetry"]
-    ESPHome["Future ESPHome component"]
+    ESPHome["ESPHome component"]
     HA["Home Assistant"]
 
     Driver --> SnapshotReader --> Snapshot --> Projector --> Telemetry --> ESPHome --> HA
 ```
 
-Milestone 1.8 does not communicate with hardware and does not publish entities. It defines the contract that makes those future platform steps straightforward.
+Milestone 1.8 itself does not communicate with hardware or publish entities. The current ESPHome component consumes this contract alongside the newer full-frame, calibration, and measurement-channel paths.
 
 ## 3. Why a projection layer exists
 
