@@ -148,11 +148,22 @@ TEST_CASE("Renderer handles a uniform frame")
     REQUIRE(image.pixels.size() == 64);
 }
 
-TEST_CASE("Rendered image rejects an out of range coordinate")
+TEST_CASE("Rendered image safely handles an out of range coordinate")
 {
     leafsense::rendering::RenderedThermalImage image;
-    image.width = 1;
-    image.height = 1;
-    image.pixels.push_back({0, 0, 0});
-    REQUIRE_THROWS_AS(image.pixel(1, 0), std::out_of_range);
+
+    image.width = 2U;
+    image.height = 2U;
+    image.pixels = {
+        {10U, 20U, 30U},
+        {40U, 50U, 60U},
+        {70U, 80U, 90U},
+        {100U, 110U, 120U}
+    };
+
+    const auto& invalid = image.pixel(2U, 0U);
+
+    REQUIRE(invalid.red == 0U);
+    REQUIRE(invalid.green == 0U);
+    REQUIRE(invalid.blue == 0U);
 }

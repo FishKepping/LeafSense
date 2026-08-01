@@ -1,6 +1,7 @@
 substitutions:
   name: leafsense-amg8833
   friendly_name: LeafSense AMG8833
+  leafsense_i2c_frequency: 100kHz
 
 esphome:
   name: ${name}
@@ -42,6 +43,8 @@ wifi:
     ssid: "LeafSense Setup"
     password: "leafsense123"
 
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
 captive_portal:
 
 esp32_improv:
