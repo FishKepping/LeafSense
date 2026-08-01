@@ -115,7 +115,7 @@ float LeafSenseAmg8833Component::get_setup_priority() const { return setup_prior
 bool LeafSenseAmg8833Component::initializeDriver_()
 {
     driver_ = std::make_unique<leafsense::drivers::Amg8833Driver>(bus_adapter_, driver_config_);
-    if (!driver_->begin()) {
+    if (!driver_->initialize()) {
         snapshot_reader_.reset();
         return false;
     }
@@ -226,23 +226,56 @@ LS_BINARY_SETTER(set_recovery_active_binary_sensor, setRecoveryActiveBinarySenso
 LS_BINARY_SETTER(set_roi_available_binary_sensor, setRoiAvailableBinarySensor)
 #undef LS_BINARY_SETTER
 
-const char* LeafSenseAmg8833Component::driverErrorName_(leafsense::drivers::Amg8833DriverError error)
+const char* LeafSenseAmg8833Component::driverErrorName_(
+    leafsense::drivers::Amg8833DriverError error)
 {
     using E = leafsense::drivers::Amg8833DriverError;
-    switch (error) {
-        case E::None: return "none";
-        case E::NotInitialized: return "not_initialized";
-        case E::InvalidArgument: return "invalid_argument";
-        case E::BusWriteFailed: return "bus_write_failed";
-        case E::BusReadFailed: return "bus_read_failed";
-        case E::DeviceNotResponding: return "device_not_responding";
-        case E::ResetFailed: return "reset_failed";
-        case E::StatusReadFailed: return "status_read_failed";
-        case E::FrameReadFailed: return "frame_read_failed";
-        case E::InterruptMapReadFailed: return "interrupt_map_read_failed";
-        case E::ThermistorReadFailed: return "thermistor_read_failed";
-        case E::RecoveryFailed: return "recovery_failed";
+
+    switch (error)
+    {
+        case E::None:
+            return "none";
+
+        case E::NotInitialized:
+            return "not_initialized";
+
+        case E::InvalidInterruptThresholds:
+            return "invalid_interrupt_thresholds";
+
+        case E::PowerControlWriteFailed:
+            return "power_control_write_failed";
+
+        case E::InitialResetWriteFailed:
+            return "initial_reset_write_failed";
+
+        case E::FrameRateWriteFailed:
+            return "frame_rate_write_failed";
+
+        case E::MovingAverageWriteFailed:
+            return "moving_average_write_failed";
+
+        case E::InterruptThresholdWriteFailed:
+            return "interrupt_threshold_write_failed";
+
+        case E::InterruptControlWriteFailed:
+            return "interrupt_control_write_failed";
+
+        case E::StatusClearWriteFailed:
+            return "status_clear_write_failed";
+
+        case E::StatusReadFailed:
+            return "status_read_failed";
+
+        case E::PixelReadFailed:
+            return "pixel_read_failed";
+
+        case E::InterruptTableReadFailed:
+            return "interrupt_table_read_failed";
+
+        case E::ThermistorReadFailed:
+            return "thermistor_read_failed";
     }
+
     return "unknown";
 }
 
