@@ -65,10 +65,24 @@ bool DeadPixelCorrector::neighbourMedian(
         return false;
     }
 
-    std::sort(
-        neighbours.begin(),
-        neighbours.begin() +
-            static_cast<std::ptrdiff_t>(valid_neighbour_count));
+    for (std::size_t index = 1U;
+     index < valid_neighbour_count;
+     ++index)
+{
+    const float value = neighbours[index];
+    std::size_t position = index;
+
+    while (position > 0U &&
+           neighbours[position - 1U] > value)
+    {
+        neighbours[position] =
+            neighbours[position - 1U];
+
+        --position;
+    }
+
+    neighbours[position] = value;
+}
 
     const std::size_t middle = valid_neighbour_count / 2;
 

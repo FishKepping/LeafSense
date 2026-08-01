@@ -1,8 +1,8 @@
-#include "measurement_channel_manager.h"
+#include "leafsense/measurement/measurement_channel_manager.h"
 
 #include <cmath>
 #include <limits>
-#include <stdexcept>
+#include <cassert>
 
 namespace leafsense::measurement {
 
@@ -23,23 +23,26 @@ float MeasurementChannelManager::calibrationOffset() const
     return calibration_offset_celsius_;
 }
 
-MeasurementChannel& MeasurementChannelManager::channel(std::size_t index)
+MeasurementChannel& MeasurementChannelManager::channel(
+    std::size_t index)
 {
-    if (index >= CHANNEL_COUNT)
-    {
-        throw std::out_of_range("measurement channel index");
-    }
-    return channels_[index];
+    assert(index < CHANNEL_COUNT);
+
+    const std::size_t safe_index =
+        index < CHANNEL_COUNT ? index : 0U;
+
+    return channels_[safe_index];
 }
 
 const MeasurementChannel& MeasurementChannelManager::channel(
     std::size_t index) const
 {
-    if (index >= CHANNEL_COUNT)
-    {
-        throw std::out_of_range("measurement channel index");
-    }
-    return channels_[index];
+    assert(index < CHANNEL_COUNT);
+
+    const std::size_t safe_index =
+        index < CHANNEL_COUNT ? index : 0U;
+
+    return channels_[safe_index];
 }
 
 std::array<MeasurementChannelResult, MeasurementChannelManager::CHANNEL_COUNT>
