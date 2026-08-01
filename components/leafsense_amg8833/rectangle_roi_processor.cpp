@@ -1,7 +1,7 @@
 #include "rectangle_roi_processor.h"
 
-#include "leafsense/frame_statistics.h"
-#include "leafsense/roi/pixel_selection.h"
+#include "frame_statistics.h"
+#include "pixel_selection.h"
 
 namespace esphome {
 namespace leafsense_amg8833 {

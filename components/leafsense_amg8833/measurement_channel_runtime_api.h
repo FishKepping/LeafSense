@@ -4,7 +4,7 @@
 #include <cstdint>
 
 #include "esphome/components/api/custom_api_device.h"
-#include "leafsense/measurement/measurement_channel_controller.h"
+#include "measurement_channel_controller.h"
 
 namespace esphome::leafsense_amg8833 {
 

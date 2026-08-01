@@ -18,14 +18,14 @@
 #include "publisher.h"
 #include "rectangle_roi_processor.h"
 
-#include "leafsense/calibration/thermal_calibrator.h"
-#include "leafsense/drivers/amg8833_driver.h"
-#include "leafsense/drivers/amg8833_snapshot.h"
-#include "leafsense/drivers/amg8833_telemetry.h"
-#include "leafsense/measurement/measurement_channel_controller.h"
-#include "leafsense/measurement/measurement_channel_manager.h"
-#include "leafsense/processing/thermal_processing_pipeline.h"
-#include "leafsense/transport/thermal_frame_publisher.h"
+#include "thermal_calibrator.h"
+#include "amg8833_driver.h"
+#include "amg8833_snapshot.h"
+#include "amg8833_telemetry.h"
+#include "measurement_channel_controller.h"
+#include "measurement_channel_manager.h"
+#include "thermal_processing_pipeline.h"
+#include "thermal_frame_publisher.h"
 
 namespace esphome::leafsense_amg8833 {
 

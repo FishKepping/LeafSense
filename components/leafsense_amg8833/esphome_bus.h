@@ -4,7 +4,7 @@
 #include <cstdint>
 
 #include "esphome/components/i2c/i2c.h"
-#include "leafsense/drivers/amg8833_bus.h"
+#include "amg8833_bus.h"
 
 namespace esphome {
 namespace leafsense_amg8833 {

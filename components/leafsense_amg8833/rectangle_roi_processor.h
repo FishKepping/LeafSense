@@ -3,8 +3,8 @@
 #include <cstddef>
 #include <cstdint>
 
-#include "leafsense/roi/rectangle_roi.h"
-#include "leafsense/thermal_frame.h"
+#include "rectangle_roi.h"
+#include "thermal_frame.h"
 
 namespace esphome {
 namespace leafsense_amg8833 {

@@ -4,7 +4,7 @@
 
 #include "esphome/components/binary_sensor/binary_sensor.h"
 #include "esphome/components/sensor/sensor.h"
-#include "leafsense/drivers/amg8833_telemetry.h"
+#include "amg8833_telemetry.h"
 
 #include "rectangle_roi_processor.h"
 
