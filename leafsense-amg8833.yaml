@@ -1,0 +1,54 @@
+substitutions:
+  name: leafsense-amg8833
+  friendly_name: LeafSense AMG8833
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  min_version: 2026.7.0
+  project:
+    name: fishkepping.leafsense
+    version: "3.0.0-alpha.1"
+  on_boot:
+    priority: -100
+    then:
+      - lambda: |-
+          id(leafsense_calibration_gain).publish_state(id(leafsense_thermal).calibration_gain());
+          id(leafsense_calibration_offset).publish_state(id(leafsense_thermal).calibration_offset());
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+packages:
+  leafsense:
+    url: https://github.com/FishKepping/LeafSense
+    ref: main
+    files:
+      - packages/leafsense_amg8833.yaml
+    refresh: 1h
+
+logger:
+
+api:
+  custom_services: true
+
+ota:
+  - platform: esphome
+
+wifi:
+  ap:
+    ssid: "LeafSense Setup"
+    password: "leafsense123"
+
+captive_portal:
+
+esp32_improv:
+  authorizer: none
+
+improv_serial:
+
+dashboard_import:
+  package_import_url: github://FishKepping/LeafSense/leafsense-amg8833.yaml@main
+  import_full_config: false

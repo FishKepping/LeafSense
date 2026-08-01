@@ -1,0 +1,297 @@
+substitutions:
+  leafsense_i2c_sda: GPIO21
+  leafsense_i2c_scl: GPIO22
+  leafsense_update_interval: 2s
+  leafsense_address: "0x69"
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/FishKepping/LeafSense
+      ref: main
+    components: [leafsense_amg8833]
+    refresh: 1h
+
+i2c:
+  id: leafsense_i2c
+  sda: ${leafsense_i2c_sda}
+  scl: ${leafsense_i2c_scl}
+  frequency: 400kHz
+  scan: true
+
+leafsense_amg8833:
+  id: leafsense_thermal
+  address: ${leafsense_address}
+  update_interval: ${leafsense_update_interval}
+  include_interrupt_map: true
+  recovery_enabled: true
+  recovery_failure_threshold: 3
+  moving_average_enabled: false
+  dead_pixel_correction_enabled: true
+  temporal_smoothing_enabled: true
+  temporal_smoothing_alpha: 0.35
+  spatial_median_enabled: false
+
+text_sensor:
+  - platform: leafsense_amg8833
+    leafsense_amg8833_id: leafsense_thermal
+    thermal_frame:
+      id: leafsense_thermal_frame
+      name: "LeafSense Thermal Frame"
+      entity_category: diagnostic
+
+sensor:
+  - platform: leafsense_amg8833
+    leafsense_amg8833_id: leafsense_thermal
+    minimum_temperature:
+      name: "Thermal Minimum Temperature"
+    maximum_temperature:
+      name: "Thermal Maximum Temperature"
+    average_temperature:
+      name: "Thermal Average Temperature"
+    thermistor_temperature:
+      name: "Thermal Sensor Temperature"
+    frame_count:
+      name: "Thermal Frame Count"
+    valid_pixel_count:
+      name: "Thermal Valid Pixel Count"
+    consecutive_failures:
+      name: "Thermal Consecutive Failures"
+    total_failures:
+      name: "Thermal Total Failures"
+    recovery_attempts:
+      name: "Thermal Recovery Attempts"
+    successful_recoveries:
+      name: "Thermal Successful Recoveries"
+    failed_recoveries:
+      name: "Thermal Failed Recoveries"
+
+  - platform: template
+    id: leafsense_calibration_current
+    name: "LeafSense Calibration Current Reading"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).current_frame_average();
+
+  - platform: template
+    id: leafsense_calibration_revision
+    name: "LeafSense Calibration Revision"
+    accuracy_decimals: 0
+    entity_category: diagnostic
+    update_interval: 5s
+    lambda: return static_cast<float>(id(leafsense_thermal).calibration_revision());
+
+  - platform: template
+    name: "LeafSense Channel 1 Minimum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_minimum(0);
+  - platform: template
+    name: "LeafSense Channel 1 Maximum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_maximum(0);
+  - platform: template
+    name: "LeafSense Channel 1 Average"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_average(0);
+  - platform: template
+    name: "LeafSense Channel 1 Pixel Count"
+    accuracy_decimals: 0
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_pixel_count(0);
+
+  - platform: template
+    name: "LeafSense Channel 2 Minimum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_minimum(1);
+  - platform: template
+    name: "LeafSense Channel 2 Maximum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_maximum(1);
+  - platform: template
+    name: "LeafSense Channel 2 Average"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_average(1);
+  - platform: template
+    name: "LeafSense Channel 2 Pixel Count"
+    accuracy_decimals: 0
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_pixel_count(1);
+
+  - platform: template
+    name: "LeafSense Channel 3 Minimum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_minimum(2);
+  - platform: template
+    name: "LeafSense Channel 3 Maximum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_maximum(2);
+  - platform: template
+    name: "LeafSense Channel 3 Average"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_average(2);
+  - platform: template
+    name: "LeafSense Channel 3 Pixel Count"
+    accuracy_decimals: 0
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_pixel_count(2);
+
+  - platform: template
+    name: "LeafSense Channel 4 Minimum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_minimum(3);
+  - platform: template
+    name: "LeafSense Channel 4 Maximum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_maximum(3);
+  - platform: template
+    name: "LeafSense Channel 4 Average"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_average(3);
+  - platform: template
+    name: "LeafSense Channel 4 Pixel Count"
+    accuracy_decimals: 0
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_pixel_count(3);
+
+  - platform: template
+    name: "LeafSense Channel 5 Minimum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_minimum(4);
+  - platform: template
+    name: "LeafSense Channel 5 Maximum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_maximum(4);
+  - platform: template
+    name: "LeafSense Channel 5 Average"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_average(4);
+  - platform: template
+    name: "LeafSense Channel 5 Pixel Count"
+    accuracy_decimals: 0
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_pixel_count(4);
+
+  - platform: template
+    name: "LeafSense Channel 6 Minimum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_minimum(5);
+  - platform: template
+    name: "LeafSense Channel 6 Maximum"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_maximum(5);
+  - platform: template
+    name: "LeafSense Channel 6 Average"
+    unit_of_measurement: "°C"
+    device_class: temperature
+    accuracy_decimals: 2
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_average(5);
+  - platform: template
+    name: "LeafSense Channel 6 Pixel Count"
+    accuracy_decimals: 0
+    update_interval: ${leafsense_update_interval}
+    lambda: return id(leafsense_thermal).channel_pixel_count(5);
+
+number:
+  - platform: template
+    id: leafsense_calibration_gain
+    name: "LeafSense Calibration Gain"
+    entity_category: config
+    optimistic: true
+    restore_value: false
+    min_value: 0.5
+    max_value: 1.5
+    step: 0.001
+    initial_value: 1.0
+    set_action:
+      - lambda: |-
+          if (!id(leafsense_thermal).set_calibration_gain(x)) {
+            ESP_LOGE("leafsense.calibration", "Rejected gain %.4f", x);
+          }
+
+  - platform: template
+    id: leafsense_calibration_offset
+    name: "LeafSense Calibration Offset"
+    entity_category: config
+    unit_of_measurement: "°C"
+    device_class: temperature
+    optimistic: true
+    restore_value: false
+    min_value: -20.0
+    max_value: 20.0
+    step: 0.1
+    initial_value: 0.0
+    set_action:
+      - lambda: |-
+          if (!id(leafsense_thermal).set_calibration_offset(x)) {
+            ESP_LOGE("leafsense.calibration", "Rejected offset %.3f", x);
+          }
+
+button:
+  - platform: template
+    name: "LeafSense Save Calibration"
+    entity_category: config
+    on_press:
+      - lambda: id(leafsense_thermal).save_calibration();
+
+  - platform: template
+    name: "LeafSense Restore Calibration Defaults"
+    entity_category: config
+    on_press:
+      - lambda: |-
+          id(leafsense_thermal).restore_calibration_defaults();
+          id(leafsense_calibration_gain).publish_state(id(leafsense_thermal).calibration_gain());
+          id(leafsense_calibration_offset).publish_state(id(leafsense_thermal).calibration_offset());

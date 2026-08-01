@@ -6,11 +6,11 @@ views:
     cards:
       - type: custom:leafsense-thermal-card
         title: LeafSense Thermal View
-        entity: sensor.leafsense_thermal_frame
+        entity: text_sensor.leafsense_thermal_frame
         palette: thermal
         scale_mode: auto
         fixed_min: 15
         fixed_max: 40
         temperature_unit: auto
         channel: 1
-        service: esphome.leafsense_set_measurement_channel
+        service_prefix: esphome.leafsense_amg8833

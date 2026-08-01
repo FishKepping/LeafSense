@@ -85,7 +85,7 @@ class LeafSenseThermalCard extends HTMLElement {
     if (!config.entity) throw new Error('LeafSense card requires entity');
     this.config = {
       title: 'LeafSense Thermal View', palette: 'thermal', scale_mode: 'auto', fixed_min: 15, fixed_max: 40,
-      channel: 1, service: 'esphome.leafsense_set_measurement_channel', temperature_unit: 'auto', ...config,
+      channel: 1, service_prefix: 'esphome.leafsense_amg8833', temperature_unit: 'auto', ...config,
     };
     this.settings = this.loadSettings();
     this.rois = Array.from({ length: CHANNEL_COUNT }, (_, i) => ({ channel: i + 1, type: 'disabled', points: [], source: 'disabled' }));
@@ -266,21 +266,44 @@ class LeafSenseThermalCard extends HTMLElement {
     const roi = this.selectedRoi(); this.root.querySelector('.angle').textContent = roi.angle ? `Angle ${roi.angle.toFixed(0)}°` : 'Angle 0°';
   }
 
-  servicePayload(roi) {
-    if (roi.type === 'disabled') return { channel: roi.channel, type: 'disabled', points: '[]' };
-    const rotatedRectangle = roi.source === 'rectangle' && roi.type === 'polygon';
-    const type = rotatedRectangle ? 'polygon' : roi.type;
-    const rawPoints = roi.source === 'rectangle' && roi.type === 'rectangle' ? roi.points : this.roiPolygon(roi);
-    return { channel: roi.channel, type, points: JSON.stringify(rawPoints.map((p) => ({ x: round3(p.x), y: round3(p.y) }))) };
+  async callLeafSenseService(name, payload) {
+    const full = `${this.config.service_prefix}_${name}`;
+    const split = full.indexOf('.');
+    if (split < 1) throw new Error(`Invalid service prefix: ${this.config.service_prefix}`);
+    await this._hass.callService(full.slice(0, split), full.slice(split + 1), payload);
   }
   async applyRoi() {
     const roi = this.selectedRoi(); const poly = this.roiPolygon(roi);
     if (!this._hass) { this.setStatus('Home Assistant connection unavailable', true); return; }
     if (roi.type === 'rectangle' && roi.points.length !== 2) { this.setStatus('Draw a rectangle first', true); return; }
     if (roi.type === 'polygon' && poly.length < 3) { this.setStatus('Polygon requires at least three points', true); return; }
-    const [domain, service] = this.config.service.split('.');
-    try { await this._hass.callService(domain, service, this.servicePayload(roi)); this.setStatus(`Channel ${roi.channel} saved`); this.editSnapshot = clone(this.rois); }
-    catch (error) { this.setStatus(`ROI service failed: ${error.message || error}`, true); }
+    try {
+      if (roi.type === 'disabled') {
+        await this.callLeafSenseService('leafsense_channel_disable', { channel: roi.channel });
+      } else if (roi.type === 'rectangle') {
+        const a = roi.points[0], b = roi.points[1];
+        await this.callLeafSenseService('leafsense_channel_set_rectangle', {
+          channel: roi.channel,
+          x: round3(Math.min(a.x, b.x)), y: round3(Math.min(a.y, b.y)),
+          width: round3(Math.abs(b.x - a.x)), height: round3(Math.abs(b.y - a.y)),
+        });
+      } else {
+        await this.callLeafSenseService('leafsense_channel_polygon_begin', { channel: roi.channel, point_count: poly.length });
+        try {
+          for (let index = 0; index < poly.length; index += 1) {
+            await this.callLeafSenseService('leafsense_channel_polygon_point', {
+              channel: roi.channel, point_index: index,
+              x: round3(poly[index].x), y: round3(poly[index].y),
+            });
+          }
+          await this.callLeafSenseService('leafsense_channel_polygon_commit', { channel: roi.channel });
+        } catch (error) {
+          await this.callLeafSenseService('leafsense_channel_polygon_cancel', { channel: roi.channel });
+          throw error;
+        }
+      }
+      this.setStatus(`Channel ${roi.channel} saved`); this.editSnapshot = clone(this.rois);
+    } catch (error) { this.setStatus(`ROI service failed: ${error.message || error}`, true); }
   }
 }
 
