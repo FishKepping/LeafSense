@@ -1,0 +1,55 @@
+substitutions:
+  name: leafsense-bme688
+  friendly_name: LeafSense BME688
+  bme688_sda_pin: GPIO8
+  bme688_scl_pin: GPIO9
+  bme688_i2c_address: "0x76"
+  bme688_temperature_offset: "0.0"
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  min_version: 2026.7.0
+  project:
+    name: fishkepping.leafsense-bme688
+    version: "0.1.0-alpha.1"
+
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16MB
+  framework:
+    type: esp-idf
+
+psram:
+  mode: octal
+  speed: 80MHz
+
+packages:
+  bme688:
+    url: https://github.com/FishKepping/LeafSense
+    ref: feature/bme688-sensor
+    files:
+      - packages/leafsense_bme688_bsec2.yaml
+    refresh: 1h
+
+logger:
+
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "LeafSense BME688 Setup"
+    password: "leafsense123"
+
+captive_portal:
+
+dashboard_import:
+  package_import_url: github://FishKepping/LeafSense/bme688-esp32-s3.yaml@feature/bme688-sensor
+  import_full_config: false
+

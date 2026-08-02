@@ -92,13 +92,14 @@ Thumbs.db
 *.tmp
 *.bak
 
-# ESPHome secrets
-secrets.yaml
-<<<<<<< HEAD
+# Bosch BSEC/BSEC2 licensed libraries and generated artifacts
+**/bsec/
+**/bsec2/
+**/BSEC*/
+**/libalgobsec*
+**/libalgobsec2*
+*.a
 **/secrets.yaml
-=======
-**/secrets.yaml
->>>>>>> d87b3d7 (Update .gitignore to include additional patterns)
 
 # ESPHome secrets
 secrets.yaml

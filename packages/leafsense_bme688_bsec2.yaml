@@ -1,0 +1,55 @@
+i2c:
+  id: bme688_i2c_bus
+  sda: ${bme688_sda_pin}
+  scl: ${bme688_scl_pin}
+  frequency: 100kHz
+  scan: true
+
+bme68x_bsec2_i2c:
+  id: bme688_bsec2
+  i2c_id: bme688_i2c_bus
+  address: ${bme688_i2c_address}
+  model: BME688
+  algorithm_output: regression
+  operating_age: 28d
+  sample_rate: LP
+  supply_voltage: 3.3V
+  temperature_offset: ${bme688_temperature_offset}
+  state_save_interval: 6h
+
+sensor:
+  - platform: bme68x_bsec2
+    bme68x_bsec2_id: bme688_bsec2
+    temperature:
+      name: "BME688 Temperature"
+    pressure:
+      name: "BME688 Pressure"
+    humidity:
+      name: "BME688 Humidity"
+    gas_resistance:
+      name: "BME688 Gas Resistance"
+    iaq:
+      name: "BME688 IAQ"
+    iaq_static:
+      name: "BME688 Static IAQ"
+    iaq_accuracy:
+      name: "BME688 IAQ Accuracy"
+    co2_equivalent:
+      name: "BME688 CO2 Equivalent"
+    breath_voc_equivalent:
+      name: "BME688 Breath VOC Equivalent"
+
+text_sensor:
+  - platform: bme68x_bsec2
+    bme68x_bsec2_id: bme688_bsec2
+    iaq_accuracy:
+      name: "BME688 IAQ Accuracy Status"
+
+button:
+  - platform: restart
+    name: "BME688 Restart"
+
+binary_sensor:
+  - platform: status
+    name: "BME688 Status"
+
