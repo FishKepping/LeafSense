@@ -1,7 +1,8 @@
 const LEAFSENSE_PACKET_SIZE = 156; const LEAFSENSE_INVALID_TEMPERATURE =
 -32768; const SENSOR_SIZE = 8; const CHANNEL_COUNT = 6; const
 SETTINGS_KEY = 'leafsense-thermal-card-settings-v3';
-const ROI_STORAGE_VERSION = 2;
+const ROI_STORAGE_VERSION = 3;
+const ROI_COLOURS = ['#00e5ff', '#ffea00', '#ff4081', '#76ff03', '#ff9100', '#b388ff'];
 
 function crc32(bytes) { let crc = 0xffffffff; for (let i = 0; i <
 bytes.length; i += 1) { crc ^= bytes[i]; for (let bit = 0; bit < 8; bit
@@ -137,12 +138,21 @@ class LeafSenseThermalCard extends HTMLElement { setConfig(config) { if
     this.selectedChannel = clamp(Number(this.config.channel) || 1, 1, CHANNEL_COUNT);
     this.tool = null;
     this.drag = null;
-    this.history = [];
-    this.future = [];
     this.frame = null;
     this.savedRois = clone(this.rois);
     this.pendingSaves = new Map();
+    this.calibrationDrafts = { gain: null, offset: null, reference: null };
+    this.nameDrafts = Array(CHANNEL_COUNT).fill(null);
     this.renderShell();
+
+    if (this._pageHideHandler) window.removeEventListener('pagehide', this._pageHideHandler);
+    if (this._visibilityHandler) document.removeEventListener('visibilitychange', this._visibilityHandler);
+    this._pageHideHandler = () => this.flushRoisToBrowser();
+    this._visibilityHandler = () => {
+      if (document.visibilityState === 'hidden') this.flushRoisToBrowser();
+    };
+    window.addEventListener('pagehide', this._pageHideHandler);
+    document.addEventListener('visibilitychange', this._visibilityHandler);
 
 }
 
@@ -165,6 +175,7 @@ return;
       this.setStatus(
         `Frame ${this.frame.sequence} • CRC OK • calibration r${this.frame.calibrationRevision}`,
       );
+      this.updateChannelTabs();
       this.draw();
     } catch (error) {
       this.setStatus(error.message, true);
@@ -197,16 +208,43 @@ saveSettings() { localStorage.setItem(SETTINGS_KEY,
 JSON.stringify(this.settings)); this.draw(); }
 
 roiStorageKey() {
-    const identity = `${this.config.entity}|${this.config.service_prefix}`;
+    // The frame entity is the stable device identity. Do not include the
+    // service prefix: users may rename or reconfigure it without changing the
+    // LeafSense device, and doing so must not hide their saved ROIs.
+    const identity = this.config.entity;
     return `leafsense-thermal-card-rois-v${ROI_STORAGE_VERSION}:${identity}`;
+}
+
+legacyRoiStorageKeys() {
+    const keys = [
+      `leafsense-thermal-card-rois-v2:${this.config.entity}|${this.config.service_prefix}`,
+      `leafsense-thermal-card-rois-v1:${this.config.entity}|${this.config.service_prefix}`,
+    ];
+    // Alpha builds included service_prefix in the key. Search for the same
+    // frame entity so data also migrates after a service-prefix rename.
+    for (let index = 0; index < localStorage.length; index += 1) {
+      const key = localStorage.key(index);
+      if (
+        key?.startsWith(`leafsense-thermal-card-rois-v2:${this.config.entity}|`) ||
+        key?.startsWith(`leafsense-thermal-card-rois-v1:${this.config.entity}|`)
+      ) keys.push(key);
+    }
+    return [...new Set(keys)];
 }
 
 loadRois(fallback) {
     try {
-      const stored = JSON.parse(localStorage.getItem(this.roiStorageKey()) || 'null');
+      const currentKey = this.roiStorageKey();
+      let raw = localStorage.getItem(currentKey);
+      let migratedFrom = null;
+      if (!raw) {
+        migratedFrom = this.legacyRoiStorageKeys().find((key) => localStorage.getItem(key));
+        if (migratedFrom) raw = localStorage.getItem(migratedFrom);
+      }
+      const stored = JSON.parse(raw || 'null');
       if (!Array.isArray(stored) || stored.length !== CHANNEL_COUNT) return fallback;
 
-      return stored.map((roi, index) => {
+      const loaded = stored.map((roi, index) => {
         const type = roi?.type === 'pixels' ? 'pixels' : 'disabled';
         const pixels = Array.isArray(roi?.pixels)
           ? [...new Set(roi.pixels.map(Number).filter((pixel) => Number.isInteger(pixel) && pixel >= 0 && pixel < 64))]
@@ -230,13 +268,27 @@ loadRois(fallback) {
           }
           : fallback[index];
       });
+      if (migratedFrom) localStorage.setItem(currentKey, JSON.stringify(loaded));
+      return loaded;
     } catch (_) {
       return fallback;
     }
 }
 
 saveRois(rois = this.rois) {
-    localStorage.setItem(this.roiStorageKey(), JSON.stringify(rois));
+    try {
+      localStorage.setItem(this.roiStorageKey(), JSON.stringify(rois));
+      return true;
+    } catch (error) {
+      this.setStatus?.(`Could not save ROI settings in this browser: ${error.message || error}`, true);
+      return false;
+    }
+}
+
+flushRoisToBrowser() {
+    if (!this.rois) return;
+    this.savedRois = clone(this.rois);
+    this.saveRois(this.savedRois);
 }
 
 displayUnit() { if (this.settings.temperatureUnit === 'celsius') return
@@ -272,14 +324,29 @@ renderShell() { this.innerHTML = '';
           color:var(--text-primary-color);
           border-color:var(--primary-color)
         }
-        .channelbtn.used:not(.active){border-color:var(--primary-color)}
+        .channelbtn.used{border-color:var(--roi-colour,#78909c);border-width:2px}
         .channelbtn{display:flex;flex-direction:column;align-items:center;gap:2px}
         .channelbtn small{font-size:10px;opacity:.78;font-weight:400}
         .primary{background:var(--primary-color);color:var(--text-primary-color)}
         .danger{color:var(--error-color)}
         .layout{position:relative}
+        .thermalrow{
+          display:grid;
+          grid-template-columns:60px minmax(0,680px);
+          width:100%;
+          max-width:750px;
+          margin:0 auto;
+          justify-content:center;
+          gap:10px;
+          align-items:stretch
+        }
+        .thermalrow.legend-hidden{
+          grid-template-columns:minmax(0,680px)
+        }
         .stage{
           position:relative;
+          width:100%;
+          min-width:0;
           aspect-ratio:1;
           max-width:680px;
           margin:auto;
@@ -315,18 +382,19 @@ renderShell() { this.innerHTML = '';
           font-size:12px;
           color:var(--secondary-text-color)
         }
-        .legendrow{max-width:680px;margin:9px auto 0}
-        .legend{height:13px;border-radius:7px}
+        .legendrow{display:flex;gap:5px;min-height:0}
+        .legend{width:28px;min-height:100%;border-radius:9px}
         .legendlabels{
           display:flex;
+          flex-direction:column-reverse;
           justify-content:space-between;
           font-size:12px;
           color:var(--secondary-text-color);
-          margin-top:3px
+          white-space:nowrap
         }
         .statusrow{
           display:grid;
-          grid-template-columns:repeat(3,1fr);
+          grid-template-columns:2fr 1fr 1fr;
           gap:7px;
           max-width:680px;
           margin:9px auto 0;
@@ -371,6 +439,13 @@ renderShell() { this.innerHTML = '';
           color:var(--primary-text-color);
           padding:6px
         }
+        .roiNameField{
+          grid-template-columns:auto minmax(190px,300px);
+          justify-content:center;
+          max-width:440px;
+          margin:10px auto 0
+        }
+        .roiNameField span{text-align:right}
         .readonly{
           min-height:36px;
           display:flex;
@@ -395,6 +470,9 @@ renderShell() { this.innerHTML = '';
           .calibration-actions{grid-template-columns:1fr}
           .statusrow{grid-template-columns:1fr}
           .statusrow span,.statusrow span:nth-child(2),.statusrow span:last-child{text-align:left}
+          .thermalrow{grid-template-columns:54px minmax(0,1fr);gap:6px}
+          .thermalrow.legend-hidden{grid-template-columns:minmax(0,1fr)}
+          .legendlabels{font-size:10px}
         }
       </style>
 
@@ -405,9 +483,15 @@ renderShell() { this.innerHTML = '';
         </div>
 
         <div class="layout">
-          <div class="stage">
-            <canvas class="heat"></canvas>
-            <canvas class="overlay"></canvas>
+          <div class="thermalrow">
+            <div class="legendrow">
+              <div class="legend"></div>
+              <div class="legendlabels"><span class="legendMin"></span><span class="legendMax"></span></div>
+            </div>
+            <div class="stage">
+              <canvas class="heat"></canvas>
+              <canvas class="overlay"></canvas>
+            </div>
           </div>
 
           <aside class="settings">
@@ -505,8 +589,7 @@ renderShell() { this.innerHTML = '';
 
         <div class="editbar">
           <button class="toolbtn" data-tool="pixels">Edit pixels</button>
-          <button class="toolbtn undo">Undo</button>
-          <button class="danger delete">Disable ROI</button>
+          <button class="danger clearRoi">Clear ROI</button>
         </div>
 
         <label class="field roiNameField"><span>ROI name</span><input class="roiName" maxlength="32" type="text"></label>
@@ -515,15 +598,10 @@ renderShell() { this.innerHTML = '';
           Choose a channel, select Edit pixels, then click or drag across the thermal image. Names and selections are kept in this browser; masks are sent to the ESP32 automatically.
         </div>
 
-        <div class="legendrow">
-          <div class="legend"></div>
-          <div class="legendlabels"><span class="legendMin"></span><span class="legendMax"></span></div>
-        </div>
-
         <div class="statusrow">
-          <span class="cursor">Cursor —</span>
+          <span class="frameStats">Full frame —</span>
           <span class="status"></span>
-          <span class="angle">Pixels —</span>
+          <span><span class="cursor">Cursor —</span> · <span class="angle">Pixels —</span></span>
         </div>
       </div>
     `;
@@ -574,22 +652,36 @@ renderShell() { this.innerHTML = '';
       });
     });
 
-    this.root.querySelector('.roiName').addEventListener('input', (event) => {
+    const roiNameInput = this.root.querySelector('.roiName');
+    roiNameInput.addEventListener('focus', () => {
+      this.nameDrafts[this.selectedChannel - 1] = roiNameInput.value;
+    });
+    roiNameInput.addEventListener('input', (event) => {
       const roi = this.selectedRoi();
-      roi.name = event.target.value.slice(0, 32) || `ROI ${roi.channel}`;
+      const draft = event.target.value.slice(0, 32);
+      this.nameDrafts[roi.channel - 1] = draft;
+      roi.name = draft;
       this.savedRois[roi.channel - 1].name = roi.name;
       this.saveRois(this.savedRois);
       this.updateChannelTabs();
       this.drawOverlay();
     });
+    roiNameInput.addEventListener('blur', () => this.commitRoiName());
 
-    this.root.querySelector('.undo').addEventListener('click', () => this.undo());
-    this.root.querySelector('.delete').addEventListener('click', () => this.deleteSelected());
+    this.root.querySelector('.clearRoi').addEventListener('click', () => this.clearSelectedRoi());
 
     [['.calGain', 'gain'], ['.calOffset', 'offset'], ['.calReference', 'reference']]
       .forEach(([selector, kind]) => {
         const input = this.root.querySelector(selector);
         input.inputMode = 'decimal';
+        input.addEventListener('focus', () => {
+          if (this.calibrationDrafts[kind] === null) {
+            this.calibrationDrafts[kind] = input.value;
+          }
+        });
+        input.addEventListener('input', () => {
+          this.calibrationDrafts[kind] = input.value;
+        });
         input.addEventListener('keydown', (event) => {
           if (event.key === 'Enter') {
             event.preventDefault();
@@ -629,6 +721,9 @@ disconnectedCallback() {
     if (this._outsideSettingsHandler) {
       document.removeEventListener('pointerdown', this._outsideSettingsHandler);
     }
+    this.flushRoisToBrowser();
+    if (this._pageHideHandler) window.removeEventListener('pagehide', this._pageHideHandler);
+    if (this._visibilityHandler) document.removeEventListener('visibilitychange', this._visibilityHandler);
     this.pendingSaves?.forEach((timeout) => clearTimeout(timeout));
 }
 
@@ -641,6 +736,7 @@ this.root.querySelector('.channelbar'); container.innerHTML = '';
       button.dataset.channel = String(channel);
       button.textContent = `ROI ${channel}`;
       button.addEventListener('click', () => {
+        this.commitRoiName();
         this.selectedChannel = channel;
         this.tool = null;
         this.updateToolbar();
@@ -666,6 +762,9 @@ updateChannelTabs() { if (!this.root) return;
         'used',
         roi?.type !== 'disabled' || stats.available,
       );
+      const colour = ROI_COLOURS[(channel - 1) % ROI_COLOURS.length];
+      if (roi?.pixels?.length) button.style.setProperty('--roi-colour', colour);
+      else button.style.removeProperty('--roi-colour');
 
       const type = roi?.type === 'pixels' ? `${roi.pixels.length} px` : stats.available ? 'Live' : 'Off';
 
@@ -673,11 +772,34 @@ updateChannelTabs() { if (!this.root) return;
       const average = stats.available
         ? `${toDisplayTemperature(stats.average, unit).toFixed(1)} ${unit}`
         : 'No data';
-      button.innerHTML = `<span>${roi?.name || `ROI ${channel}`} · ${type}</span><small>${average}</small>`;
+      const label = document.createElement('span');
+      label.textContent = `${roi?.name || `ROI ${channel}`} · ${type}`;
+      const reading = document.createElement('small');
+      reading.textContent = average;
+      button.replaceChildren(label, reading);
     });
     const nameInput = this.root.querySelector('.roiName');
-    if (nameInput) nameInput.value = this.selectedRoi()?.name || `ROI ${this.selectedChannel}`;
+    if (nameInput) {
+      const draft = this.nameDrafts[this.selectedChannel - 1];
+      nameInput.value = draft !== null
+        ? draft
+        : this.selectedRoi()?.name || `ROI ${this.selectedChannel}`;
+    }
 
+}
+
+commitRoiName() {
+    if (!this.rois || !this.savedRois || !this.nameDrafts) return;
+    const index = this.selectedChannel - 1;
+    const draft = this.nameDrafts[index];
+    if (draft === null) return;
+    const name = String(draft).trim().slice(0, 32) || `ROI ${this.selectedChannel}`;
+    this.rois[index].name = name;
+    this.savedRois[index].name = name;
+    this.nameDrafts[index] = null;
+    this.saveRois(this.savedRois);
+    this.updateChannelTabs();
+    this.drawOverlay();
 }
 
 toggleSettings(open) {
@@ -697,12 +819,16 @@ async applyTypedCalibration() {
       ['reference', this.root.querySelector('.calReference')],
     ];
     for (const [kind, input] of controls) {
-      if (!input || input.disabled || !input.value.trim()) continue;
-      const value = Number(input.value);
+      const draft = this.calibrationDrafts[kind];
+      const inputValue = draft !== null ? draft : input?.value;
+      if (!input || input.disabled || !String(inputValue).trim()) continue;
+      const value = Number(inputValue);
       const entityValue = this.stateNumber(this.calibrationEntity(kind));
       if (Number.isFinite(value) && (!Number.isFinite(entityValue) || value !== entityValue)) {
         await this.setCalibrationNumber(kind, value);
       }
+      // Retain the requested value until Home Assistant confirms it. Clearing
+      // it here lets a delayed state update restore the previous value.
     }
 }
 
@@ -728,23 +854,12 @@ updateToolbar() {
 this.root.querySelectorAll('[data-tool]').forEach((button) => {
 button.classList.toggle('active', button.dataset.tool === this.tool);
 });
-    this.root.querySelector('.undo').disabled = this.history.length === 0;
 }
 
-pushHistory() { this.history.push(clone(this.rois)); if
-(this.history.length > 30) this.history.shift(); this.future = []; this.updateToolbar(); }
-
-undo() { if (!this.history.length) return;
-this.future.push(clone(this.rois)); this.rois = this.history.pop();
-this.updateChannelTabs(); this.drawOverlay(); this.scheduleApplyRoi(this.selectedChannel); this.updateToolbar(); }
-
-redo() { if (!this.future.length) return;
-this.history.push(clone(this.rois)); this.rois = this.future.pop();
-this.updateChannelTabs(); this.drawOverlay(); this.scheduleApplyRoi(this.selectedChannel); }
-
-deleteSelected() { this.pushHistory(); const previous = this.selectedRoi(); this.rois[this.selectedChannel -
+clearSelectedRoi() { const previous = this.selectedRoi(); this.rois[this.selectedChannel -
 1] = { channel: this.selectedChannel, type: 'disabled', pixels: [],
-name: previous.name || `ROI ${this.selectedChannel}`, }; this.updateChannelTabs(); this.drawOverlay();
+name: previous.name || `ROI ${this.selectedChannel}`, };
+this.tool = null; this.updateToolbar(); this.updateChannelTabs(); this.drawOverlay();
 this.applyRoi(this.selectedChannel); }
 
 setStatus(text, error = false) { if (!this.root) return; const element =
@@ -773,9 +888,12 @@ updateLegend(min, max) { if (!this.root) return;
       .join(',');
 
     const row = this.root.querySelector('.legendrow');
-    row.style.display = this.settings.showLegend ? '' : 'none';
+    const thermalRow = this.root.querySelector('.thermalrow');
+    const legendVisible = Boolean(this.settings.showLegend);
+    row.style.display = legendVisible ? '' : 'none';
+    thermalRow.classList.toggle('legend-hidden', !legendVisible);
     this.root.querySelector('.legend').style.background =
-      `linear-gradient(90deg,${colours})`;
+      `linear-gradient(0deg,${colours})`;
 
     if (Number.isFinite(min) && Number.isFinite(max)) {
       const unit = this.displayUnit();
@@ -797,6 +915,7 @@ draw() { if (!this.heat) return;
     if (!this.frame) {
       context.fillStyle = '#111';
       context.fillRect(0, 0, w, h);
+      this.root.querySelector('.frameStats').textContent = 'Full frame —';
       this.drawOverlay();
       return;
     }
@@ -824,6 +943,19 @@ draw() { if (!this.heat) return;
     if (!(maximum > minimum)) {
       minimum -= 0.5;
       maximum += 0.5;
+    }
+
+    const validTemperatures = this.frame.temperatures.filter(Number.isFinite);
+    if (validTemperatures.length) {
+      const frameMinimum = Math.min(...validTemperatures);
+      const frameMaximum = Math.max(...validTemperatures);
+      const frameAverage = validTemperatures.reduce((sum, value) => sum + value, 0) / validTemperatures.length;
+      this.root.querySelector('.frameStats').textContent =
+        `Full frame: Min ${toDisplayTemperature(frameMinimum, unit).toFixed(1)} ${unit} · ` +
+        `Avg ${toDisplayTemperature(frameAverage, unit).toFixed(1)} ${unit} · ` +
+        `Max ${toDisplayTemperature(frameMaximum, unit).toFixed(1)} ${unit}`;
+    } else {
+      this.root.querySelector('.frameStats').textContent = 'Full frame —';
     }
 
     const image = context.createImageData(w, h);
@@ -954,7 +1086,6 @@ pointInPolygon(point, points) { let inside = false;
 pointerDown(event) { const point = this.pointFromEvent(event); this.updateCursor(point);
     if (this.tool !== 'pixels') return;
     this.overlay.setPointerCapture(event.pointerId);
-    this.pushHistory();
     const roi = this.selectedRoi();
     if (!Array.isArray(roi.pixels)) roi.pixels = [];
     const pixel = clamp(Math.floor(point.y), 0, 7) * 8 + clamp(Math.floor(point.x), 0, 7);
@@ -993,6 +1124,10 @@ paintPixel(pixel) {
     roi.pixels = [...selected].sort((a, b) => a - b);
     roi.type = roi.pixels.length ? 'pixels' : 'disabled';
     roi.name ||= `ROI ${roi.channel}`;
+    // Persist synchronously. The ESP update remains debounced, but a browser
+    // refresh must never be able to discard the most recent painted pixel.
+    this.savedRois[roi.channel - 1] = clone(roi);
+    this.saveRois(this.savedRois);
     this.drawOverlay();
 }
 
@@ -1084,8 +1219,7 @@ drawOverlay() { if (!this.overlay) return;
     for (const roi of this.rois) {
       if (roi.type !== 'pixels' || !roi.pixels?.length) continue;
       const selected = roi.channel === this.selectedChannel;
-      const colours = ['#00e5ff', '#ffea00', '#ff4081', '#76ff03', '#ff9100', '#b388ff'];
-      const colour = colours[(roi.channel - 1) % colours.length];
+      const colour = ROI_COLOURS[(roi.channel - 1) % ROI_COLOURS.length];
       const cellWidth = w / SENSOR_SIZE;
       const cellHeight = h / SENSOR_SIZE;
       context.fillStyle = selected ? `${colour}72` : `${colour}4a`;
@@ -1220,15 +1354,38 @@ average = this.stateNumber(this.channelEntity(channel, 'average'));
 const pixelCount = this.stateNumber(this.channelEntity(channel,
 'pixelCount'));
 
+    const entitiesAvailable =
+      Number.isFinite(minimum) &&
+      Number.isFinite(maximum) &&
+      Number.isFinite(average);
+
+    if (!entitiesAvailable) {
+      const roi = this.rois?.[channel - 1];
+      const selectedTemperatures = roi?.type === 'pixels' && this.frame
+        ? (roi.pixels || [])
+          .map((pixel) => this.frame.temperatures?.[pixel])
+          .filter(Number.isFinite)
+        : [];
+      if (selectedTemperatures.length) {
+        return {
+          minimum: Math.min(...selectedTemperatures),
+          maximum: Math.max(...selectedTemperatures),
+          average: selectedTemperatures.reduce((sum, value) => sum + value, 0) /
+            selectedTemperatures.length,
+          pixelCount: selectedTemperatures.length,
+          available: true,
+          source: 'frame',
+        };
+      }
+    }
+
     return {
       minimum,
       maximum,
       average,
       pixelCount,
-      available:
-        Number.isFinite(minimum) &&
-        Number.isFinite(maximum) &&
-        Number.isFinite(average),
+      available: entitiesAvailable,
+      source: entitiesAvailable ? 'entity' : 'none',
     };
 
 }
@@ -1358,17 +1515,27 @@ syncCalibrationControls() { if (!this.root || !this._hass) return;
     const offsetInput = this.root.querySelector('.calOffset');
     const referenceInput = this.root.querySelector('.calReference');
 
+    [['gain', gain], ['offset', offset], ['reference', reference]]
+      .forEach(([kind, entityValue]) => {
+        const draft = Number(this.calibrationDrafts[kind]);
+        if (this.calibrationDrafts[kind] !== null &&
+            Number.isFinite(draft) && Number.isFinite(entityValue) &&
+            Math.abs(draft - entityValue) < 0.0001) {
+          this.calibrationDrafts[kind] = null;
+        }
+      });
+
     gainInput.disabled = !gainEntity;
     offsetInput.disabled = !offsetEntity;
     referenceInput.disabled = !referenceEntity;
 
-    if (Number.isFinite(gain) && document.activeElement !== gainInput) {
+    if (Number.isFinite(gain) && document.activeElement !== gainInput && this.calibrationDrafts.gain === null) {
       gainInput.value = String(gain);
     }
-    if (Number.isFinite(offset) && document.activeElement !== offsetInput) {
+    if (Number.isFinite(offset) && document.activeElement !== offsetInput && this.calibrationDrafts.offset === null) {
       offsetInput.value = String(offset);
     }
-    if (Number.isFinite(reference) && document.activeElement !== referenceInput) {
+    if (Number.isFinite(reference) && document.activeElement !== referenceInput && this.calibrationDrafts.reference === null) {
       referenceInput.value = String(reference);
     }
 
@@ -1496,8 +1663,14 @@ resolved.domain, resolved.service, payload, ); }
 
 async applyRoi(channel = this.selectedChannel) { const roi = this.rois[channel - 1];
 
+    // Browser persistence is independent of the ESP/HA connection. This keeps
+    // the user's mask and name across a refresh even when an ESP service call
+    // is temporarily unavailable.
+    this.savedRois[roi.channel - 1] = clone(roi);
+    this.saveRois(this.savedRois);
+
     if (!this._hass) {
-      this.setStatus('Home Assistant connection unavailable', true);
+      this.setStatus('ROI kept in browser; Home Assistant connection unavailable', true);
       return;
     }
 
@@ -1523,19 +1696,11 @@ async applyRoi(channel = this.selectedChannel) { const roi = this.rois[channel -
         );
       }
 
-      this.savedRois[roi.channel - 1] = clone(roi);
-      this.saveRois(this.savedRois);
       this.setStatus(`ROI ${roi.channel} saved to ESP and browser`);
       this.updateChannelTabs();
     } catch (error) {
-      if (this.savedRois?.[roi.channel - 1]) {
-        this.rois[roi.channel - 1] = clone(this.savedRois[roi.channel - 1]);
-        this.updateChannelTabs();
-        this.drawOverlay();
-      }
-
       this.setStatus(
-        `ROI action failed: ${error.message || error}`,
+        `ROI kept in browser; ESP update failed: ${error.message || error}`,
         true,
       );
     }
@@ -1547,4 +1712,4 @@ window.LeafSenseThermal = { LeafSenseThermalCard, parseThermalFramePacket, crc32
 rectangleCorners, rotatePoint, toDisplayTemperature,
 toDisplayTemperatureDifference, fromDisplayTemperature }; window.customCards = window.customCards || [];
 window.customCards.push({ type: 'leafsense-thermal-card', name:
-'LeafSense Thermal Card', description: 'Live AMG8833 thermal image with six editable and rotatable measurement channels' });
+'LeafSense Thermal Card', description: 'Live AMG8833 thermal image with six editable pixel-mask ROIs' });
