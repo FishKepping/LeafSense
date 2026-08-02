@@ -1,6 +1,6 @@
 # LeafSense Home Assistant dashboard — Milestone 3.0 Alpha
 
-The custom `leafsense-thermal-card` is a working hardware alpha. It decodes the live AMG8833 frame, draws a thermal image, displays six fixed measurement channels, and sends direct 8×8 pixel-mask channel definitions to the ESP32.
+The custom `leafsense-thermal-card` is a working, hardware-tested alpha. It decodes the live AMG8833 frame, draws a thermal image, displays six fixed measurement channels, and sends direct 8×8 pixel-mask channel definitions to the ESP32. Minor interface improvements are planned, but the current dashboard is the tested Milestone 3.0 Alpha checkpoint.
 
 ## Confirmed working
 
@@ -9,16 +9,19 @@ The custom `leafsense-thermal-card` is a working hardware alpha. It decodes the 
 - ESP32-generated minimum, maximum, average, and pixel-count statistics.
 - Click-toggle and drag paint/erase pixel-mask editing.
 - Browser-persisted custom ROI names shown on tabs and the thermal image.
+- Browser-persisted pixel masks for all six ROIs across refreshes in the same browser.
+- Full-frame minimum, average, and maximum temperature display.
 - Sensor-wide gain and offset written through Home Assistant entities.
 - Explicit calibration save and restore-default buttons.
+- Automatic calibration gain/offset persistence across ESP32 restarts.
 - Celsius/Fahrenheit display conversion, palettes, scaling, interpolation, grid, legend, and labels.
 
 ## Known alpha limitations
 
-- ROI editing is still alpha and needs hardware testing across desktop and mobile browsers.
+- ROI editing works on the tested hardware/browser path; minor desktop, mobile, and visual polish remains.
 - ROI geometry is stored per LeafSense device in the current browser. It survives a browser refresh, but it does not automatically follow the user to another browser or Home Assistant companion device.
 - The ESP32 does not yet persist channel geometry; restarting it disables the channels.
-- Writing calibration works, but automatic entity discovery still depends on Home Assistant's generated entity IDs.
+- Automatic entity discovery still depends on Home Assistant's generated entity IDs.
 - The installation below is provisional until it has been repeated from a clean Home Assistant and ESPHome setup.
 
 ## Provisional installation
@@ -58,7 +61,7 @@ The card uses separate ESPHome actions:
 
 The pixel-mask action accepts `channel` plus `row_0` through `row_7`. Each row is an integer from `0` to `255`; bit 0 is the leftmost pixel and bit 7 is the rightmost pixel.
 
-After a successful ESP32 action, the card stores all six ROI definitions in browser local storage using the thermal-frame entity and ESPHome action prefix as the device identity. A failed action restores only the affected channel to its last successfully saved geometry.
+The card stores pixel changes immediately in browser local storage and flushes all six masks and names during page/card teardown. It restores that state when Home Assistant recreates the card after a refresh. ESP32 actions remain debounced to avoid flooding the device. Browser storage is device-scoped; it is separate from ESP32 persistence.
 
 ## Calibration behaviour
 
@@ -68,7 +71,7 @@ Calibration is applied to the entire AMG8833 before dead-pixel correction, smoot
 calibrated temperature = (raw temperature × gain) + offset
 ```
 
-Changing gain or offset updates the running ESP32 state. Press **Save Calibration** to persist it across a restart. **Restore Calibration Defaults** restores gain `1.0` and offset `0.0`.
+Changing gain or offset updates the running ESP32 state and saves accepted changes to flash automatically. Press **Save Calibration** for an explicit save/verification action. **Restore Calibration Defaults** restores gain `1.0` and offset `0.0` and saves those defaults.
 
 Calibration persistence does not imply ROI persistence; they are separate systems.
 

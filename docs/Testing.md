@@ -304,13 +304,13 @@ Run continuously and record:
 
 The repository includes `homeassistant/tests/leafsense-thermal-card.test.html` for packet CRC, palette output, registration, temperature conversion, device-scoped storage, and pixel-mask/name validation. ESPHome configurations must also be validated and compiled against the supported ESPHome version.
 
-The current browser test is not sufficient to declare the card stable. Add automated or repeatable tests for:
+The working dashboard has been validated on the current hardware/browser path, including live rendering, six channels, pixel-mask editing, browser-refresh restoration, and calibration restoration after ESP32 restart. The browser test is still not sufficient to declare a stable release. Add automated or repeatable tests for:
 
-- Pointer and touch click-toggle plus drag paint/erase editing of pixel masks.
-- All six channel action sequences and error rollback.
-- ROI save/restore across browser refresh and Home Assistant reconnect.
+- Wider pointer and touch coverage for click-toggle plus drag paint/erase editing.
+- All six channel action sequences, failure handling, and recovery.
+- ROI save/restore across Home Assistant reconnect and different browsers/devices.
 - ESP32 channel restoration after restart and power loss.
-- Calibration entity discovery, writes, save/default actions, and state synchronisation.
+- Calibration entity discovery, writes, save/default actions, flash restoration, and state synchronisation.
 - Channel-statistics availability and presentation.
 - Clean Device Builder import and package installation.
 - Desktop, tablet, and mobile layouts.

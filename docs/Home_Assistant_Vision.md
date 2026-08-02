@@ -16,7 +16,7 @@ The intended experience is an approachable Home Assistant dashboard where a user
 - Create safe automations.
 - Understand sensor health and stale data.
 
-Milestone 3.0 Alpha now implements the central prototype: live thermal rendering, six fixed pixel-mask measurement channels, ESP32-computed statistics, and calibration writes. The editing, persistence, installation, and presentation work described here remains the path from the alpha prototype to a stable user experience.
+Milestone 3.0 Alpha now implements the central prototype and a working hardware-tested dashboard: live thermal rendering, six fixed pixel-mask measurement channels, click/drag editing, browser-restored names and masks, ESP32-computed statistics, and persistent calibration. Minor UI polish, ESP32-side ROI persistence, and the tested installation package remain on the path to a stable release.
 
 ## 2. Dashboard concept
 
@@ -24,7 +24,7 @@ Milestone 3.0 Alpha now implements the central prototype: live thermal rendering
 flowchart TB
     Header["LeafSense device and connection status"]
     Image["Live thermal image"]
-    Tools["Edit pixels / undo / disable"]
+    Tools["Edit pixels / clear ROI"]
     Regions["Named regions overlaid on image"]
     Cards["Region temperature cards"]
     Trends["Temperature and environment history"]
@@ -174,7 +174,7 @@ Current design:
 4. The ESP32 computes basic region statistics.
 5. Home Assistant displays those statistics and history.
 
-The transport and ESP32 calculation path has been validated on hardware. Browser and ESP32 persistence still need implementation and restart testing.
+The transport, ESP32 calculation path, dashboard editing, and same-browser refresh restoration have been validated on hardware. ESP32-side ROI persistence and cross-browser synchronisation still need implementation and restart testing.
 
 ## 8. Thermal image transport
 
@@ -267,7 +267,7 @@ A language model may not be the best technical fit. Time-series forecasting, ano
 1. ✅ Scalar ESPHome entities.
 2. ✅ Full-frame transport and thermal rendering.
 3. 🧪 Alpha pixel-mask channels and ESP32 statistics.
-4. 🚧 Repair UI, persist/synchronise regions, and publish tested installation instructions.
+4. 🚧 Polish UI, add device-side region persistence/synchronisation, and publish tested installation instructions.
 5. 🗓️ Add BME688 environmental context and leaf VPD using ROI temperatures.
 6. 💡 Add safeguarded actuator automations.
 7. 💡 Research prediction or AI assistance.

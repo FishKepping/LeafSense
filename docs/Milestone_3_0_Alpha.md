@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Milestone 3.0 Alpha records the first demonstrated end-to-end LeafSense thermal-camera system. It is a checkpoint for working data flow and channel calculations, not a stable user-interface release.
+Milestone 3.0 Alpha records the first demonstrated end-to-end LeafSense thermal-camera system and its working Home Assistant dashboard. It is a hardware-tested alpha checkpoint, not yet a polished installation release.
 
 ## Demonstrated on hardware
 
@@ -12,16 +12,20 @@ Milestone 3.0 Alpha records the first demonstrated end-to-end LeafSense thermal-
 - Direct 8×8 pixel masks written from Home Assistant to the ESP32.
 - Correct per-channel minimum, maximum, average, and pixel-count results.
 - Sensor-wide calibration values written to the ESP32.
+- Calibration gain and offset restored from ESP32 flash after restart.
+- Click-toggle and drag paint/erase editing for all six pixel-mask ROIs.
+- ROI masks and custom names restored after refreshing the same browser.
+- Full-frame and per-channel temperature statistics displayed in the dashboard.
 
 ## Alpha defects and incomplete work
 
 | Area | Current state | Required outcome |
 |---|---|---|
-| ROI editor | Buggy interactions and layout | Reliable desktop and touch editing |
-| Browser persistence | ROI geometry is lost on refresh | Restore the exact six-channel state |
+| ROI editor | Working hardware alpha | Minor desktop, touch, and layout polish |
+| Browser persistence | Six masks and names restore in the same browser | Continue regression testing and improve cross-device synchronisation |
 | Device persistence | Channels reset after ESP32 restart | Versioned, validated persistent storage |
-| Calibration UI | Write path works; UI needs refinement | Clear values, validation, save/default feedback |
-| Statistics UI | Values work | Clear, compact six-channel presentation |
+| Calibration | Gain and offset persist across ESP32 restarts | Minor control and feedback polish |
+| Statistics UI | Full-frame and six-channel values work | Minor presentation and mobile polish |
 | Installation | Package/import files exist | Repeatable, tested Device Builder and HA guide |
 
 ## Processing contract
@@ -39,7 +43,7 @@ Each channel is always addressable as channel 1–6 and may be disabled or conta
 
 ## Exit criteria
 
-Milestone 3.0 can move beyond alpha when the dashboard UI is reliable, ROI configuration survives browser and device restarts, calibration and statistics are understandable, and a clean installation has passed the published Home Assistant and ESPHome Device Builder instructions.
+Milestone 3.0 can move beyond alpha when the remaining dashboard polish is complete, ROI configuration survives device restarts, and a clean installation has passed the published Home Assistant and ESPHome Device Builder instructions.
 
 ## Following milestone
 

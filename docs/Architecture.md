@@ -315,7 +315,7 @@ flowchart LR
     Stats --> Entity
 ```
 
-The fixed limit of six channels preserves predictable memory use and leaves room for future environmental sensors. Calibration occurs once for the whole sensor before channel processing. The remaining architecture work is a versioned persistence format and safe synchronisation after browser, Home Assistant, or ESP32 restarts.
+The fixed limit of six channels preserves predictable memory use and leaves room for future environmental sensors. Calibration occurs once for the whole sensor before channel processing and is restored from ESP32 flash. Browser storage restores the six masks and custom names after a dashboard refresh. The remaining architecture work is ESP32-side ROI persistence and safe synchronisation between device and browser state.
 
 ## 10. Current Home Assistant data flow
 
@@ -338,7 +338,7 @@ sequenceDiagram
     ESP->>HA: Region min / max / average
 ```
 
-This sequence is implemented in the alpha. The ROI save/restore path is incomplete: the browser does not currently reconstruct geometry after refresh and the ESP32 does not persist channel geometry across restart.
+This sequence is implemented in the alpha. The browser reconstructs ROI masks and names after refresh, while the ESP32 does not yet persist channel geometry across restart.
 
 ## 11. Future prediction layer
 

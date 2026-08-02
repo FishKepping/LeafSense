@@ -22,25 +22,23 @@
 | Six stable channels | ✅ | All channel entities exist; disabled channels remain unavailable. |
 | Direct pixel-mask channel processing | 🧪 | Arbitrary 8×8 cell selections are sent to the ESP32 and retain the existing statistics entities. |
 | Channel min/max/average/pixel count | ✅ | Calculated on the ESP32 and published to Home Assistant. |
-| Sensor-wide calibration writes | ✅ | Gain and offset changes reach the ESP32. |
-| ROI editor | 🧪 | Usable as an alpha, but interactions remain buggy. |
-| ROI restoration | 🧪 | Geometry is lost on browser refresh and ESP32 restart. |
-| Calibration UI | 🧪 | Functional write path; workflow and feedback need improvement. |
-| Statistics UI | 🧪 | Data works; presentation needs improvement. |
+| Sensor-wide calibration | ✅ | Gain and offset changes reach the ESP32 and restore from flash after restart. |
+| ROI editor | ✅ | Hardware-tested click-toggle and drag paint/erase editing works for six pixel-mask channels. |
+| Browser ROI restoration | ✅ | All six masks and custom names restore after refresh in the same browser. |
+| ESP32 ROI restoration | 🧪 | Channels still reset after an ESP32 restart. |
+| Statistics UI | ✅ | Full-frame and six-channel statistics are displayed; minor polish remains. |
 | Device Builder/package installation | 🧪 | Files exist but the clean user installation path is not yet release-tested. |
 
 ## Immediate next phase: Home Assistant release candidate
 
 This is the project's next major goal.
 
-1. Hardware-test click-toggle, drag paint/erase, undo, deletion, browser persistence, and all six pixel-mask channels.
-2. Define one versioned ROI representation and restore all six channel geometries after browser refresh and reconnection.
-3. Add ESP32-side channel persistence so a device restart does not silently disable configured ROIs.
-4. Improve calibration controls, value synchronisation, validation, save/default feedback, and error reporting.
-5. Redesign channel-statistics presentation for clear comparison and mobile use.
-6. Test a clean install through ESPHome Device Builder and Home Assistant.
-7. Publish a working package plus verified wiring, secrets, installation, dashboard, upgrade, rollback, and troubleshooting instructions.
-8. Complete browser, native, ESPHome compile, hardware restart, and long-duration validation.
+1. Complete minor dashboard usability, touch, layout, and visual polish.
+2. Add ESP32-side channel persistence so a device restart does not silently disable configured ROIs.
+3. Define safe synchronisation between ESP32 state and browser-local masks/names.
+4. Test a clean install through ESPHome Device Builder and Home Assistant.
+5. Publish a working package plus verified wiring, secrets, installation, dashboard, upgrade, rollback, and troubleshooting instructions.
+6. Complete browser, native, ESPHome compile, hardware restart, and long-duration validation.
 
 The release criterion is a new user being able to install a thermal camera, draw ROIs, restart Home Assistant/browser/ESP32, and recover a functioning configuration by following the published guide.
 
