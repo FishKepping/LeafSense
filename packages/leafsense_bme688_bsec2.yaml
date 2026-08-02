@@ -10,7 +10,7 @@ bme68x_bsec2_i2c:
   i2c_id: bme688_i2c_bus
   address: ${bme688_i2c_address}
   model: BME688
-  algorithm_output: regression
+  algorithm_output: classification
   operating_age: 28d
   sample_rate: LP
   supply_voltage: 3.3V
