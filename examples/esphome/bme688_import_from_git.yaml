@@ -1,0 +1,24 @@
+substitutions:
+  name: leafsense-bme688
+  friendly_name: LeafSense BME688
+  bme688_sda_pin: GPIO8
+  bme688_scl_pin: GPIO9
+  bme688_i2c_address: "0x76"
+  bme688_temperature_offset: "0.0"
+
+packages:
+  bme688:
+    url: https://github.com/FishKepping/LeafSense
+    ref: feature/bme688-sensor
+    files:
+      - bme688-esp32-s3.yaml
+    refresh: 0s
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+api:
+  encryption:
+    key: !secret bme688_api_key
+
