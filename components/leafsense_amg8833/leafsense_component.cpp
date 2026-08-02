@@ -134,6 +134,21 @@ void LeafSenseAmg8833Component::loadCalibration_()
     }
 }
 
+bool LeafSenseAmg8833Component::persistCalibration_()
+{
+    const auto settings = calibrator_.settings();
+    if (calibration_preference_.save(&settings)) {
+        ESP_LOGI(TAG, "Saved calibration gain %.4f, offset %.3f C, revision %u",
+                 settings.gain,
+                 settings.offset_c,
+                 static_cast<unsigned>(settings.revision));
+        return true;
+    }
+
+    ESP_LOGE(TAG, "Failed to save calibration to flash");
+    return false;
+}
+
 void LeafSenseAmg8833Component::updateProcessedSummary_(
     leafsense::drivers::Amg8833Snapshot& snapshot)
 {
@@ -178,10 +193,29 @@ void LeafSenseAmg8833Component::set_temporal_smoothing_alpha(float v) { if (std:
 void LeafSenseAmg8833Component::set_spatial_median_enabled(bool v) { processing_options_.spatial.enabled = v; }
 void LeafSenseAmg8833Component::set_rectangle_roi(std::uint8_t x, std::uint8_t y, std::uint8_t w, std::uint8_t h) { roi_processor_.configure(x, y, w, h); }
 
-bool LeafSenseAmg8833Component::set_calibration_gain(float v) { return calibrator_.setGain(v); }
-bool LeafSenseAmg8833Component::set_calibration_offset(float v) { return calibrator_.setOffset(v); }
-bool LeafSenseAmg8833Component::save_calibration() { const auto settings = calibrator_.settings(); return calibration_preference_.save(&settings); }
-void LeafSenseAmg8833Component::restore_calibration_defaults() { calibrator_.restoreDefaults(); }
+bool LeafSenseAmg8833Component::set_calibration_gain(float v)
+{
+    const auto revision = calibrator_.settings().revision;
+    if (!calibrator_.setGain(v)) return false;
+    if (calibrator_.settings().revision != revision) persistCalibration_();
+    return true;
+}
+
+bool LeafSenseAmg8833Component::set_calibration_offset(float v)
+{
+    const auto revision = calibrator_.settings().revision;
+    if (!calibrator_.setOffset(v)) return false;
+    if (calibrator_.settings().revision != revision) persistCalibration_();
+    return true;
+}
+
+bool LeafSenseAmg8833Component::save_calibration() { return persistCalibration_(); }
+
+void LeafSenseAmg8833Component::restore_calibration_defaults()
+{
+    calibrator_.restoreDefaults();
+    persistCalibration_();
+}
 float LeafSenseAmg8833Component::calibration_gain() const { return calibrator_.settings().gain; }
 float LeafSenseAmg8833Component::calibration_offset() const { return calibrator_.settings().offset_c; }
 std::uint32_t LeafSenseAmg8833Component::calibration_revision() const { return calibrator_.settings().revision; }

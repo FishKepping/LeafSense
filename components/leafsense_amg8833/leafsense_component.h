@@ -100,6 +100,7 @@ public:
 private:
     bool initializeDriver_();
     void loadCalibration_();
+    bool persistCalibration_();
     void updateProcessedSummary_(leafsense::drivers::Amg8833Snapshot& snapshot);
     static const char* driverErrorName_(leafsense::drivers::Amg8833DriverError error);
     static float unavailableValue_();

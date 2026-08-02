@@ -285,7 +285,10 @@ button:
     name: "LeafSense Save Calibration"
     entity_category: config
     on_press:
-      - lambda: id(leafsense_thermal).save_calibration();
+      - lambda: |-
+          if (!id(leafsense_thermal).save_calibration()) {
+            ESP_LOGE("leafsense.calibration", "Failed to save calibration");
+          }
 
   - platform: template
     name: "LeafSense Restore Calibration Defaults"
