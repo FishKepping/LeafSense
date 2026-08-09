@@ -22,22 +22,56 @@ sensor:
     bme68x_bsec2_id: bme688_bsec2
     temperature:
       name: "BME688 Temperature"
+      id: bme688_temperature
     pressure:
       name: "BME688 Pressure"
+      id: bme688_pressure
     humidity:
       name: "BME688 Humidity"
+      id: bme688_humidity
     gas_resistance:
       name: "BME688 Gas Resistance"
+      id: bme688_gas_resistance
     iaq:
       name: "BME688 IAQ"
+      id: bme688_iaq
     iaq_static:
       name: "BME688 Static IAQ"
+      id: bme688_static_iaq
     iaq_accuracy:
       name: "BME688 IAQ Accuracy"
+      id: bme688_iaq_accuracy
     co2_equivalent:
       name: "BME688 CO2 Equivalent"
+      id: bme688_co2_equivalent
     breath_voc_equivalent:
       name: "BME688 Breath VOC Equivalent"
+      id: bme688_breath_voc_equivalent
+
+  - platform: template
+    id: leafsense_air_vpd
+    name: "LeafSense Air VPD"
+    unit_of_measurement: "kPa"
+    device_class: pressure
+    state_class: measurement
+    icon: "mdi:water-percent"
+    accuracy_decimals: 3
+    update_interval: 3s
+    lambda: |-
+      const float air_temperature = id(bme688_temperature).state;
+      const float relative_humidity = id(bme688_humidity).state;
+
+      if (!std::isfinite(air_temperature) ||
+          !std::isfinite(relative_humidity) ||
+          relative_humidity < 0.0f || relative_humidity > 100.0f) {
+        return NAN;
+      }
+
+      // Tetens saturation vapour pressure equation, with temperature in °C.
+      const float saturation_vapour_pressure =
+          0.6108f * expf((17.27f * air_temperature) /
+                         (air_temperature + 237.3f));
+      return saturation_vapour_pressure * (1.0f - relative_humidity / 100.0f);
 
 text_sensor:
   - platform: bme68x_bsec2
@@ -52,4 +86,3 @@ button:
 binary_sensor:
   - platform: status
     name: "BME688 Status"
-

@@ -1,0 +1,147 @@
+# LeafSense VPD integration for Home Assistant.
+#
+# Include this file from configuration.yaml with:
+#   template: !include leafsense-vpd-template-sensors.yaml
+#
+# If configuration.yaml already contains a `template:` section, copy the list
+# item below into that existing section instead. Replace the source entity IDs
+# if Home Assistant generated different IDs for your ESPHome devices.
+
+- sensor:
+    - name: "LeafSense ROI 1 Leaf VPD"
+      unique_id: leafsense_roi_1_leaf_vpd
+      default_entity_id: sensor.leafsense_roi_1_leaf_vpd
+      unit_of_measurement: "kPa"
+      device_class: pressure
+      state_class: measurement
+      icon: mdi:leaf
+      availability: >-
+        {{ is_number(states('sensor.leafsense_bme688_bme688_temperature'))
+           and is_number(states('sensor.leafsense_bme688_bme688_humidity'))
+           and is_number(states('sensor.leafsense_amg8833_leafsense_channel_1_average')) }}
+      state: >-
+        {% set ta = states('sensor.leafsense_bme688_bme688_temperature') | float %}
+        {% set rh = states('sensor.leafsense_bme688_bme688_humidity') | float %}
+        {% set tl = states('sensor.leafsense_amg8833_leafsense_channel_1_average') | float %}
+        {% set svp_leaf = 0.6108 * e ** ((17.27 * tl) / (tl + 237.3)) %}
+        {% set vapour_pressure_air = (rh / 100) * 0.6108 * e ** ((17.27 * ta) / (ta + 237.3)) %}
+        {{ (svp_leaf - vapour_pressure_air) | round(3) }}
+      attributes:
+        leaf_temperature_offset_c: >-
+          {{ (states('sensor.leafsense_amg8833_leafsense_channel_1_average') | float
+              - states('sensor.leafsense_bme688_bme688_temperature') | float) | round(2) }}
+
+    - name: "LeafSense ROI 2 Leaf VPD"
+      unique_id: leafsense_roi_2_leaf_vpd
+      default_entity_id: sensor.leafsense_roi_2_leaf_vpd
+      unit_of_measurement: "kPa"
+      device_class: pressure
+      state_class: measurement
+      icon: mdi:leaf
+      availability: >-
+        {{ is_number(states('sensor.leafsense_bme688_bme688_temperature'))
+           and is_number(states('sensor.leafsense_bme688_bme688_humidity'))
+           and is_number(states('sensor.leafsense_amg8833_leafsense_channel_2_average')) }}
+      state: >-
+        {% set ta = states('sensor.leafsense_bme688_bme688_temperature') | float %}
+        {% set rh = states('sensor.leafsense_bme688_bme688_humidity') | float %}
+        {% set tl = states('sensor.leafsense_amg8833_leafsense_channel_2_average') | float %}
+        {% set svp_leaf = 0.6108 * e ** ((17.27 * tl) / (tl + 237.3)) %}
+        {% set vapour_pressure_air = (rh / 100) * 0.6108 * e ** ((17.27 * ta) / (ta + 237.3)) %}
+        {{ (svp_leaf - vapour_pressure_air) | round(3) }}
+      attributes:
+        leaf_temperature_offset_c: >-
+          {{ (states('sensor.leafsense_amg8833_leafsense_channel_2_average') | float
+              - states('sensor.leafsense_bme688_bme688_temperature') | float) | round(2) }}
+
+    - name: "LeafSense ROI 3 Leaf VPD"
+      unique_id: leafsense_roi_3_leaf_vpd
+      default_entity_id: sensor.leafsense_roi_3_leaf_vpd
+      unit_of_measurement: "kPa"
+      device_class: pressure
+      state_class: measurement
+      icon: mdi:leaf
+      availability: >-
+        {{ is_number(states('sensor.leafsense_bme688_bme688_temperature'))
+           and is_number(states('sensor.leafsense_bme688_bme688_humidity'))
+           and is_number(states('sensor.leafsense_amg8833_leafsense_channel_3_average')) }}
+      state: >-
+        {% set ta = states('sensor.leafsense_bme688_bme688_temperature') | float %}
+        {% set rh = states('sensor.leafsense_bme688_bme688_humidity') | float %}
+        {% set tl = states('sensor.leafsense_amg8833_leafsense_channel_3_average') | float %}
+        {% set svp_leaf = 0.6108 * e ** ((17.27 * tl) / (tl + 237.3)) %}
+        {% set vapour_pressure_air = (rh / 100) * 0.6108 * e ** ((17.27 * ta) / (ta + 237.3)) %}
+        {{ (svp_leaf - vapour_pressure_air) | round(3) }}
+      attributes:
+        leaf_temperature_offset_c: >-
+          {{ (states('sensor.leafsense_amg8833_leafsense_channel_3_average') | float
+              - states('sensor.leafsense_bme688_bme688_temperature') | float) | round(2) }}
+
+    - name: "LeafSense ROI 4 Leaf VPD"
+      unique_id: leafsense_roi_4_leaf_vpd
+      default_entity_id: sensor.leafsense_roi_4_leaf_vpd
+      unit_of_measurement: "kPa"
+      device_class: pressure
+      state_class: measurement
+      icon: mdi:leaf
+      availability: >-
+        {{ is_number(states('sensor.leafsense_bme688_bme688_temperature'))
+           and is_number(states('sensor.leafsense_bme688_bme688_humidity'))
+           and is_number(states('sensor.leafsense_amg8833_leafsense_channel_4_average')) }}
+      state: >-
+        {% set ta = states('sensor.leafsense_bme688_bme688_temperature') | float %}
+        {% set rh = states('sensor.leafsense_bme688_bme688_humidity') | float %}
+        {% set tl = states('sensor.leafsense_amg8833_leafsense_channel_4_average') | float %}
+        {% set svp_leaf = 0.6108 * e ** ((17.27 * tl) / (tl + 237.3)) %}
+        {% set vapour_pressure_air = (rh / 100) * 0.6108 * e ** ((17.27 * ta) / (ta + 237.3)) %}
+        {{ (svp_leaf - vapour_pressure_air) | round(3) }}
+      attributes:
+        leaf_temperature_offset_c: >-
+          {{ (states('sensor.leafsense_amg8833_leafsense_channel_4_average') | float
+              - states('sensor.leafsense_bme688_bme688_temperature') | float) | round(2) }}
+
+    - name: "LeafSense ROI 5 Leaf VPD"
+      unique_id: leafsense_roi_5_leaf_vpd
+      default_entity_id: sensor.leafsense_roi_5_leaf_vpd
+      unit_of_measurement: "kPa"
+      device_class: pressure
+      state_class: measurement
+      icon: mdi:leaf
+      availability: >-
+        {{ is_number(states('sensor.leafsense_bme688_bme688_temperature'))
+           and is_number(states('sensor.leafsense_bme688_bme688_humidity'))
+           and is_number(states('sensor.leafsense_amg8833_leafsense_channel_5_average')) }}
+      state: >-
+        {% set ta = states('sensor.leafsense_bme688_bme688_temperature') | float %}
+        {% set rh = states('sensor.leafsense_bme688_bme688_humidity') | float %}
+        {% set tl = states('sensor.leafsense_amg8833_leafsense_channel_5_average') | float %}
+        {% set svp_leaf = 0.6108 * e ** ((17.27 * tl) / (tl + 237.3)) %}
+        {% set vapour_pressure_air = (rh / 100) * 0.6108 * e ** ((17.27 * ta) / (ta + 237.3)) %}
+        {{ (svp_leaf - vapour_pressure_air) | round(3) }}
+      attributes:
+        leaf_temperature_offset_c: >-
+          {{ (states('sensor.leafsense_amg8833_leafsense_channel_5_average') | float
+              - states('sensor.leafsense_bme688_bme688_temperature') | float) | round(2) }}
+
+    - name: "LeafSense ROI 6 Leaf VPD"
+      unique_id: leafsense_roi_6_leaf_vpd
+      default_entity_id: sensor.leafsense_roi_6_leaf_vpd
+      unit_of_measurement: "kPa"
+      device_class: pressure
+      state_class: measurement
+      icon: mdi:leaf
+      availability: >-
+        {{ is_number(states('sensor.leafsense_bme688_bme688_temperature'))
+           and is_number(states('sensor.leafsense_bme688_bme688_humidity'))
+           and is_number(states('sensor.leafsense_amg8833_leafsense_channel_6_average')) }}
+      state: >-
+        {% set ta = states('sensor.leafsense_bme688_bme688_temperature') | float %}
+        {% set rh = states('sensor.leafsense_bme688_bme688_humidity') | float %}
+        {% set tl = states('sensor.leafsense_amg8833_leafsense_channel_6_average') | float %}
+        {% set svp_leaf = 0.6108 * e ** ((17.27 * tl) / (tl + 237.3)) %}
+        {% set vapour_pressure_air = (rh / 100) * 0.6108 * e ** ((17.27 * ta) / (ta + 237.3)) %}
+        {{ (svp_leaf - vapour_pressure_air) | round(3) }}
+      attributes:
+        leaf_temperature_offset_c: >-
+          {{ (states('sensor.leafsense_amg8833_leafsense_channel_6_average') | float
+              - states('sensor.leafsense_bme688_bme688_temperature') | float) | round(2) }}
