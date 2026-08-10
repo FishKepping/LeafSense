@@ -1,0 +1,68 @@
+# LeafSense reusable hardware package for the Seeed Studio XIAO ESP32-S3 Sense
+# with the OV3660 camera module.
+
+esp32:
+  board: seeed_xiao_esp32s3
+  variant: ESP32S3
+  flash_size: 8MB
+  framework:
+    type: arduino
+
+logger:
+
+psram:
+  mode: octal
+  speed: 80MHz
+
+# Dedicated internal I2C bus used by the onboard camera.
+i2c:
+  - id: camera_i2c
+    sda: GPIO40
+    scl: GPIO39
+    scan: false
+
+esp32_camera:
+  id: leafsense_camera
+  name: "LeafSense Vision Camera"
+
+  external_clock:
+    pin: GPIO10
+    frequency: 20MHz
+
+  i2c_id: camera_i2c
+
+  data_pins:
+    - GPIO15
+    - GPIO17
+    - GPIO18
+    - GPIO16
+    - GPIO14
+    - GPIO12
+    - GPIO11
+    - GPIO48
+
+  vsync_pin: GPIO38
+  href_pin: GPIO47
+  pixel_clock_pin: GPIO13
+
+  resolution: 800x600
+  jpeg_quality: 12
+  max_framerate: 10 fps
+  idle_framerate: 0.2 fps
+
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 30s
+
+  - platform: uptime
+    name: "Uptime"
+    update_interval: 30s
+
+button:
+  - platform: restart
+    name: "Restart"
+
+text_sensor:
+  - platform: version
+    name: "ESPHome Version"
